@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layout — Functional — OpenCode</title>
+<link rel="stylesheet" href="style-function.css">
+</head>
+<body>
+  <div class="container">
+    <h1>[layout] — Functional</h1>
+    <p>Toggle divider styles, visualize spacer tokens, adjust container width.</p>
+
+    <div class="section">
+      <h3>divider-horizontal</h3>
+      <div class="divider-controls">
+        <button class="btn" onclick="setDivider('default')">Default</button>
+        <button class="btn" onclick="setDivider('strong')">Strong</button>
+        <button class="btn" onclick="setDivider('dashed')">Dashed</button>
+      </div>
+      <p>Content above the divider.</p>
+      <hr class="divider-h" id="demoDivider">
+      <p>Content below the divider.</p>
+    </div>
+
+    <div class="section">
+      <h3>divider-vertical</h3>
+      <div class="preview-box">
+        <span>Home</span><span class="divider-v"></span>
+        <span>Docs</span><span class="divider-v"></span>
+        <span>API</span><span class="divider-v"></span>
+        <span>Contact</span>
+        <p style="margin-top: 12px; font-size: 14px; color: var(--mute);">Vertical dividers between inline items.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>spacer</h3>
+      <div id="spacerViz">
+        <div class="spacer-viz"><span class="spacer-label">xs (4px)</span><div class="spacer-bar" style="width: 4px;"></div></div>
+        <div class="spacer-viz"><span class="spacer-label">sm (8px)</span><div class="spacer-bar" style="width: 8px;"></div></div>
+        <div class="spacer-viz"><span class="spacer-label">md (12px)</span><div class="spacer-bar" style="width: 12px;"></div></div>
+        <div class="spacer-viz"><span class="spacer-label">lg (16px)</span><div class="spacer-bar" style="width: 16px;"></div></div>
+        <div class="spacer-viz"><span class="spacer-label">xl (24px)</span><div class="spacer-bar" style="width: 24px;"></div></div>
+        <div class="spacer-viz"><span class="spacer-label">xxl (32px)</span><div class="spacer-bar" style="width: 32px;"></div></div>
+        <div class="spacer-viz"><span class="spacer-label">section (96px)</span><div class="spacer-bar" style="width: 96px;"></div></div>
+      </div>
+      <div class="spacer-controls">
+        <button class="btn" onclick="toggleSpacerScale()">Toggle Scale</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>container</h3>
+      <div class="container-controls">
+        <button class="btn" onclick="setContainerWidth(600)">600px</button>
+        <button class="btn" onclick="setContainerWidth(960)">960px</button>
+        <button class="btn" onclick="setContainerWidth(1200)">1200px</button>
+        <button class="btn" onclick="setContainerWidth('100%')">Full-bleed</button>
+      </div>
+      <div class="container-box">
+        <div class="container-inner" id="demoContainer">
+          <p>Content inside the container.</p>
+        </div>
+        <p class="container-info" id="containerInfo">max-width: 960px · padding: 16px</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Responsive container</h3>
+      <div class="responsive-box" id="responsiveBox">
+        <p>Drag the slider to simulate viewport width</p>
+        <p class="responsive-label" id="responsiveLabel">Viewport: 960px</p>
+      </div>
+      <input type="range" class="width-slider" min="320" max="1400" value="960" id="widthSlider">
+    </div>
+  </div>
+
+  <script>
+    function setDivider(type) {
+      const d = document.getElementById('demoDivider');
+      d.className = 'divider-h';
+      if (type === 'strong') d.classList.add('divider-h--strong');
+      if (type === 'dashed') d.classList.add('divider-h--dashed');
+    }
+
+    let spacerScaled = false;
+    function toggleSpacerScale() {
+      spacerScaled = !spacerScaled;
+      const mult = spacerScaled ? 2 : 1;
+      const bars = document.querySelectorAll('#spacerViz .spacer-bar');
+      const widths = [4, 8, 12, 16, 24, 32, 96];
+      bars.forEach((bar, i) => { bar.style.width = (widths[i] * mult) + 'px'; });
+    }
+
+    function setContainerWidth(w) {
+      const el = document.getElementById('demoContainer');
+      el.style.maxWidth = typeof w === 'number' ? w + 'px' : w;
+      document.getElementById('containerInfo').textContent = `max-width: ${w === '100%' ? 'none (full-bleed)' : w + 'px'} · padding: 16px`;
+    }
+
+    // Responsive slider
+    const slider = document.getElementById('widthSlider');
+    const box = document.getElementById('responsiveBox');
+    const label = document.getElementById('responsiveLabel');
+    slider.addEventListener('input', () => {
+      const w = parseInt(slider.value);
+      label.textContent = `Viewport: ${w}px`;
+      box.style.maxWidth = w + 'px';
+      if (w <= 640) {
+        label.textContent = `Viewport: ${w}px — Mobile`;
+        box.style.background = '#EDEAE3';
+      } else if (w <= 850) {
+        label.textContent = `Viewport: ${w}px — Tablet`;
+        box.style.background = '#E5E2DB';
+      } else {
+        label.textContent = `Viewport: ${w}px — Desktop`;
+        box.style.background = '#EDEAE3';
+      }
+    });
+  </script>
+</body>
+</html>

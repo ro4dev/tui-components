@@ -1,0 +1,65 @@
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --canvas: #F5F2EB; --surface-soft: #EDEAE3; --surface-card: #E5E2DB;
+      --surface-dark: #1A1A1A; --ink: #111111; --body: #2A2A2A;
+      --mute: #6B6B6B; --stone: #8A8580; --on-dark: #F5F2EB;
+      --hairline: #D5D2CB; --hairline-strong: #B5B2AB;
+      --rounded-sm: 4px;
+    }
+    body {
+      font-family: 'Berkeley Mono', 'SF Mono', 'Fira Code', monospace;
+      font-size: 16px; font-weight: 400; line-height: 1.5;
+      color: var(--body); background: var(--canvas); padding: 40px 24px;
+    }
+    h1 { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    h3 { font-size: 14px; font-weight: 700; color: var(--mute); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section { margin-bottom: 48px; }
+
+    /* image-block */
+    .image-block {
+      background: var(--surface-soft); border-radius: var(--rounded-sm);
+      overflow: hidden; max-width: 560px;
+    }
+    .image-block__placeholder {
+      width: 100%; aspect-ratio: 16/9; display: flex;
+      align-items: center; justify-content: center;
+      background: var(--surface-card); color: var(--mute); font-size: 14px;
+    }
+    .image-block__caption {
+      font-size: 14px; color: var(--mute); padding: 8px 0;
+    }
+
+    /* video-embed */
+    .video-embed {
+      background: var(--surface-dark); border-radius: var(--rounded-sm);
+      overflow: hidden; max-width: 560px;
+    }
+    .video-embed__placeholder {
+      width: 100%; aspect-ratio: 16/9; display: flex;
+      align-items: center; justify-content: center;
+      position: relative;
+    }
+    .video-embed__play {
+      color: var(--on-dark); opacity: 0.5; font-size: 48px;
+    }
+    .video-embed__caption {
+      font-size: 14px; color: var(--mute); padding: 8px 0;
+    }
+
+    /* blockquote */
+    .blockquote {
+      border-left: 3px solid var(--hairline-strong); padding: 0 0 0 16px;
+      max-width: 560px;
+    }
+    .blockquote__text {
+      font-size: 16px; color: var(--mute);
+    }
+    .blockquote__text--italic {
+      font-style: italic;
+    }
+    .blockquote__attribution {
+      font-size: 14px; color: var(--stone); margin-top: 8px;
+    }
+
+    .demo-row { display: flex; flex-direction: column; gap: 16px; }

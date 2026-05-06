@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Navigation</h1>
+
+    <div class="section">
+      <h3>sidebar-nav</h3>
+      <div class="preview-box" style="width: fit-content;">
+        <nav class="sidebar-nav">
+          <div class="sidebar-nav__group-header">Getting Started</div>
+          <a class="sidebar-nav__item" href="#">Installation</a>
+          <a class="sidebar-nav__item sidebar-nav__item--active" href="#">Configuration</a>
+          <a class="sidebar-nav__item sidebar-nav__item--nested" href="#">agent.pool_size</a>
+          <a class="sidebar-nav__item sidebar-nav__item--nested" href="#">agent.timeout</a>
+          <a class="sidebar-nav__item" href="#">Quick Start</a>
+          <div class="sidebar-nav__group-header">API</div>
+          <a class="sidebar-nav__item" href="#">Endpoints</a>
+          <a class="sidebar-nav__item" href="#">Authentication</a>
+          <a class="sidebar-nav__item" href="#">Webhooks</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>pagination</h3>
+      <div class="pagination">
+        <button class="pagination__nav">[←]</button>
+        <button class="pagination__item">1</button>
+        <button class="pagination__item">2</button>
+        <button class="pagination__item pagination__item--active">3</button>
+        <button class="pagination__item">4</button>
+        <span class="pagination__ellipsis">···</span>
+        <button class="pagination__item">12</button>
+        <button class="pagination__nav">[→]</button>
+      </div>
+
+      <h3 style="margin-top: 16px;">pagination (simple)</h3>
+      <div class="pagination">
+        <button class="pagination__nav">[←]</button>
+        <span style="color: var(--ink); font-size: 16px;">3 of 12</span>
+        <button class="pagination__nav">[→]</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>dropdown-menu</h3>
+      <div class="dropdown-menu">
+        <div class="dropdown-menu__item">
+          <span>Open File</span>
+          <span class="dropdown-menu__shortcut">⌘O</span>
+        </div>
+        <div class="dropdown-menu__item">
+          <span>Save</span>
+          <span class="dropdown-menu__shortcut">⌘S</span>
+        </div>
+        <div class="dropdown-menu__item">
+          <span>Save As...</span>
+          <span class="dropdown-menu__shortcut">⇧⌘S</span>
+        </div>
+        <div class="dropdown-menu__divider"></div>
+        <div class="dropdown-menu__item">
+          <span>Preferences</span>
+          <span class="dropdown-menu__shortcut">⌘,</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>context-menu</h3>
+      <div class="context-menu">
+        <div class="context-menu__item">Copy</div>
+        <div class="context-menu__item">Paste</div>
+        <div class="context-menu__divider"></div>
+        <div class="context-menu__item">Rename</div>
+        <div class="context-menu__item">Duplicate</div>
+        <div class="context-menu__divider"></div>
+        <div class="context-menu__item context-menu__item--danger">Delete</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

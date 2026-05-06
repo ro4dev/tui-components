@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Progress & Loading</h1>
+
+    <div class="section">
+      <h3>progress-bar</h3>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div>
+          <p style="margin-bottom: 8px; font-size: 14px; color: var(--mute);">Uploading... 0%</p>
+          <div class="progress-bar"><div class="progress-bar__fill" style="width: 0%;"></div></div>
+        </div>
+        <div>
+          <p style="margin-bottom: 8px; font-size: 14px; color: var(--mute);">Building... 45%</p>
+          <div class="progress-bar"><div class="progress-bar__fill" style="width: 45%;"></div></div>
+        </div>
+        <div>
+          <p style="margin-bottom: 8px; font-size: 14px; color: var(--mute);">Indexing... 78%</p>
+          <div class="progress-bar"><div class="progress-bar__fill" style="width: 78%;"></div></div>
+        </div>
+        <div>
+          <p style="margin-bottom: 8px; font-size: 14px; color: var(--mute);">Complete — 100%</p>
+          <div class="progress-bar"><div class="progress-bar__fill" style="width: 100%; background: var(--success);"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>progress-spinner</h3>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div class="progress-spinner">
+          <span class="progress-spinner__icon">⟳</span>
+          Building...
+        </div>
+        <div class="progress-spinner">
+          <span class="progress-spinner__icon">⟳</span>
+          Fetching dependencies...
+        </div>
+        <div class="progress-spinner">
+          <span class="progress-spinner__icon">⟳</span>
+          Waiting for agent...
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>progress-steps</h3>
+      <div class="progress-steps">
+        <div class="progress-steps__step">
+          <span class="progress-steps__marker progress-steps__marker--done">[x]</span>
+          <span class="progress-steps__label">Clone</span>
+        </div>
+        <span class="progress-steps__connector progress-steps__connector--done">──</span>
+        <div class="progress-steps__step">
+          <span class="progress-steps__marker progress-steps__marker--done">[x]</span>
+          <span class="progress-steps__label">Install</span>
+        </div>
+        <span class="progress-steps__connector progress-steps__connector--done">──</span>
+        <div class="progress-steps__step">
+          <span class="progress-steps__marker progress-steps__marker--current">[3]</span>
+          <span class="progress-steps__label">Build</span>
+        </div>
+        <span class="progress-steps__connector">──</span>
+        <div class="progress-steps__step">
+          <span class="progress-steps__marker progress-steps__marker--future">[4]</span>
+          <span class="progress-steps__label">Deploy</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

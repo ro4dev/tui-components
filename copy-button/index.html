@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copy Button — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Copy Button</h1>
+
+    <div class="section">
+      <h3>copy-button (standalone)</h3>
+      <div class="preview-box">
+        <div class="demo-row">
+          <button class="copy-button" title="Copy to clipboard">[⎘]</button>
+          <span style="color: var(--mute); font-size: 14px;">Default state</span>
+        </div>
+        <div class="demo-row" style="margin-top: 16px;">
+          <button class="copy-button copy-button--copied" title="Copied!">[✓]</button>
+          <span style="color: var(--success); font-size: 14px;">Copied state (1.5s)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>copy-button in code block</h3>
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__filename">install.sh</span>
+          <button class="copy-button" title="Copy to clipboard">[⎘]</button>
+        </div>
+        <div class="code-block__body">
+          $ npm install -g @opencode/cli
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>copy-button paired with text</h3>
+      <div class="preview-box">
+        <p style="margin-bottom: 8px;">
+          Run the following command:
+        </p>
+        <div style="display: flex; align-items: center; gap: 8px; background: var(--surface-dark); color: var(--on-dark); padding: 8px 12px; border-radius: var(--rounded-sm); max-width: fit-content;">
+          <code style="flex: 1;">curl -fsSL https://opencode.ai/install | sh</code>
+          <button class="copy-button" title="Copy to clipboard">[⎘]</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

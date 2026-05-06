@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alerts — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Alerts & Callouts</h1>
+    <p>Alert variants for notifications, warnings, and status messages.</p>
+
+    <div class="section">
+      <h3>alert-info</h3>
+      <div class="alert alert-info">
+        <span class="alert__icon">[i]</span>
+        <span class="alert__title">New version available</span>
+        <span class="alert__body">OpenCode 2.4.0 is ready to install. Review the changelog before upgrading.</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>alert-warning</h3>
+      <div class="alert alert-warning">
+        <span class="alert__icon">[!]</span>
+        <span class="alert__title">Low disk space</span>
+        <span class="alert__body">Less than 2 GB remaining. Consider clearing old build artifacts.</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>alert-danger</h3>
+      <div class="alert alert-danger">
+        <span class="alert__icon">[x]</span>
+        <span class="alert__title">Build failed</span>
+        <span class="alert__body">TypeScript compilation error in src/agent.ts:42 — Property 'process' does not exist on type 'Agent'.</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>alert-success</h3>
+      <div class="alert alert-success">
+        <span class="alert__icon">[✓]</span>
+        <span class="alert__title">Deploy complete</span>
+        <span class="alert__body">Production environment updated successfully. 0 errors, 12 warnings.</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>alert-inline</h3>
+      <p>
+        This configuration option is deprecated.
+        <span class="alert-inline">
+          <span class="alert__icon">[!]</span>
+          <span class="alert__body">Use `agent.pool_size` instead of `agent.workers`.</span>
+        </span>
+        The old key will be removed in version 3.0.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

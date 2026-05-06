@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Feedback & Notifications</h1>
+
+    <div class="section">
+      <h3>toast (stacked)</h3>
+      <div class="preview-box">
+        <div class="toast-stack">
+          <div class="toast toast--info">
+            <span>[i]</span>
+            <span>Index rebuild started — 12,847 files queued.</span>
+            <button class="toast__dismiss">[×]</button>
+          </div>
+          <div class="toast toast--success">
+            <span>[✓]</span>
+            <span>Configuration saved successfully.</span>
+            <button class="toast__dismiss">[×]</button>
+          </div>
+          <div class="toast toast--error">
+            <span>[x]</span>
+            <span>Connection lost — agent pool unreachable.</span>
+            <button class="toast__dismiss">[×]</button>
+          </div>
+          <div class="toast toast--warning">
+            <span>[!]</span>
+            <span>Memory usage above 80%. Consider increasing limits.</span>
+            <button class="toast__dismiss">[×]</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>skeleton</h3>
+      <div class="demo-row">
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <div class="skeleton skeleton--avatar"></div>
+          <div style="flex: 1;">
+            <div class="skeleton skeleton--text" style="width: 120px;"></div>
+            <div class="skeleton skeleton--text-short"></div>
+          </div>
+        </div>
+        <div class="skeleton skeleton--thumbnail"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>inline-validation (error)</h3>
+      <div class="field-wrap">
+        <label style="display: block; font-weight: 700; color: var(--ink); margin-bottom: 8px;">Agent Name</label>
+        <input class="field-input field-input--error" type="text" value="">
+        <div class="validation-msg validation-msg--error">
+          <span>[!]</span> Agent name is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>inline-validation (success)</h3>
+      <div class="field-wrap">
+        <label style="display: block; font-weight: 700; color: var(--ink); margin-bottom: 8px;">Agent Name</label>
+        <input class="field-input" type="text" value="agent-pool-1">
+        <div class="validation-msg validation-msg--success">
+          <span>[✓]</span> Name is available.
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

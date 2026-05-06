@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Component: Data Display & Function</title>
+<link rel="stylesheet" href="style-function.css">
+</head>
+<body>
+
+<header>
+  <h1>Data Display &amp; Function</h1>
+  <p>component-data-display-function.html — Interactive lists, tags, and toggles</p>
+</header>
+
+<section>
+  <h2>Manage List Items</h2>
+  <div class="input-group">
+    <input type="text" class="input" id="newItemInput" placeholder="Add new item..." onkeydown="if(event.key==='Enter') addListItem()">
+    <button class="btn btn-success" onclick="addListItem()">[+] Add</button>
+  </div>
+  <div id="listContainer"></div>
+</section>
+
+<section>
+  <h2>Definition List</h2>
+  <dl>
+    <dt>Model</dt>
+    <dd>opencode/big-pickle</dd>
+    <dt>Context Window</dt>
+    <dd>200,000 tokens</dd>
+    <dt>Temperature</dt>
+    <dd>0.7 (default)</dd>
+    <dt>Max Tokens</dt>
+    <dd>4,096</dd>
+    <dt>Provider</dt>
+    <dd>Anomaly Co.</dd>
+  </dl>
+</section>
+
+<section>
+  <h2>Tags</h2>
+  <div class="input-group">
+    <input type="text" class="input" id="newTagInput" placeholder="Add new tag..." onkeydown="if(event.key==='Enter') addTag()">
+    <button class="btn btn-success" onclick="addTag()">[+] Add Tag</button>
+  </div>
+  <div class="tags" id="tagsContainer"></div>
+</section>
+
+<section>
+  <h2>Toggle Bullet List</h2>
+  <ul class="bullet-list" id="bulletList">
+    <li onclick="toggleItem(this)"><span class="toggle">( )</span> Enable syntax highlighting</li>
+    <li onclick="toggleItem(this)"><span class="toggle">( )</span> Auto-save on change</li>
+    <li onclick="toggleItem(this)"><span class="toggle">( )</span> Show line numbers</li>
+    <li onclick="toggleItem(this)"><span class="toggle">( )</span> Format on paste</li>
+    <li onclick="toggleItem(this)"><span class="toggle">( )</span> Word wrap</li>
+  </ul>
+</section>
+
+<script>
+let listItems = ['Initialize project', 'Configure build tools', 'Write tests', 'Deploy to staging'];
+let tags = ['frontend', 'react', 'typescript', 'design-system', 'components'];
+
+function renderList() {
+  const container = document.getElementById('listContainer');
+  container.innerHTML = '';
+  listItems.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'list-item';
+    div.innerHTML = `
+      <span>${item}</span>
+      <div class="actions">
+        <button class="btn btn-danger" onclick="removeListItem(${i})">[×] Remove</button>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function addListItem() {
+  const input = document.getElementById('newItemInput');
+  if (input.value.trim()) {
+    listItems.push(input.value.trim());
+    input.value = '';
+    renderList();
+  }
+}
+
+function removeListItem(index) {
+  listItems.splice(index, 1);
+  renderList();
+}
+
+function renderTags() {
+  const container = document.getElementById('tagsContainer');
+  container.innerHTML = '';
+  tags.forEach((tag, i) => {
+    const span = document.createElement('span');
+    span.className = 'tag';
+    span.innerHTML = `${tag} <span class="remove" onclick="removeTag(${i})">[×]</span>`;
+    container.appendChild(span);
+  });
+}
+
+function addTag() {
+  const input = document.getElementById('newTagInput');
+  if (input.value.trim()) {
+    tags.push(input.value.trim());
+    input.value = '';
+    renderTags();
+  }
+}
+
+function removeTag(index) {
+  tags.splice(index, 1);
+  renderTags();
+}
+
+function toggleItem(el) {
+  const toggle = el.querySelector('.toggle');
+  if (el.classList.contains('active')) {
+    el.classList.remove('active');
+    toggle.textContent = '( )';
+  } else {
+    el.classList.add('active');
+    toggle.textContent = '(•)';
+  }
+}
+
+renderList();
+renderTags();
+</script>
+
+</body>
+</html>

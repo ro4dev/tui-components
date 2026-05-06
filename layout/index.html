@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layout Primitives — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Layout Primitives</h1>
+
+    <div class="section">
+      <h3>divider-horizontal</h3>
+      <p>Content above the divider.</p>
+      <hr class="divider-h">
+      <p>Content below the default divider.</p>
+      <p style="margin-top: 16px;">Stronger separation:</p>
+      <hr class="divider-h divider-h--strong">
+      <p>Content below the strong divider.</p>
+    </div>
+
+    <div class="section">
+      <h3>divider-vertical</h3>
+      <div class="preview-box">
+        <span>Home</span>
+        <span class="divider-v"></span>
+        <span>Docs</span>
+        <span class="divider-v"></span>
+        <span>API</span>
+        <span class="divider-v"></span>
+        <span>Contact</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>spacer</h3>
+      <div class="preview-box">
+        <div class="spacer-demo">
+          <div class="spacer-row">
+            <span class="label" style="width: 100px;">xs (4px)</span>
+            <div class="spacer-bar" style="width: 4px;"></div>
+          </div>
+          <div class="spacer-row">
+            <span class="label" style="width: 100px;">sm (8px)</span>
+            <div class="spacer-bar" style="width: 8px;"></div>
+          </div>
+          <div class="spacer-row">
+            <span class="label" style="width: 100px;">md (12px)</span>
+            <div class="spacer-bar" style="width: 12px;"></div>
+          </div>
+          <div class="spacer-row">
+            <span class="label" style="width: 100px;">lg (16px)</span>
+            <div class="spacer-bar" style="width: 16px;"></div>
+          </div>
+          <div class="spacer-row">
+            <span class="label" style="width: 100px;">xl (24px)</span>
+            <div class="spacer-bar" style="width: 24px;"></div>
+          </div>
+          <div class="spacer-row">
+            <span class="label" style="width: 100px;">xxl (32px)</span>
+            <div class="spacer-bar" style="width: 32px;"></div>
+          </div>
+          <div class="spacer-row">
+            <span class="label" style="width: 100px;">section (96px)</span>
+            <div class="spacer-bar" style="width: 96px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>container</h3>
+      <div class="container-demo">
+        <p style="font-size: 14px; color: var(--mute);">max-width: 960px, inner padding: 16px</p>
+        <p>Body content centered with constrained width.</p>
+      </div>
+
+      <h3 style="margin-top: 24px;">container (full-bleed)</h3>
+      <div class="container-full">
+        <p style="font-size: 14px; color: var(--mute);">No max-width, edge-to-edge</p>
+        <p>Used for hero mockup, footer, and full-width sections.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

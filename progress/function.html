@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progress - OpenCode Design System</title>
+<link rel="stylesheet" href="style-function.css">
+</head>
+<body>
+
+<div class="header">
+  <h1>Progress</h1>
+  <p>Progress bars, spinners, and step indicators</p>
+</div>
+
+<div class="section">
+  <div class="section-title">Progress Bar</div>
+  <p class="progress-label" id="progressLabel">0%</p>
+  <div class="progress-bar-track">
+    <div class="progress-bar-fill" id="progressFill"></div>
+  </div>
+  <div class="controls">
+    <button class="btn" onclick="setProgress(0)">[∅] Reset</button>
+    <button class="btn" onclick="setProgress(25)">25%</button>
+    <button class="btn" onclick="setProgress(50)">50%</button>
+    <button class="btn" onclick="setProgress(75)">75%</button>
+    <button class="btn" onclick="setProgress(100)">100%</button>
+    <button class="btn btn-accent" onclick="animateProgress()">[↑] Animate</button>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Spinner</div>
+  <div class="spinner-row">
+    <span class="spinner" id="spinner">⟳</span>
+    <span class="spinner-label" id="spinnerLabel">Building...</span>
+  </div>
+  <div class="controls">
+    <button class="btn" onclick="setSpinnerSpeed('1.2s')">Slow</button>
+    <button class="btn" onclick="setSpinnerSpeed('0.6s')">Normal</button>
+    <button class="btn" onclick="setSpinnerSpeed('0.3s')">Fast</button>
+    <button class="btn" onclick="toggleSpinner()">[×] Toggle</button>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Progress Steps</div>
+  <div class="steps" id="stepsContainer">
+    <div class="step completed" data-step="1">[x]</div>
+    <span class="step-connector completed">──</span>
+    <div class="step active" data-step="2">[2]</div>
+    <span class="step-connector">──</span>
+    <div class="step" data-step="3">[3]</div>
+    <span class="step-connector">──</span>
+    <div class="step" data-step="4">[4]</div>
+  </div>
+  <div class="controls">
+    <button class="btn btn-accent" onclick="nextStep()">[→] Next Step</button>
+    <button class="btn" onclick="resetSteps()">[∅] Reset</button>
+  </div>
+</div>
+
+<div class="log">
+  <div class="log-title">Activity Log</div>
+  <div id="log-entries"></div>
+</div>
+
+<script>
+let currentProgress = 0;
+let currentStep = 2;
+
+function setProgress(val) {
+  currentProgress = val;
+  const fill = document.getElementById('progressFill');
+  const label = document.getElementById('progressLabel');
+  fill.style.width = val + '%';
+  label.textContent = val + '%';
+
+  fill.classList.remove('success', 'warning');
+  if (val === 100) fill.classList.add('success');
+  else if (val >= 75) fill.classList.add('warning');
+
+  logAction('Progress set to: ' + val + '%');
+}
+
+function animateProgress() {
+  let val = 0;
+  const fill = document.getElementById('progressFill');
+  const label = document.getElementById('progressLabel');
+  logAction('Animating progress...');
+
+  const interval = setInterval(() => {
+    val += 2;
+    if (val > 100) {
+      clearInterval(interval);
+      logAction('Animation complete!');
+      return;
+    }
+    fill.style.width = val + '%';
+    label.textContent = val + '%';
+    fill.classList.remove('success', 'warning');
+    if (val === 100) fill.classList.add('success');
+    else if (val >= 75) fill.classList.add('warning');
+  }, 50);
+}
+
+function setSpinnerSpeed(duration) {
+  const spinner = document.getElementById('spinner');
+  spinner.style.animationDuration = duration;
+  logAction('Spinner speed: ' + duration);
+}
+
+function toggleSpinner() {
+  const spinner = document.getElementById('spinner');
+  if (spinner.style.animationPlayState === 'paused') {
+    spinner.style.animationPlayState = 'running';
+    logAction('Spinner resumed');
+  } else {
+    spinner.style.animationPlayState = 'paused';
+    logAction('Spinner paused');
+  }
+}
+
+function nextStep() {
+  if (currentStep > 4) return;
+
+  const steps = document.querySelectorAll('#stepsContainer .step');
+  const connectors = document.querySelectorAll('#stepsContainer .step-connector');
+  const currentEl = document.querySelector(`.step[data-step="${currentStep}"]`);
+  currentEl.classList.remove('active');
+  currentEl.classList.add('completed');
+  currentEl.textContent = '[x]';
+
+  if (currentStep - 1 < connectors.length) {
+    connectors[currentStep - 1].classList.add('completed');
+  }
+
+  currentStep++;
+  if (currentStep <= 4) {
+    const nextEl = document.querySelector(`.step[data-step="${currentStep}"]`);
+    nextEl.classList.add('active');
+  } else {
+    logAction('All steps completed!');
+    return;
+  }
+
+  logAction('Advanced to step ' + currentStep);
+}
+
+function resetSteps() {
+  currentStep = 2;
+  const steps = document.querySelectorAll('#stepsContainer .step');
+  const connectors = document.querySelectorAll('#stepsContainer .step-connector');
+  steps.forEach((step, idx) => {
+    step.classList.remove('active', 'completed');
+    step.textContent = idx === 0 ? '[x]' : `[${idx + 1}]`;
+  });
+  connectors.forEach(c => c.classList.remove('completed'));
+  document.querySelector('.step[data-step="1"]').classList.add('completed');
+  document.querySelector('.step[data-step="2"]').classList.add('active');
+  logAction('Steps reset to beginning');
+}
+
+function logAction(message) {
+  const log = document.getElementById('log-entries');
+  const entry = document.createElement('div');
+  entry.className = 'log-entry';
+  entry.textContent = '> ' + message;
+  log.prepend(entry);
+  if (log.children.length > 10) {
+    log.removeChild(log.lastChild);
+  }
+}
+</script>
+
+</body>
+</html>

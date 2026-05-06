@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Empty States — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Empty States</h1>
+
+    <div class="section">
+      <h3>empty-default (no files)</h3>
+      <div class="empty-state">
+        <div class="empty-state__icon">[∅]</div>
+        <p class="empty-state__title">No files found</p>
+        <p class="empty-state__desc">This directory is empty. Upload a file or run <span style="background: var(--surface-soft); padding: 2px 6px; border-radius: 4px;">opencode init</span> to get started.</p>
+        <button class="btn-primary">[+] New File</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>empty-default (no agents)</h3>
+      <div class="empty-state">
+        <div class="empty-state__icon">[∅]</div>
+        <p class="empty-state__title">No active agents</p>
+        <p class="empty-state__desc">All agents are idle. Start a task to activate the pool.</p>
+        <button class="btn-primary">[+] Start Agent</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>empty-default (no results)</h3>
+      <div class="empty-state">
+        <div class="empty-state__icon">[∅]</div>
+        <p class="empty-state__title">No search results</p>
+        <p class="empty-state__desc">No files match your search query. Try broadening your search terms.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

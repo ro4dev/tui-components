@@ -1,0 +1,32 @@
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --canvas: #F5F2EB; --surface-dark: #1A1A1A; --ink: #111111;
+      --mute: #6B6B6B; --on-dark: #F5F2EB;
+      --rounded-sm: 4px;
+    }
+    body {
+      font-family: 'Berkeley Mono', 'SF Mono', 'Fira Code', monospace;
+      font-size: 16px; font-weight: 400; line-height: 1.5;
+      color: var(--body); background: var(--canvas); padding: 40px 24px;
+    }
+    h1 { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    h3 { font-size: 14px; font-weight: 700; color: var(--mute); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section { margin-bottom: 48px; }
+
+    .tooltip-demo {
+      position: relative; display: inline-block;
+    }
+    .tooltip-trigger {
+      background: var(--surface-dark); color: var(--on-dark);
+      padding: 8px 16px; border-radius: var(--rounded-sm); cursor: pointer;
+      font-family: inherit; font-size: 16px; border: none;
+    }
+    .tooltip {
+      position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+      margin-top: 4px; background: var(--surface-dark); color: var(--on-dark);
+      font-size: 14px; padding: 4px 8px; border-radius: var(--rounded-sm);
+      max-width: 240px; white-space: nowrap;
+    }
+
+    .demo-row { display: flex; gap: 32px; align-items: flex-start; padding: 24px 0; }

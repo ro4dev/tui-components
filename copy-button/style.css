@@ -1,0 +1,43 @@
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --canvas: #F5F2EB; --surface-dark: #1A1A1A; --surface-card: #E5E2DB;
+      --ink: #111111; --body: #2A2A2A; --mute: #6B6B6B; --ash: #9A9590;
+      --success: #34C759; --hairline: #D5D2CB; --hairline-strong: #B5B2AB;
+      --on-dark: #F5F2EB;
+      --rounded-sm: 4px;
+    }
+    body {
+      font-family: 'Berkeley Mono', 'SF Mono', 'Fira Code', monospace;
+      font-size: 16px; font-weight: 400; line-height: 1.5;
+      color: var(--body); background: var(--canvas); padding: 40px 24px;
+    }
+    h1 { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    h3 { font-size: 14px; font-weight: 700; color: var(--mute); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section { margin-bottom: 48px; }
+
+    .copy-button {
+      background: none; border: none; color: var(--mute); cursor: pointer;
+      font-family: inherit; font-size: 16px; min-width: 36px; min-height: 36px;
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 4px 8px;
+    }
+    .copy-button:hover { color: var(--on-dark); }
+    .copy-button--copied { color: var(--success) !important; }
+
+    .demo-row { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+
+    .preview-box {
+      padding: 24px; background: var(--surface-soft); border-radius: var(--rounded-sm);
+    }
+
+    .code-block {
+      background: var(--surface-dark); color: var(--on-dark);
+      border-radius: var(--rounded-sm); overflow: hidden;
+    }
+    .code-block__header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 16px; border-bottom: 1px solid var(--hairline-strong);
+    }
+    .code-block__filename { font-size: 14px; color: var(--ash); }
+    .code-block__body { padding: 16px; font-size: 16px; line-height: 1.6; }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Blocks — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Code Blocks</h1>
+
+    <div class="section">
+      <h3>code-block</h3>
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__filename">config.yaml</span>
+          <button class="code-block__copy">[⎘]</button>
+        </div>
+        <div class="code-block__body">
+          <div class="code-block__gutter">
+            1<br>2<br>3<br>4<br>5<br>6
+          </div>
+          <pre class="code-block__code"><span style="color: #FF79C6;">agent:</span>
+  <span style="color: #8BE9FD;">pool_size</span><span style="color: #F8F8F2;">:</span> <span style="color: #BD93F9;">4</span>
+  <span style="color: #8BE9FD;">timeout</span><span style="color: #F8F8F2;">:</span> <span style="color: #BD93F9;">300</span>
+  <span style="color: #8BE9FD;">index</span><span style="color: #F8F8F2;">:</span>
+    <span style="color: #8BE9FD;">enabled</span><span style="color: #F8F8F2;">:</span> <span style="color: #FF79C6;">true</span>
+    <span style="color: #8BE9FD;">path</span><span style="color: #F8F8F2;">:</span> <span style="color: #F1FA8C;">~/.opencode/index</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>code-block (shell)</h3>
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__filename">terminal</span>
+          <button class="code-block__copy">[⎘]</button>
+        </div>
+        <div class="code-block__body">
+          <div class="code-block__gutter">
+            1<br>2<br>3
+          </div>
+          <pre class="code-block__code">$ opencode init
+✓ Project initialized
+✓ Index created — 12,847 files</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>code-inline</h3>
+      <p>
+        Set the <span class="code-inline">agent.pool_size</span> option in your
+        <span class="code-inline">config.yaml</span> to control how many agents run concurrently.
+        The default is <span class="code-inline">4</span>. You can also set
+        <span class="code-inline">agent.timeout</span> to limit execution time in seconds.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

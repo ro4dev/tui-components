@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forms — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Forms</h1>
+
+    <div class="section">
+      <h3>search-input</h3>
+      <div class="search-input-wrap">
+        <span class="search-input-wrap__icon">[⌕]</span>
+        <input class="text-input" type="text" placeholder="Search files...">
+        <button class="search-input-wrap__clear">[×]</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>select (closed)</h3>
+      <div class="select-wrap">
+        <input class="text-input" type="text" value="agent-pool-1" readonly>
+        <span class="select-wrap__indicator">[▾]</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>select (open panel)</h3>
+      <div class="select-panel">
+        <div class="select-panel__item select-panel__item--selected">agent-pool-1</div>
+        <div class="select-panel__item">agent-pool-2</div>
+        <div class="select-panel__item">agent-pool-3</div>
+        <div class="select-panel__item">default-pool</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>radio-group</h3>
+      <div class="radio-group">
+        <label class="radio-option radio-option--selected">
+          <span class="radio-option__marker">(•)</span>
+          <span>Local execution</span>
+        </label>
+        <label class="radio-option radio-option--unselected">
+          <span class="radio-option__marker">( )</span>
+          <span>Remote execution</span>
+        </label>
+        <label class="radio-option radio-option--unselected">
+          <span class="radio-option__marker">( )</span>
+          <span>Hybrid mode</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>file-upload</h3>
+      <div class="file-upload">
+        <div class="file-upload__icon">[↑]</div>
+        <div class="file-upload__label">Drop files or click to upload</div>
+      </div>
+
+      <h3 style="margin-top: 24px;">Uploaded files</h3>
+      <div class="file-row">
+        <span class="file-row__name">config.yaml</span>
+        <span class="file-row__size">12 KB</span>
+        <button class="file-row__remove">[×]</button>
+      </div>
+      <div class="file-row">
+        <span class="file-row__name">schema.json</span>
+        <span class="file-row__size">4.2 KB</span>
+        <button class="file-row__remove">[×]</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>file-upload (drag-over state)</h3>
+      <div class="file-upload file-upload--dragover">
+        <div class="file-upload__icon">[↑]</div>
+        <div class="file-upload__label">Drop files here</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cards — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Cards</h1>
+    <p>Card variants for containers, feature blocks, and stat displays.</p>
+
+    <div class="section">
+      <h3>card-flat</h3>
+      <div class="grid grid-2">
+        <div class="card-flat">
+          <strong>Fast Indexing</strong>
+          <p>Agents navigate your codebase in milliseconds. No warm-up, no cold starts.</p>
+        </div>
+        <div class="card-flat">
+          <strong>Local-First</strong>
+          <p>Everything runs on your machine. Your code never leaves your control.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>card-header</h3>
+      <div class="grid grid-2">
+        <div class="card-header">
+          <div class="card-header__head">Session Activity</div>
+          <div class="card-header__body">
+            <p>3 active agents processing 12 files. Estimated completion: 2m 34s.</p>
+          </div>
+        </div>
+        <div class="card-header">
+          <div class="card-header__head">Build Output</div>
+          <div class="card-header__body">
+            <p>Compiled 847 modules in 4.2s. 0 errors, 3 warnings.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>card-dark</h3>
+      <div class="grid grid-2">
+        <div class="card-dark">
+          <div style="color: var(--ash); font-size: 14px;">$ opencode serve</div>
+          <div>✓ Server running on :3000</div>
+          <div>✓ Agent pool initialized (4 workers)</div>
+          <div>✓ Index complete — 12,847 files</div>
+        </div>
+        <div class="card-dark">
+          <div style="color: var(--ash); font-size: 14px;">$ opencode status</div>
+          <div>Runtime: 4h 12m 33s</div>
+          <div>Memory: 256 MB / 512 MB</div>
+          <div>Queue: 0 pending</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>card-stats</h3>
+      <div class="card-stats">
+        <div class="card-stats__cell">
+          <div class="card-stats__number">12.8K</div>
+          <div class="card-stats__label">Files Indexed</div>
+        </div>
+        <div class="card-stats__cell">
+          <div class="card-stats__number">4</div>
+          <div class="card-stats__label">Active Agents</div>
+        </div>
+        <div class="card-stats__cell">
+          <div class="card-stats__number">99.7%</div>
+          <div class="card-stats__label">Uptime</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Component: Empty States & Function</title>
+<link rel="stylesheet" href="style-function.css">
+</head>
+<body>
+
+<header>
+  <h1>Empty States &amp; Function</h1>
+  <p>component-empty-states-function.html — Interactive empty states with populate/clear actions</p>
+</header>
+
+<section>
+  <h2>No Files</h2>
+  <div class="empty-state" id="emptyFiles">
+    <div class="icon">[∅]</div>
+    <h3>No files found</h3>
+    <p>Drop files here or click to upload</p>
+    <button class="btn btn-accent" onclick="populateFiles()">[+] Populate Files</button>
+  </div>
+  <div class="content-block hidden" id="contentFiles">
+    <h3>Project Files</h3>
+    <ul>
+      <li>src/index.ts</li>
+      <li>src/App.tsx</li>
+      <li>package.json</li>
+      <li>tsconfig.json</li>
+      <li>README.md</li>
+    </ul>
+    <button class="btn btn-danger" onclick="clearFiles()" style="margin-top:var(--spacing-md);">[×] Clear All</button>
+  </div>
+</section>
+
+<section>
+  <h2>No Agents</h2>
+  <div class="empty-state" id="emptyAgents">
+    <div class="icon">[∅]</div>
+    <h3>No agents running</h3>
+    <p>Start an agent to begin processing tasks</p>
+    <button class="btn btn-accent" onclick="populateAgents()">[+] Start Agent</button>
+  </div>
+  <div class="content-block hidden" id="contentAgents">
+    <h3>Active Agents</h3>
+    <ul>
+      <li>[✓] Code Reviewer — Processing PR #142</li>
+      <li>[✓] Test Runner — 84 tests passing</li>
+      <li>[✓] Linter — No issues found</li>
+    </ul>
+    <button class="btn btn-danger" onclick="clearAgents()" style="margin-top:var(--spacing-md);">[×] Clear All</button>
+  </div>
+</section>
+
+<section>
+  <h2>No Results</h2>
+  <div class="empty-state" id="emptyResults">
+    <div class="icon">[∅]</div>
+    <h3>No results found</h3>
+    <p>Try adjusting your search or filters</p>
+    <button class="btn btn-accent" onclick="populateResults()">[+] Show Results</button>
+  </div>
+  <div class="content-block hidden" id="contentResults">
+    <h3>Search Results</h3>
+    <ul>
+      <li>Configure OpenCode settings in ~/.opencode/config.json</li>
+      <li>OpenCode supports multiple AI providers and models</li>
+      <li>Use [⌘K] to open the command palette quickly</li>
+      <li>Agents can be configured with custom system prompts</li>
+    </ul>
+    <button class="btn btn-danger" onclick="clearResults()" style="margin-top:var(--spacing-md);">[×] Clear All</button>
+  </div>
+</section>
+
+<script>
+function populateFiles() {
+  document.getElementById('emptyFiles').classList.add('hidden');
+  document.getElementById('contentFiles').classList.remove('hidden');
+}
+function clearFiles() {
+  document.getElementById('contentFiles').classList.add('hidden');
+  document.getElementById('emptyFiles').classList.remove('hidden');
+}
+function populateAgents() {
+  document.getElementById('emptyAgents').classList.add('hidden');
+  document.getElementById('contentAgents').classList.remove('hidden');
+}
+function clearAgents() {
+  document.getElementById('contentAgents').classList.add('hidden');
+  document.getElementById('emptyAgents').classList.remove('hidden');
+}
+function populateResults() {
+  document.getElementById('emptyResults').classList.add('hidden');
+  document.getElementById('contentResults').classList.remove('hidden');
+}
+function clearResults() {
+  document.getElementById('contentResults').classList.add('hidden');
+  document.getElementById('emptyResults').classList.remove('hidden');
+}
+</script>
+
+</body>
+</html>

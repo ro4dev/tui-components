@@ -1,0 +1,41 @@
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --canvas: #F5F2EB; --surface-soft: #EDEAE3; --surface-card: #E5E2DB;
+      --ink: #111111; --body: #2A2A2A; --mute: #6B6B6B;
+      --warning: #FF9500; --danger: #FF3B30; --success: #34C759;
+      --on-dark: #F5F2EB;
+      --rounded-sm: 4px; --rounded-full: 9999px;
+    }
+    body {
+      font-family: 'Berkeley Mono', 'SF Mono', 'Fira Code', monospace;
+      font-size: 16px; font-weight: 400; line-height: 1.5;
+      color: var(--body); background: var(--canvas); padding: 40px 24px;
+    }
+    h1 { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    h3 { font-size: 14px; font-weight: 700; color: var(--mute); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section { margin-bottom: 48px; }
+
+    .badge-status {
+      display: inline-flex; align-items: center; gap: 4px;
+      border-radius: var(--rounded-full); padding: 2px 8px; font-size: 14px;
+    }
+    .badge-status--active { background: var(--success); color: var(--on-dark); }
+    .badge-status--warning { background: var(--warning); color: var(--ink); }
+    .badge-status--error { background: var(--danger); color: var(--on-dark); }
+    .badge-status--idle { background: var(--surface-card); color: var(--mute); }
+
+    .badge-label {
+      display: inline-block; background: var(--surface-card);
+      color: var(--mute); font-size: 14px; border-radius: var(--rounded-sm);
+      padding: 2px 8px;
+    }
+
+    .badge-counter {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--danger); color: var(--on-dark); font-size: 14px;
+      border-radius: var(--rounded-full); min-width: 20px; height: 20px;
+    }
+
+    .demo-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding: 12px 0; }
+    .demo-spaced { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }

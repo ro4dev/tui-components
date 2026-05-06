@@ -1,0 +1,46 @@
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --canvas: #F5F2EB; --surface-card: #E5E2DB;
+      --ink: #111111; --body: #2A2A2A; --mute: #6B6B6B;
+      --on-dark: #F5F2EB;
+      --rounded-full: 9999px;
+    }
+    body {
+      font-family: 'Berkeley Mono', 'SF Mono', 'Fira Code', monospace;
+      font-size: 16px; font-weight: 400; line-height: 1.5;
+      color: var(--body); background: var(--canvas); padding: 40px 24px;
+    }
+    h1 { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    h3 { font-size: 14px; font-weight: 700; color: var(--mute); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section { margin-bottom: 48px; }
+
+    .toggle-ascii {
+      display: inline-flex; align-items: center; gap: 8px;
+      cursor: pointer; font-size: 16px; min-height: 36px;
+    }
+    .toggle-ascii__box {
+      font-weight: 700; font-family: inherit;
+    }
+    .toggle-ascii--on .toggle-ascii__box { color: var(--ink); }
+    .toggle-ascii--off .toggle-ascii__box { color: var(--mute); }
+
+    .toggle-switch {
+      position: relative; width: 40px; height: 20px;
+      border-radius: var(--rounded-full); cursor: pointer;
+      transition: background 0.15s;
+    }
+    .toggle-switch::after {
+      content: ''; position: absolute; top: 2px; left: 2px;
+      width: 16px; height: 16px; border-radius: var(--rounded-full);
+      transition: transform 0.15s;
+    }
+    .toggle-switch--off { background: var(--surface-card); }
+    .toggle-switch--off::after { background: var(--mute); }
+    .toggle-switch--on { background: var(--ink); }
+    .toggle-switch--on::after { background: var(--on-dark); transform: translateX(20px); }
+
+    .toggle-demo {
+      display: flex; align-items: center; gap: 16px; padding: 8px 0;
+    }
+    .toggle-row { display: flex; flex-direction: column; gap: 8px; }

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code Blocks - OpenCode Design System</title>
+<link rel="stylesheet" href="style-function.css">
+</head>
+<body>
+
+<div class="header">
+  <h1>Code Blocks [⌕]</h1>
+  <p>Syntax-highlighted code blocks with line numbers and copy functionality</p>
+</div>
+
+<div class="section">
+  <div class="section-title">Syntax Highlighted Block</div>
+  <div class="code-block">
+    <div class="code-block-header">
+      <span class="code-block-title">example.js</span>
+      <button class="copy-btn" onclick="copyCode(this, 'code1')">[⎘] Copy</button>
+    </div>
+    <div class="code-block-body">
+      <div class="line-numbers"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
+      <div class="code-content" id="code1">function <span class="function">greetUser</span>(<span class="keyword">name</span>) {
+  <span class="keyword">const</span> message = <span class="string">`Hello, ${name}!`</span>;
+  <span class="keyword">return</span> message;
+}
+
+<span class="keyword">const</span> result = <span class="function">greetUser</span>(<span class="string">"World"</span>);
+console.<span class="function">log</span>(result); <span class="comment">// Hello, World!</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Terminal Style Block</div>
+  <div class="terminal-block">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+    </div>
+    <div class="terminal-body" id="code2">
+<span class="prompt">$</span> <span class="path">~/projects/app</span><br>
+<span class="prompt">></span> <span class="cmd">npm install opencode-core</span><br>
+<br>
+added <span class="number">142</span> packages in <span class="number">3.2s</span><br>
+<br>
+<span class="prompt">$</span> <span class="path">~/projects/app</span><br>
+<span class="prompt">></span> <span class="cmd">op encode --version</span><br>
+v2.4.1
+    </div>
+    <div style="padding: 0 var(--spacing-lg) var(--spacing-md); text-align: right;">
+      <button class="copy-btn" onclick="copyCode(this, 'code2')" style="border-color: var(--hairline-strong);">[⎘] Copy</button>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Inline Code Examples</div>
+  <div class="example-grid">
+    <div class="example-item">
+      <h4>Variable</h4>
+      <span class="inline-code">const count = 42;</span>
+    </div>
+    <div class="example-item">
+      <h4>Function</h4>
+      <span class="inline-code">parseData(input)</span>
+    </div>
+    <div class="example-item">
+      <h4>Path</h4>
+      <span class="inline-code">~/projects/app/src</span>
+    </div>
+    <div class="example-item">
+      <h4>Command</h4>
+      <span class="inline-code">git push origin main</span>
+    </div>
+  </div>
+</div>
+
+<script>
+function copyCode(btn, id) {
+  const el = document.getElementById(id);
+  const text = el.textContent || el.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.classList.add('copied');
+    btn.innerHTML = '[✓] Copied!';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = '[⎘] Copy';
+    }, 1500);
+  }).catch(() => {
+    btn.innerHTML = '[!] Error';
+    setTimeout(() => { btn.innerHTML = '[⎘] Copy'; }, 1500);
+  });
+}
+</script>
+</body>
+</html>

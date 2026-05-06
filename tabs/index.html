@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabs — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Tabs</h1>
+
+    <div class="section">
+      <h3>tab-strip</h3>
+      <div class="tab-strip">
+        <span class="tab-strip__item tab-strip__item--active">Files</span>
+        <span class="tab-strip__item">Search</span>
+        <span class="tab-strip__item">Terminal</span>
+        <span class="tab-strip__item">Problems</span>
+      </div>
+      <div style="padding: 16px 0;">
+        <p>Active tab shows content panel below.</p>
+      </div>
+
+      <h3 style="margin-top: 24px;">tab-strip (secondary)</h3>
+      <div class="tab-strip">
+        <span class="tab-strip__item">Overview</span>
+        <span class="tab-strip__item tab-strip__item--active">Configuration</span>
+        <span class="tab-strip__item">Logs</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>tab-pills</h3>
+      <div class="tab-pills">
+        <span class="tab-pills__item tab-pills__item--active">All</span>
+        <span class="tab-pills__item">TypeScript</span>
+        <span class="tab-pills__item">JavaScript</span>
+        <span class="tab-pills__item">JSON</span>
+        <span class="tab-pills__item">Markdown</span>
+      </div>
+
+      <h3 style="margin-top: 24px;">tab-pills (filter group)</h3>
+      <div class="tab-pills">
+        <span class="tab-pills__item tab-pills__item--active">Active</span>
+        <span class="tab-pills__item">Idle</span>
+        <span class="tab-pills__item">Completed</span>
+        <span class="tab-pills__item">Failed</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

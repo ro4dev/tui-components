@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panels — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Panels & Splitters</h1>
+
+    <div class="section">
+      <h3>panel</h3>
+      <div class="panel">
+        <div class="panel__header">Agent Status</div>
+        <div class="panel__body">
+          <p>Pool: 4 agents active</p>
+          <p>Queue: 0 pending tasks</p>
+          <p>Index: 12,847 files</p>
+        </div>
+        <div class="panel__footer">Last updated: 2026-05-05 14:22:03</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>panel (body only)</h3>
+      <div class="panel">
+        <div class="panel__body">
+          <p>This panel has no header or footer — just body content.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>split-panel</h3>
+      <div class="split-panel">
+        <div class="split-panel__left">
+          <p style="font-weight: 700; color: var(--ink); margin-bottom: 8px;">Editor</p>
+          <p>Source code view with syntax highlighting and line numbers.</p>
+        </div>
+        <div class="split-panel__splitter" title="Drag to resize"></div>
+        <div class="split-panel__right">
+          <p style="font-weight: 700; color: var(--ink); margin-bottom: 8px;">Preview</p>
+          <p>Rendered output with live reload.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>scroll-area</h3>
+      <div class="scroll-area">
+        <p>Item 1 — Lorem ipsum dolor sit amet</p>
+        <p>Item 2 — Consectetur adipiscing elit</p>
+        <p>Item 3 — Sed do eiusmod tempor</p>
+        <p>Item 4 — Ut labore et dolore magna</p>
+        <p>Item 5 — Quis nostrud exercitation</p>
+        <p>Item 6 — Duis aute irure dolor</p>
+        <p>Item 7 — Excepteur sint occaecat</p>
+        <p>Item 8 — Cupidatat non proident</p>
+        <p>Item 9 — Sunt in culpa</p>
+        <p>Item 10 — Qui officia deserunt</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Component: Copy Button & Function</title>
+<link rel="stylesheet" href="style-function.css">
+</head>
+<body>
+
+<header>
+  <h1>Copy Button &amp; Function</h1>
+  <p>component-copy-button-function.html — Interactive copy buttons with clipboard integration</p>
+</header>
+
+<section>
+  <h2>Code Block with Copy</h2>
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this, 'code1')">[⎘] Copy</button>
+    <pre id="code1">function greet(name: string): string {
+  return `Hello, ${name}!`;
+}
+
+const message = greet("World");
+console.log(message);</pre>
+  </div>
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this, 'code2')">[⎘] Copy</button>
+    <pre id="code2">import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  server: { port: 3000 }
+});</pre>
+  </div>
+</section>
+
+<section>
+  <h2>Inline Text with Copy</h2>
+  <div class="inline-text">
+    <span>npm install @opencode/core</span>
+    <button class="inline-copy-btn" onclick="copyInline(this, 'npm install @opencode/core')">[⎘]</button>
+  </div>
+  <div class="inline-text">
+    <span>git clone https://github.com/anomalyco/opencode.git</span>
+    <button class="inline-copy-btn" onclick="copyInline(this, 'git clone https://github.com/anomalyco/opencode.git')">[⎘]</button>
+  </div>
+  <div class="inline-text">
+    <span>export OPENCODE_API_KEY="sk-..."</span>
+    <button class="inline-copy-btn" onclick="copyInline(this, 'export OPENCODE_API_KEY=&quot;sk-...&quot;')">[⎘]</button>
+  </div>
+</section>
+
+<section>
+  <h2>Clipboard Log</h2>
+  <div class="clipboard-log">
+    <h3>Last Copied</h3>
+    <div class="log-content" id="clipboardLog">Nothing copied yet.</div>
+  </div>
+</section>
+
+<script>
+function copyCode(btn, id) {
+  const code = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.innerHTML = '[✓] Copied';
+    btn.classList.add('copied');
+    updateLog(code);
+    setTimeout(() => {
+      btn.innerHTML = '[⎘] Copy';
+      btn.classList.remove('copied');
+    }, 1500);
+  }).catch(() => {
+    fallbackCopy(code, btn, '[⎘] Copy');
+  });
+}
+
+function copyInline(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.innerHTML = '[✓]';
+    btn.classList.add('copied');
+    updateLog(text);
+    setTimeout(() => {
+      btn.innerHTML = '[⎘]';
+      btn.classList.remove('copied');
+    }, 1500);
+  }).catch(() => {
+    fallbackCopy(text, btn, '[⎘]');
+  });
+}
+
+function fallbackCopy(text, btn, originalHTML) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand('copy');
+    btn.innerHTML = '[✓] Copied';
+    btn.classList.add('copied');
+    updateLog(text);
+    setTimeout(() => {
+      btn.innerHTML = originalHTML;
+      btn.classList.remove('copied');
+    }, 1500);
+  } catch(e) {
+    console.error('Copy failed:', e);
+  }
+  document.body.removeChild(textarea);
+}
+
+function updateLog(text) {
+  const now = new Date();
+  const time = now.toLocaleTimeString('en-US', { hour12: false });
+  const display = text.length > 60 ? text.substring(0, 60) + '...' : text;
+  document.getElementById('clipboardLog').innerHTML = `<span class="timestamp">[${time}]</span> ${display.replace(/</g, '&lt;').replace(/>/g, '&gt;')}`;
+}
+</script>
+
+</body>
+</html>

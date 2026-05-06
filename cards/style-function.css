@@ -1,0 +1,71 @@
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --canvas: #F5F2EB; --surface-soft: #EDEAE3; --surface-card: #E5E2DB;
+      --surface-dark: #1A1A1A; --ink: #111111; --body: #2A2A2A; --mute: #6B6B6B;
+      --stone: #8A8580; --ash: #9A9590; --success: #34C759;
+      --hairline: #D5D2CB; --hairline-strong: #B5B2AB; --on-dark: #F5F2EB;
+      --rounded-sm: 4px; --spacing-lg: 16px;
+    }
+    body {
+      font-family: 'Berkeley Mono', 'SF Mono', 'Fira Code', monospace;
+      font-size: 16px; font-weight: 400; line-height: 1.5;
+      color: var(--body); background: var(--canvas); padding: 40px 24px;
+    }
+    h1 { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    h3 { font-size: 14px; font-weight: 700; color: var(--mute); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section { margin-bottom: 48px; }
+    .grid { display: grid; gap: 16px; }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+    .card-flat {
+      background: var(--canvas); border: 1px solid var(--hairline);
+      border-radius: var(--rounded-sm); padding: 16px; cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .card-flat:hover { border-color: var(--hairline-strong); }
+    .card-flat:hover .card__toggle { opacity: 1; }
+    .card__toggle { opacity: 0; transition: opacity 0.15s; color: var(--mute); font-size: 14px; float: right; }
+    .card-flat h4 { margin-bottom: 8px; color: var(--ink); font-size: 16px; }
+    .card-flat p { color: var(--body); font-size: 16px; }
+    .card-flat .card__actions { margin-top: 12px; display: flex; gap: 8px; }
+
+    .card-header {
+      background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--rounded-sm);
+    }
+    .card-header__head {
+      padding: 8px 16px; border-bottom: 1px solid var(--hairline);
+      font-weight: 700; color: var(--ink); display: flex; justify-content: space-between;
+    }
+    .card-header__body { padding: 16px; }
+    .card-header__body p { margin-bottom: 4px; }
+
+    .card-dark {
+      background: var(--surface-dark); color: var(--on-dark);
+      border-radius: var(--rounded-sm); padding: 16px;
+    }
+    .card-dark__cmd { color: var(--ash); font-size: 14px; margin-bottom: 8px; }
+    .card-dark__line { margin-bottom: 4px; }
+    .card-dark__line--success { color: var(--success); }
+
+    .card-stats {
+      background: var(--canvas); border: 1px solid var(--hairline);
+      border-radius: var(--rounded-sm); display: flex;
+    }
+    .card-stats__cell {
+      flex: 1; padding: 24px; text-align: center; cursor: pointer;
+    }
+    .card-stats__cell:not(:last-child) { border-right: 1px solid var(--hairline); }
+    .card-stats__cell:hover { background: var(--surface-soft); }
+    .card-stats__number { font-size: 38px; font-weight: 700; color: var(--ink); line-height: 1; }
+    .card-stats__label { font-size: 14px; color: var(--mute); margin-top: 4px; }
+
+    .btn {
+      font-family: inherit; font-size: 14px; padding: 6px 12px;
+      border-radius: var(--rounded-sm); cursor: pointer;
+      border: 1px solid var(--hairline-strong); background: var(--canvas); color: var(--body);
+    }
+    .btn:hover { background: var(--surface-soft); color: var(--ink); }
+    .counter-anim { transition: transform 0.1s; }
+    .counter-anim.bump { transform: scale(1.1); }

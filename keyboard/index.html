@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keyboard & Command Palette — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Keyboard & Command Palette</h1>
+
+    <div class="section">
+      <h3>kbd</h3>
+      <div class="preview-box">
+        <p style="margin-bottom: 16px;">
+          Open command palette: <kbd>⌘</kbd> + <kbd>K</kbd>
+        </p>
+        <p style="margin-bottom: 16px;">
+          Save file: <kbd>⌘</kbd> + <kbd>S</kbd>
+        </p>
+        <p style="margin-bottom: 16px;">
+          Full text search: <kbd>⌘</kbd> + <kbd>⇧</kbd> + <kbd>F</kbd>
+        </p>
+        <p>
+          Active state example: <kbd class="kbd--active">⌘</kbd>
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>command-palette</h3>
+      <div class="cmd-overlay">
+        <div class="cmd-palette">
+          <div class="cmd-palette__search">
+            <input class="cmd-palette__input" type="text" placeholder="Type a command or search..." autofocus>
+          </div>
+          <div class="cmd-palette__results">
+            <div class="cmd-palette__item">
+              <span>Open File...</span>
+              <span class="cmd-palette__shortcut">⌘O</span>
+            </div>
+            <div class="cmd-palette__item cmd-palette__item--selected">
+              <span>Toggle Agent Pool</span>
+              <span class="cmd-palette__shortcut">⌘⇧A</span>
+            </div>
+            <div class="cmd-palette__item">
+              <span>Rebuild Index</span>
+              <span class="cmd-palette__shortcut">⌘⇧I</span>
+            </div>
+            <div class="cmd-palette__item">
+              <span>Preferences: Open Settings</span>
+              <span class="cmd-palette__shortcut">⌘,</span>
+            </div>
+            <div class="cmd-palette__item">
+              <span>Terminal: Create New</span>
+              <span class="cmd-palette__shortcut">⌃`</span>
+            </div>
+          </div>
+          <div class="cmd-palette__footer">
+            <span><kbd>↑↓</kbd> navigate</span>
+            <span><kbd>↵</kbd> select</span>
+            <span><kbd>esc</kbd> close</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

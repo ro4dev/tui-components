@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forms - OpenCode Design System</title>
+<link rel="stylesheet" href="style-function.css">
+</head>
+<body>
+
+<div class="header">
+  <h1>Forms [⌕]</h1>
+  <p>Interactive form elements with search, select, radio, and file upload</p>
+</div>
+
+<div class="section">
+  <div class="section-title">Search Input</div>
+  <div class="form-group">
+    <label class="form-label">Search files</label>
+    <div class="form-input-wrap">
+      <span class="search-icon">[⌕]</span>
+      <input type="text" class="form-input" id="searchInput" placeholder="Type to search..." oninput="toggleClearBtn()">
+      <button class="clear-btn" id="clearBtn" onclick="clearSearch()">[×]</button>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Select Dropdown</div>
+  <div class="form-group">
+    <label class="form-label">Choose framework</label>
+    <div class="select-wrap">
+      <button class="select-trigger" id="selectTrigger" onclick="toggleSelect()">
+        <span id="selectValue">Select an option...</span>
+        <span class="arrow">[▾]</span>
+      </button>
+      <div class="select-panel" id="selectPanel">
+        <div class="select-option" onclick="selectOption(this, 'React')">React</div>
+        <div class="select-option" onclick="selectOption(this, 'Vue')">Vue</div>
+        <div class="select-option" onclick="selectOption(this, 'Svelte')">Svelte</div>
+        <div class="select-option" onclick="selectOption(this, 'Angular')">Angular</div>
+        <div class="select-option" onclick="selectOption(this, 'Solid')">Solid</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Radio Group</div>
+  <div class="form-group">
+    <label class="form-label">Build target</label>
+    <div class="radio-group" id="radioGroup">
+      <div class="radio-option" onclick="selectRadio(this)">
+        <span class="radio-marker">( )</span>
+        <span class="radio-label">Development (debug, slower)</span>
+      </div>
+      <div class="radio-option selected" onclick="selectRadio(this)">
+        <span class="radio-marker">(•)</span>
+        <span class="radio-label">Production (optimized, faster)</span>
+      </div>
+      <div class="radio-option" onclick="selectRadio(this)">
+        <span class="radio-marker">( )</span>
+        <span class="radio-label">Test (with coverage)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">File Upload</div>
+  <div class="form-group">
+    <label class="form-label">Attachments</label>
+    <div class="dropzone" id="dropzone">
+      <div class="dropzone-icon">[↑]</div>
+      <div class="dropzone-text">Drop files here or use button below</div>
+      <button class="btn" onclick="addFile()">[+] Add File</button>
+    </div>
+    <div class="file-list" id="fileList"></div>
+  </div>
+</div>
+
+<script>
+function toggleClearBtn() {
+  const input = document.getElementById('searchInput');
+  const btn = document.getElementById('clearBtn');
+  btn.classList.toggle('show', input.value.length > 0);
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('clearBtn').classList.remove('show');
+}
+
+function toggleSelect() {
+  document.getElementById('selectPanel').classList.toggle('open');
+}
+
+function selectOption(el, value) {
+  document.getElementById('selectValue').textContent = value;
+  document.querySelectorAll('.select-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('selectPanel').classList.remove('open');
+}
+
+function selectRadio(el) {
+  document.querySelectorAll('.radio-option').forEach(o => {
+    o.classList.remove('selected');
+    o.querySelector('.radio-marker').textContent = '( )';
+  });
+  el.classList.add('selected');
+  el.querySelector('.radio-marker').textContent = '(•)';
+}
+
+let fileCount = 0;
+const sampleFiles = ['config.json', 'README.md', 'index.ts', 'package.json', 'styles.css'];
+
+function addFile() {
+  const file = sampleFiles[fileCount % sampleFiles.length];
+  fileCount++;
+  const item = document.createElement('div');
+  item.className = 'file-item';
+  item.innerHTML = `<span>${file}</span><button class="remove-file" onclick="this.parentElement.remove()">[×]</button>`;
+  document.getElementById('fileList').appendChild(item);
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.select-wrap')) {
+    document.getElementById('selectPanel').classList.remove('open');
+  }
+});
+</script>
+</body>
+</html>

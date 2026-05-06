@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tables — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Tables</h1>
+    <p>Table variants for data display in OpenCode.</p>
+
+    <div class="section">
+      <h3>table-default</h3>
+      <table class="table-default">
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Status</th>
+            <th>Version</th>
+            <th>Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>button-primary</td><td>stable</td><td>2.1.0</td><td>4.2 KB</td></tr>
+          <tr><td>card-flat</td><td>stable</td><td>1.8.3</td><td>2.1 KB</td></tr>
+          <tr><td>dialog-default</td><td>beta</td><td>0.9.0</td><td>3.5 KB</td></tr>
+          <tr><td>alert-info</td><td>stable</td><td>1.4.1</td><td>1.8 KB</td></tr>
+          <tr><td>tooltip-default</td><td>beta</td><td>0.7.2</td><td>0.9 KB</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h3>table-compact</h3>
+      <table class="table-compact">
+        <thead>
+          <tr><th>PID</th><th>Process</th><th>CPU</th><th>Memory</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1247</td><td>opencode-server</td><td>12%</td><td>256 MB</td></tr>
+          <tr><td>1248</td><td>opencode-agent</td><td>8%</td><td>128 MB</td></tr>
+          <tr><td>1249</td><td>opencode-lsp</td><td>3%</td><td>64 MB</td></tr>
+          <tr><td>1250</td><td>opencode-watcher</td><td>1%</td><td>32 MB</td></tr>
+          <tr><td>1251</td><td>opencode-indexer</td><td>15%</td><td>512 MB</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h3>table-interactive</h3>
+      <table class="table-interactive">
+        <thead>
+          <tr>
+            <th style="width: 40px;"></th>
+            <th>File</th>
+            <th>Last Modified</th>
+            <th>Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="selected">
+            <td class="checkbox">[x]</td>
+            <td>config.yaml</td>
+            <td>2026-05-04 14:22</td>
+            <td>12 KB</td>
+          </tr>
+          <tr>
+            <td class="checkbox">[ ]</td>
+            <td>package.json</td>
+            <td>2026-05-03 09:15</td>
+            <td>4.2 KB</td>
+          </tr>
+          <tr>
+            <td class="checkbox">[ ]</td>
+            <td>README.md</td>
+            <td>2026-05-02 18:30</td>
+            <td>8.1 KB</td>
+          </tr>
+          <tr class="selected">
+            <td class="checkbox">[x]</td>
+            <td>tsconfig.json</td>
+            <td>2026-05-01 11:45</td>
+            <td>2.3 KB</td>
+          </tr>
+          <tr>
+            <td class="checkbox">[ ]</td>
+            <td>.gitignore</td>
+            <td>2026-04-28 08:00</td>
+            <td>0.5 KB</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h3>table-bordered</h3>
+      <table class="table-bordered">
+        <thead>
+          <tr>
+            <th>Endpoint</th>
+            <th>Method</th>
+            <th>Status</th>
+            <th>Avg Latency</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>/api/v1/agents</td><td>GET</td><td>200</td><td>45ms</td></tr>
+          <tr><td>/api/v1/sessions</td><td>POST</td><td>201</td><td>120ms</td></tr>
+          <tr><td>/api/v1/config</td><td>PUT</td><td>200</td><td>89ms</td></tr>
+          <tr><td>/api/v1/health</td><td>GET</td><td>200</td><td>12ms</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

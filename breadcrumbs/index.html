@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breadcrumbs — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Breadcrumbs</h1>
+
+    <div class="section">
+      <h3>breadcrumb-default</h3>
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <nav class="breadcrumb">
+          <a class="breadcrumb__item" href="#">home</a>
+          <span class="breadcrumb__separator">/</span>
+          <a class="breadcrumb__item" href="#">docs</a>
+          <span class="breadcrumb__separator">/</span>
+          <a class="breadcrumb__item" href="#">agents</a>
+          <span class="breadcrumb__separator">/</span>
+          <span class="breadcrumb__current">configuration</span>
+        </nav>
+
+        <nav class="breadcrumb">
+          <a class="breadcrumb__item" href="#">home</a>
+          <span class="breadcrumb__separator">/</span>
+          <a class="breadcrumb__item" href="#">settings</a>
+          <span class="breadcrumb__separator">/</span>
+          <span class="breadcrumb__current">theme</span>
+        </nav>
+
+        <nav class="breadcrumb">
+          <a class="breadcrumb__item" href="#">home</a>
+          <span class="breadcrumb__separator">/</span>
+          <span class="breadcrumb__current">dashboard</span>
+        </nav>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

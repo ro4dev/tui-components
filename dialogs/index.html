@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dialogs — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Dialogs</h1>
+    <p>Modal dialogs for confirmations, prompts, and alerts.</p>
+
+    <div class="section">
+      <h3>dialog-default</h3>
+      <div class="preview">
+        <div class="dialog">
+          <div class="dialog__header">
+            <span class="dialog__title">Save Changes</span>
+            <span class="dialog__close">×</span>
+          </div>
+          <div class="dialog__body">
+            You have unsaved changes in your configuration. Would you like to save them before closing?
+          </div>
+          <div class="dialog__footer">
+            <button class="btn btn-secondary">Discard</button>
+            <button class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>dialog-dark</h3>
+      <div class="preview">
+        <div class="dialog-dark">
+          <div class="dialog__header">
+            <span class="dialog__title">Terminal Confirmation</span>
+            <span class="dialog__close">×</span>
+          </div>
+          <div class="dialog__body">
+            $ rm -rf ./dist<br><br>
+            This will remove all build artifacts. Continue?
+          </div>
+          <div class="dialog__footer">
+            <button class="btn btn-secondary">Cancel</button>
+            <button class="btn btn-primary">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>dialog-confirm (destructive)</h3>
+      <div class="preview">
+        <div class="dialog">
+          <div class="dialog__header">
+            <span class="dialog__title">Delete Agent Pool</span>
+            <span class="dialog__close">×</span>
+          </div>
+          <div class="dialog__body">
+            This action cannot be undone. All running agents in the pool will be terminated immediately.
+          </div>
+          <div class="dialog__footer">
+            <button class="btn btn-secondary">Cancel</button>
+            <button class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

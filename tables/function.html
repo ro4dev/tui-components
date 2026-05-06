@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tables — Functional — OpenCode</title>
+<link rel="stylesheet" href="style-function.css">
+</head>
+<body>
+  <div class="container">
+    <h1>[tables] — Functional</h1>
+    <p>Click to select rows, sort columns, add/delete entries.</p>
+
+    <div class="section">
+      <h3>table-default (sortable)</h3>
+      <table class="table-default" id="sortableTable">
+        <thead>
+          <tr>
+            <th class="sort-btn" data-col="0">Component</th>
+            <th class="sort-btn" data-col="1">Status</th>
+            <th class="sort-btn" data-col="2">Version</th>
+            <th class="sort-btn" data-col="3">Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>button-primary</td><td>stable</td><td>2.1.0</td><td>4.2 KB</td></tr>
+          <tr><td>card-flat</td><td>stable</td><td>1.8.3</td><td>2.1 KB</td></tr>
+          <tr><td>dialog-default</td><td>beta</td><td>0.9.0</td><td>3.5 KB</td></tr>
+          <tr><td>alert-info</td><td>stable</td><td>1.4.1</td><td>1.8 KB</td></tr>
+          <tr><td>tooltip-default</td><td>beta</td><td>0.7.2</td><td>0.9 KB</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h3>table-interactive (selectable)</h3>
+      <div class="controls">
+        <button class="btn" id="selectAll">Select All</button>
+        <button class="btn" id="deselectAll">Deselect All</button>
+        <button class="btn btn--primary" id="deleteSelected">[x] Delete Selected</button>
+        <span id="selectedCount" style="color: var(--mute); font-size: 14px; margin-left: 8px;">0 selected</span>
+      </div>
+      <table class="table-interactive" id="interactiveTable">
+        <thead>
+          <tr><th style="width:40px"></th><th>File</th><th>Modified</th><th>Size</th></tr>
+        </thead>
+        <tbody>
+          <tr data-id="1"><td>[ ]</td><td>config.yaml</td><td>2026-05-04 14:22</td><td>12 KB</td></tr>
+          <tr data-id="2"><td>[ ]</td><td>package.json</td><td>2026-05-03 09:15</td><td>4.2 KB</td></tr>
+          <tr data-id="3"><td>[ ]</td><td>README.md</td><td>2026-05-02 18:30</td><td>8.1 KB</td></tr>
+          <tr data-id="4"><td>[ ]</td><td>tsconfig.json</td><td>2026-05-01 11:45</td><td>2.3 KB</td></tr>
+          <tr data-id="5"><td>[ ]</td><td>.gitignore</td><td>2026-04-28 08:00</td><td>0.5 KB</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h3>table-bordered (dynamic)</h3>
+      <div class="controls">
+        <button class="btn btn--primary" id="addRow">[+] Add Row</button>
+        <span id="rowCount" style="color: var(--mute); font-size: 14px; margin-left: 8px;">4 rows</span>
+      </div>
+      <table class="table-bordered" id="dynamicTable">
+        <thead><tr><th>Endpoint</th><th>Method</th><th>Status</th><th>Latency</th></tr></thead>
+        <tbody>
+          <tr><td>/api/v1/agents</td><td>GET</td><td>200</td><td>45ms</td></tr>
+          <tr><td>/api/v1/sessions</td><td>POST</td><td>201</td><td>120ms</td></tr>
+          <tr><td>/api/v1/config</td><td>PUT</td><td>200</td><td>89ms</td></tr>
+          <tr><td>/api/v1/health</td><td>GET</td><td>200</td><td>12ms</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const endpoints = ['/api/v1/users', '/api/v1/files', '/api/v1/logs', '/api/v1/metrics', '/api/v1/tokens'];
+    const methods = ['GET', 'POST', 'DELETE', 'PATCH'];
+
+    // Sortable table
+    document.querySelectorAll('.sort-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const table = document.getElementById('sortableTable');
+        const tbody = table.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const col = parseInt(btn.dataset.col);
+        const isAsc = btn.classList.contains('asc');
+        // reset all
+        document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('asc', 'desc'));
+        btn.classList.add(isAsc ? 'desc' : 'asc');
+        rows.sort((a, b) => {
+          const aT = a.cells[col].textContent.trim();
+          const bT = b.cells[col].textContent.trim();
+          return isAsc ? bT.localeCompare(aT) : aT.localeCompare(bT);
+        });
+        rows.forEach(r => tbody.appendChild(r));
+        toast(`Sorted by column ${col + 1} ${isAsc ? 'desc' : 'asc'}`);
+      });
+    });
+
+    // Interactive table - row selection
+    document.getElementById('interactiveTable').addEventListener('click', (e) => {
+      const row = e.target.closest('tr');
+      if (!row || !row.dataset.id) return;
+      const td = row.cells[0];
+      const isSelected = row.classList.toggle('selected');
+      td.textContent = isSelected ? '[x]' : '[ ]';
+      updateSelectedCount();
+    });
+
+    function updateSelectedCount() {
+      const count = document.querySelectorAll('#interactiveTable tr.selected').length;
+      document.getElementById('selectedCount').textContent = `${count} selected`;
+    }
+
+    document.getElementById('selectAll').addEventListener('click', () => {
+      document.querySelectorAll('#interactiveTable tbody tr').forEach(row => {
+        row.classList.add('selected');
+        row.cells[0].textContent = '[x]';
+      });
+      updateSelectedCount();
+    });
+
+    document.getElementById('deselectAll').addEventListener('click', () => {
+      document.querySelectorAll('#interactiveTable tbody tr').forEach(row => {
+        row.classList.remove('selected');
+        row.cells[0].textContent = '[ ]';
+      });
+      updateSelectedCount();
+    });
+
+    document.getElementById('deleteSelected').addEventListener('click', () => {
+      const selected = document.querySelectorAll('#interactiveTable tbody tr.selected');
+      if (selected.length === 0) { toast('No rows selected'); return; }
+      const count = selected.length;
+      selected.forEach(r => r.remove());
+      updateSelectedCount();
+      toast(`${count} row(s) deleted`);
+    });
+
+    // Dynamic table - add row
+    document.getElementById('addRow').addEventListener('click', () => {
+      const tbody = document.querySelector('#dynamicTable tbody');
+      const ep = endpoints[Math.floor(Math.random() * endpoints.length)];
+      const m = methods[Math.floor(Math.random() * methods.length)];
+      const s = [200, 201, 204, 404, 500][Math.floor(Math.random() * 5)];
+      const l = Math.floor(Math.random() * 200) + 'ms';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${ep}</td><td>${m}</td><td>${s}</td><td>${l}</td>`;
+      tbody.appendChild(tr);
+      const rows = tbody.querySelectorAll('tr').length;
+      document.getElementById('rowCount').textContent = `${rows} rows`;
+      toast('Row added');
+    });
+
+    function toast(msg) {
+      const t = document.createElement('div');
+      t.className = 'toast-fn';
+      t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 2000);
+    }
+  </script>
+</body>
+</html>

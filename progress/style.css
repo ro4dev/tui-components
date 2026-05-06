@@ -1,0 +1,58 @@
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --canvas: #F5F2EB; --surface-card: #E5E2DB;
+      --ink: #111111; --body: #2A2A2A; --mute: #6B6B6B;
+      --accent: #007AFF; --success: #34C759; --danger: #FF3B30;
+      --hairline: #D5D2CB;
+      --rounded-sm: 4px;
+    }
+    body {
+      font-family: 'Berkeley Mono', 'SF Mono', 'Fira Code', monospace;
+      font-size: 16px; font-weight: 400; line-height: 1.5;
+      color: var(--body); background: var(--canvas); padding: 40px 24px;
+    }
+    h1 { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    h3 { font-size: 14px; font-weight: 700; color: var(--mute); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section { margin-bottom: 48px; }
+
+    /* progress-bar */
+    .progress-bar {
+      background: var(--surface-card); height: 4px; border-radius: var(--rounded-sm);
+      width: 100%;
+    }
+    .progress-bar__fill {
+      height: 4px; border-radius: var(--rounded-sm);
+      background: var(--accent);
+    }
+
+    /* progress-spinner */
+    .progress-spinner {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--mute); font-size: 16px;
+    }
+    .progress-spinner__icon {
+      font-size: 16px; animation: spin 1.2s linear infinite;
+    }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    /* progress-steps */
+    .progress-steps {
+      display: flex; align-items: center; gap: 0;
+    }
+    .progress-steps__step {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .progress-steps__marker {
+      font-size: 14px; font-weight: 700;
+    }
+    .progress-steps__label {
+      font-size: 14px; color: var(--mute);
+    }
+    .progress-steps__connector {
+      color: var(--hairline); padding: 0 4px; margin-bottom: 18px;
+    }
+    .progress-steps__connector--done { color: var(--success); }
+    .progress-steps__marker--done { color: var(--success); }
+    .progress-steps__marker--current { color: var(--ink); }
+    .progress-steps__marker--future { color: var(--mute); }

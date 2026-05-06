@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggles — OpenCode Components</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Toggles & Switches</h1>
+
+    <div class="section">
+      <h3>toggle-ascii</h3>
+      <div class="toggle-row">
+        <div class="toggle-demo">
+          <label class="toggle-ascii toggle-ascii--on">
+            <span class="toggle-ascii__box">[x]</span>
+            <span>Enable indexing</span>
+          </label>
+        </div>
+        <div class="toggle-demo">
+          <label class="toggle-ascii toggle-ascii--off">
+            <span class="toggle-ascii__box">[ ]</span>
+            <span>Enable telemetry</span>
+          </label>
+        </div>
+        <div class="toggle-demo">
+          <label class="toggle-ascii toggle-ascii--on">
+            <span class="toggle-ascii__box">[x]</span>
+            <span>Auto-save</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>toggle-switch</h3>
+      <div class="toggle-row">
+        <div class="toggle-demo">
+          <div class="toggle-switch toggle-switch--on"></div>
+          <span>Dark mode</span>
+        </div>
+        <div class="toggle-demo">
+          <div class="toggle-switch toggle-switch--off"></div>
+          <span>Notifications</span>
+        </div>
+        <div class="toggle-demo">
+          <div class="toggle-switch toggle-switch--on"></div>
+          <span>Auto-update</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Comparison — ASCII vs Switch</h3>
+      <div class="toggle-demo">
+        <label class="toggle-ascii toggle-ascii--on">
+          <span class="toggle-ascii__box">[x]</span>
+          <span>ASCII toggle</span>
+        </label>
+        <span style="color: var(--mute); margin: 0 16px;">vs</span>
+        <div class="toggle-switch toggle-switch--on"></div>
+        <span>Pill switch</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

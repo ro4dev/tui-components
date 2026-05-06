@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accordions - OpenCode Design System</title>
+<link rel="stylesheet" href="style-function.css">
+</head>
+<body>
+
+<div class="header">
+  <h1>Accordions</h1>
+  <p>Expandable/collapsible content sections with nested support</p>
+</div>
+
+<div class="accordion" id="acc1">
+  <button class="accordion-header" onclick="toggleAccordion('acc1')">
+    <span>Getting Started</span>
+    <span class="marker">[+]</span>
+  </button>
+  <div class="accordion-content">
+    <div class="accordion-body">
+      Welcome to the OpenCode design system. This accordion demonstrates the expand/collapse functionality with smooth transitions.
+      <br><br>
+      <div class="nested-accordion" id="nested1">
+        <button class="accordion-header" onclick="toggleAccordion('nested1')">
+          <span>→ Installation Steps</span>
+          <span class="marker">[+]</span>
+        </button>
+        <div class="accordion-content">
+          <div class="accordion-body">
+            1. Clone the repository<br>
+            2. Install dependencies with npm<br>
+            3. Run the development server<br>
+            4. Start building components
+          </div>
+        </div>
+      </div>
+      <div class="nested-accordion" id="nested2">
+        <button class="accordion-header" onclick="toggleAccordion('nested2')">
+          <span>→ Configuration</span>
+          <span class="marker">[+]</span>
+        </button>
+        <div class="accordion-content">
+          <div class="accordion-body">
+            Configure your design tokens in the root config file. All components read from these CSS custom properties.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="accordion" id="acc2">
+  <button class="accordion-header" onclick="toggleAccordion('acc2')">
+    <span>Component API</span>
+    <span class="marker">[+]</span>
+  </button>
+  <div class="accordion-content">
+    <div class="accordion-body">
+      Each component exports a standard API with props, events, and slots. Review the documentation for full details on implementation patterns and usage guidelines.
+    </div>
+  </div>
+</div>
+
+<div class="accordion" id="acc3">
+  <button class="accordion-header" onclick="toggleAccordion('acc3')">
+    <span>Design Tokens</span>
+    <span class="marker">[+]</span>
+  </button>
+  <div class="accordion-content">
+    <div class="accordion-body">
+      <strong>Colors:</strong> canvas, surface-soft, surface-card, surface-dark, ink, body, mute, stone, ash, accent, warning, danger, success, hairline, hairline-strong, on-dark<br><br>
+      <strong>Spacing:</strong> xs(4px), sm(8px), md(12px), lg(16px), xl(24px), xxl(32px)<br><br>
+      <strong>Radius:</strong> sm(4px), full(9999px)
+    </div>
+  </div>
+</div>
+
+<div class="accordion" id="acc4">
+  <button class="accordion-header" onclick="toggleAccordion('acc4')">
+    <span>Troubleshooting</span>
+    <span class="marker">[+]</span>
+  </button>
+  <div class="accordion-content">
+    <div class="accordion-body">
+      Having issues? Check the following:<br>
+      • Verify all dependencies are installed<br>
+      • Check browser console for errors<br>
+      • Ensure design tokens are properly loaded<br>
+      • Review component prop types
+    </div>
+  </div>
+</div>
+
+<div class="log">
+  <div class="log-title">Activity Log</div>
+  <div id="log-entries"></div>
+</div>
+
+<script>
+function toggleAccordion(id) {
+  const accordion = document.getElementById(id);
+  const content = accordion.querySelector('.accordion-content');
+  const marker = accordion.querySelector('.marker');
+  const isOpen = content.classList.contains('open');
+
+  if (isOpen) {
+    content.classList.remove('open');
+    marker.textContent = '[+]';
+    logAction('Collapsed: ' + accordion.querySelector('.accordion-header span:first-child').textContent.trim());
+  } else {
+    content.classList.add('open');
+    marker.textContent = '[-]';
+    if (accordion.querySelector('.nested-accordion')) {
+      marker.textContent = '[↓]';
+    }
+    logAction('Expanded: ' + accordion.querySelector('.accordion-header span:first-child').textContent.trim());
+  }
+}
+
+function logAction(message) {
+  const log = document.getElementById('log-entries');
+  const entry = document.createElement('div');
+  entry.className = 'log-entry';
+  entry.textContent = '> ' + message;
+  log.prepend(entry);
+  if (log.children.length > 10) {
+    log.removeChild(log.lastChild);
+  }
+}
+</script>
+
+</body>
+</html>

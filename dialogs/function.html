@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dialogs — Functional — OpenCode</title>
+<link rel="stylesheet" href="style-function.css">
+</head>
+<body>
+  <div class="container">
+    <h1>[dialogs] — Functional</h1>
+    <p>Open dialogs, confirm/cancel, see results.</p>
+
+    <div class="section">
+      <h3>Open dialogs</h3>
+      <div class="controls">
+        <button class="btn" onclick="openDialog('save')">Save Changes</button>
+        <button class="btn" onclick="openDialog('terminal')">Terminal Confirm</button>
+        <button class="btn" onclick="openDialog('delete')">Destructive Action</button>
+      </div>
+      <div id="dialogResult">Click a button to open a dialog. The result of your action will appear here.</div>
+    </div>
+  </div>
+
+  <!-- Save Dialog -->
+  <div class="dialog-overlay" id="dialog-save" onclick="closeOnOverlay(event, 'save')">
+    <div class="dialog">
+      <div class="dialog__header">
+        <span class="dialog__title">Save Changes</span>
+        <button class="dialog__close" onclick="closeDialog('save')">[×]</button>
+      </div>
+      <div class="dialog__body">
+        You have unsaved changes in your configuration. Would you like to save them before closing?
+      </div>
+      <div class="dialog__footer">
+        <button class="btn btn--secondary" onclick="closeDialog('save'); setResult('Changes discarded.');">Discard</button>
+        <button class="btn btn--primary" onclick="closeDialog('save'); setResult('Changes saved successfully.');">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terminal Dialog -->
+  <div class="dialog-overlay" id="dialog-terminal" onclick="closeOnOverlay(event, 'terminal')">
+    <div class="dialog dialog-dark">
+      <div class="dialog__header">
+        <span class="dialog__title">Terminal Confirmation</span>
+        <button class="dialog__close" onclick="closeDialog('terminal')" style="color: var(--stone);">[×]</button>
+      </div>
+      <div class="dialog__body">
+        $ rm -rf ./dist<br><br>
+        This will remove all build artifacts. Continue?
+      </div>
+      <div class="dialog__footer">
+        <button class="btn btn--secondary" onclick="closeDialog('terminal'); setResult('Command cancelled.');">Cancel</button>
+        <button class="btn btn--primary" onclick="closeDialog('terminal'); setResult('Build artifacts removed. ✓');">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Dialog -->
+  <div class="dialog-overlay" id="dialog-delete" onclick="closeOnOverlay(event, 'delete')">
+    <div class="dialog">
+      <div class="dialog__header">
+        <span class="dialog__title">Delete Agent Pool</span>
+        <button class="dialog__close" onclick="closeDialog('delete')">[×]</button>
+      </div>
+      <div class="dialog__body">
+        This action cannot be undone. All running agents in the pool will be terminated immediately.
+      </div>
+      <div class="dialog__footer">
+        <button class="btn btn--secondary" onclick="closeDialog('delete'); setResult('Deletion cancelled.');">Cancel</button>
+        <button class="btn btn--danger" onclick="closeDialog('delete'); setResult('Agent pool deleted. Action is irreversible.');">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openDialog(name) {
+      document.getElementById('dialog-' + name).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDialog(name) {
+      document.getElementById('dialog-' + name).classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function closeOnOverlay(event, name) {
+      if (event.target.classList.contains('dialog-overlay')) closeDialog(name);
+    }
+
+    function setResult(msg) {
+      const el = document.getElementById('dialogResult');
+      el.textContent = msg;
+      el.classList.add('has-result');
+    }
+
+    // Escape key closes dialogs
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.dialog-overlay.active').forEach(o => {
+          o.classList.remove('active');
+        });
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+</html>

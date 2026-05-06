@@ -1,0 +1,57 @@
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --canvas: #F5F2EB; --surface-soft: #EDEAE3; --surface-card: #E5E2DB;
+      --ink: #111111; --body: #2A2A2A; --mute: #6B6B6B; --stone: #8A8580;
+      --hairline: #D5D2CB;
+      --rounded-sm: 4px;
+      --spacing-xs: 4px; --spacing-sm: 8px;
+    }
+    body {
+      font-family: 'Berkeley Mono', 'SF Mono', 'Fira Code', monospace;
+      font-size: 16px; font-weight: 400; line-height: 1.5;
+      color: var(--body); background: var(--canvas); padding: 40px 24px;
+    }
+    h1 { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    h3 { font-size: 14px; font-weight: 700; color: var(--mute); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section { margin-bottom: 48px; }
+
+    /* list */
+    .list { border-bottom: 1px solid var(--hairline); }
+    .list__item {
+      padding: 4px 0; font-size: 16px; color: var(--body);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .list--bullet .list__item { padding-left: 24px; }
+    .list--bullet .list__item::before {
+      content: '[•]'; color: var(--mute); position: absolute; margin-left: -24px;
+    }
+    .list--numbered .list__item { padding-left: 24px; }
+    .list--bullet .list__item { position: relative; }
+
+    /* definition-list */
+    .def-list { max-width: 500px; }
+    .def-list__term {
+      font-weight: 700; color: var(--ink); padding: 8px 0 0;
+    }
+    .def-list__def {
+      color: var(--body); padding: 0 0 8px 16px;
+    }
+    .def-list__pair { border-bottom: 1px solid var(--hairline); }
+
+    /* tag */
+    .tag {
+      display: inline-flex; align-items: center; gap: var(--spacing-xs);
+      background: var(--surface-soft); color: var(--mute);
+      font-size: 14px; border-radius: var(--rounded-sm); padding: 2px 8px;
+    }
+    .tag__remove {
+      background: none; border: none; color: var(--stone); cursor: pointer;
+      font-family: inherit; font-size: 14px;
+    }
+    .tag__remove:hover { color: var(--ink); }
+    .tag-group { display: flex; gap: var(--spacing-xs); flex-wrap: wrap; }
+
+    .preview-box {
+      padding: 24px; background: var(--surface-soft); border-radius: var(--rounded-sm);
+    }

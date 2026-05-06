@@ -1,0 +1,58 @@
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --canvas: #F5F2EB; --surface-soft: #EDEAE3; --surface-card: #E5E2DB;
+      --ink: #111111; --body: #2A2A2A; --mute: #6B6B6B;
+      --hairline: #D5D2CB; --hairline-strong: #B5B2AB;
+      --rounded-sm: 4px;
+      --spacing-lg: 16px;
+    }
+    body {
+      font-family: 'Berkeley Mono', 'SF Mono', 'Fira Code', monospace;
+      font-size: 16px; font-weight: 400; line-height: 1.5;
+      color: var(--body); background: var(--canvas); padding: 40px 24px;
+    }
+    h1 { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    h3 { font-size: 14px; font-weight: 700; color: var(--mute); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section { margin-bottom: 48px; }
+
+    /* panel */
+    .panel {
+      border: 1px solid var(--hairline); border-radius: var(--rounded-sm);
+      max-width: 560px;
+    }
+    .panel__header {
+      background: var(--surface-soft); padding: 8px 16px;
+      font-weight: 700; color: var(--ink);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .panel__body { padding: var(--spacing-lg); }
+    .panel__footer {
+      padding: 8px 16px; border-top: 1px solid var(--hairline);
+      font-size: 14px; color: var(--mute);
+    }
+
+    /* split-panel */
+    .split-panel {
+      display: flex; border: 1px solid var(--hairline);
+      border-radius: var(--rounded-sm); max-width: 800px; min-height: 200px;
+    }
+    .split-panel__left { flex: 1; padding: var(--spacing-lg); }
+    .split-panel__splitter {
+      width: 1px; background: var(--hairline-strong); cursor: col-resize;
+      position: relative;
+    }
+    .split-panel__splitter::after {
+      content: ''; position: absolute; top: 0; bottom: 0; left: -8px; right: -8px;
+    }
+    .split-panel__right { flex: 1; padding: var(--spacing-lg); }
+
+    /* scroll-area */
+    .scroll-area {
+      max-width: 400px; max-height: 160px; overflow-y: auto;
+      padding-right: 8px;
+    }
+    .scroll-area::-webkit-scrollbar { width: 6px; }
+    .scroll-area::-webkit-scrollbar-track { background: var(--surface-card); border-radius: var(--rounded-sm); }
+    .scroll-area::-webkit-scrollbar-thumb { background: var(--ash); border-radius: var(--rounded-sm); }
+    .scroll-area::-webkit-scrollbar-thumb:hover { background: var(--mute); }
