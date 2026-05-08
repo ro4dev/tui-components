@@ -13,13 +13,15 @@ Cada componente vive en su propia carpeta con dos archivos:
 ```
 tui-components/
 ├── README.md
-├── accordions/
-│   ├── index.html
-│   └── style.css
-├── alerts/
-│   ├── index.html
-│   └── style.css
-└── ...
+├── DESIGN.md
+└── components/
+    ├── accordions/
+    │   ├── index.html
+    │   └── style.css
+    ├── alerts/
+    │   ├── index.html
+    │   └── style.css
+    └── ...
 ```
 
 ## Uso
