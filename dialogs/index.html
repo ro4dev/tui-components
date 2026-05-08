@@ -1,73 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dialogs — OpenCode Components</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dialogs</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
+  <div class="header">
     <h1>Dialogs</h1>
-    <p>Modal dialogs for confirmations, prompts, and alerts.</p>
-
-    <div class="section">
-      <h3>dialog-default</h3>
-      <div class="preview">
-        <div class="dialog">
-          <div class="dialog__header">
-            <span class="dialog__title">Save Changes</span>
-            <span class="dialog__close">×</span>
-          </div>
-          <div class="dialog__body">
-            You have unsaved changes in your configuration. Would you like to save them before closing?
-          </div>
-          <div class="dialog__footer">
-            <button class="btn btn-secondary">Discard</button>
-            <button class="btn btn-primary">Save</button>
-          </div>
-        </div>
-      </div>
+    <p>Open dialogs, confirm/cancel, see results</p>
+  </div>
+  <div class="section">
+    <h2>Open Dialogs</h2>
+    <div class="controls">
+      <button class="btn" data-action="open-dialog" data-dialog="save">Save Changes</button>
+      <button class="btn" data-action="open-dialog" data-dialog="terminal">Terminal Confirm</button>
+      <button class="btn" data-action="open-dialog" data-dialog="delete">Destructive Action</button>
     </div>
+    <div id="dialogResult">Click a button to open a dialog. The result of your action will appear here.</div>
+  </div>
 
-    <div class="section">
-      <h3>dialog-dark</h3>
-      <div class="preview">
-        <div class="dialog-dark">
-          <div class="dialog__header">
-            <span class="dialog__title">Terminal Confirmation</span>
-            <span class="dialog__close">×</span>
-          </div>
-          <div class="dialog__body">
-            $ rm -rf ./dist<br><br>
-            This will remove all build artifacts. Continue?
-          </div>
-          <div class="dialog__footer">
-            <button class="btn btn-secondary">Cancel</button>
-            <button class="btn btn-primary">Confirm</button>
-          </div>
-        </div>
+  <div class="dialog-overlay" data-dialog="save">
+    <div class="dialog">
+      <div class="dialog__header">
+        <span class="dialog__title">Save Changes</span>
+        <button class="dialog__close" data-action="close-dialog" data-dialog="save">[×]</button>
       </div>
-    </div>
-
-    <div class="section">
-      <h3>dialog-confirm (destructive)</h3>
-      <div class="preview">
-        <div class="dialog">
-          <div class="dialog__header">
-            <span class="dialog__title">Delete Agent Pool</span>
-            <span class="dialog__close">×</span>
-          </div>
-          <div class="dialog__body">
-            This action cannot be undone. All running agents in the pool will be terminated immediately.
-          </div>
-          <div class="dialog__footer">
-            <button class="btn btn-secondary">Cancel</button>
-            <button class="btn btn-danger">Delete</button>
-          </div>
-        </div>
+      <div class="dialog__body">You have unsaved changes in your configuration. Would you like to save them before closing?</div>
+      <div class="dialog__footer">
+        <button class="btn btn--secondary" data-action="close-dialog-result" data-dialog="save" data-result="Changes discarded.">Discard</button>
+        <button class="btn btn--primary" data-action="close-dialog-result" data-dialog="save" data-result="Changes saved successfully.">Save</button>
       </div>
     </div>
   </div>
+
+  <div class="dialog-overlay" data-dialog="terminal">
+    <div class="dialog dialog-dark">
+      <div class="dialog__header">
+        <span class="dialog__title">Terminal Confirmation</span>
+        <button class="dialog__close" data-action="close-dialog" data-dialog="terminal">[×]</button>
+      </div>
+      <div class="dialog__body">$ rm -rf ./dist<br><br>This will remove all build artifacts. Continue?</div>
+      <div class="dialog__footer">
+        <button class="btn btn--secondary" data-action="close-dialog-result" data-dialog="terminal" data-result="Command cancelled.">Cancel</button>
+        <button class="btn btn--primary" data-action="close-dialog-result" data-dialog="terminal" data-result="Build artifacts removed. ✓">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dialog-overlay" data-dialog="delete">
+    <div class="dialog">
+      <div class="dialog__header">
+        <span class="dialog__title">Delete Agent Pool</span>
+        <button class="dialog__close" data-action="close-dialog" data-dialog="delete">[×]</button>
+      </div>
+      <div class="dialog__body">This action cannot be undone. All running agents in the pool will be terminated immediately.</div>
+      <div class="dialog__footer">
+        <button class="btn btn--secondary" data-action="close-dialog-result" data-dialog="delete" data-result="Deletion cancelled.">Cancel</button>
+        <button class="btn btn--danger" data-action="close-dialog-result" data-dialog="delete" data-result="Agent pool deleted. Action is irreversible.">Delete</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+function openDialog(name) {
+  document.querySelector(`[data-dialog="${name}"].dialog-overlay`).classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeDialog(name) {
+  document.querySelector(`[data-dialog="${name}"].dialog-overlay`).classList.remove('active');
+  document.body.style.overflow = '';
+}
+function setResult(msg) {
+  const el = document.getElementById('dialogResult');
+  el.textContent = msg;
+  el.classList.add('has-result');
+}
+
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-action]');
+  if (!el) return;
+  const action = el.dataset.action;
+
+  if (action === 'open-dialog') {
+    openDialog(el.dataset.dialog);
+  } else if (action === 'close-dialog') {
+    closeDialog(el.dataset.dialog);
+  } else if (action === 'close-dialog-result') {
+    closeDialog(el.dataset.dialog);
+    setResult(el.dataset.result);
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.dialog-overlay.active').forEach(o => {
+      o.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  }
+});
+
+document.querySelectorAll('.dialog-overlay').forEach(o => {
+  o.addEventListener('click', e => {
+    if (e.target === o) closeDialog(o.dataset.dialog);
+  });
+});
+</script>
 </body>
 </html>

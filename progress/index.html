@@ -1,79 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Progress — OpenCode Components</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progress - OpenCode Design System</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Progress & Loading</h1>
+<div class="header">
+  <h1>Progress</h1>
+  <p>Progress bars, spinners, and step indicators</p>
+</div>
 
-    <div class="section">
-      <h3>progress-bar</h3>
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <div>
-          <p style="margin-bottom: 8px; font-size: 14px; color: var(--mute);">Uploading... 0%</p>
-          <div class="progress-bar"><div class="progress-bar__fill" style="width: 0%;"></div></div>
-        </div>
-        <div>
-          <p style="margin-bottom: 8px; font-size: 14px; color: var(--mute);">Building... 45%</p>
-          <div class="progress-bar"><div class="progress-bar__fill" style="width: 45%;"></div></div>
-        </div>
-        <div>
-          <p style="margin-bottom: 8px; font-size: 14px; color: var(--mute);">Indexing... 78%</p>
-          <div class="progress-bar"><div class="progress-bar__fill" style="width: 78%;"></div></div>
-        </div>
-        <div>
-          <p style="margin-bottom: 8px; font-size: 14px; color: var(--mute);">Complete — 100%</p>
-          <div class="progress-bar"><div class="progress-bar__fill" style="width: 100%; background: var(--success);"></div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>progress-spinner</h3>
-      <div style="display: flex; flex-direction: column; gap: 12px;">
-        <div class="progress-spinner">
-          <span class="progress-spinner__icon">⟳</span>
-          Building...
-        </div>
-        <div class="progress-spinner">
-          <span class="progress-spinner__icon">⟳</span>
-          Fetching dependencies...
-        </div>
-        <div class="progress-spinner">
-          <span class="progress-spinner__icon">⟳</span>
-          Waiting for agent...
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>progress-steps</h3>
-      <div class="progress-steps">
-        <div class="progress-steps__step">
-          <span class="progress-steps__marker progress-steps__marker--done">[x]</span>
-          <span class="progress-steps__label">Clone</span>
-        </div>
-        <span class="progress-steps__connector progress-steps__connector--done">──</span>
-        <div class="progress-steps__step">
-          <span class="progress-steps__marker progress-steps__marker--done">[x]</span>
-          <span class="progress-steps__label">Install</span>
-        </div>
-        <span class="progress-steps__connector progress-steps__connector--done">──</span>
-        <div class="progress-steps__step">
-          <span class="progress-steps__marker progress-steps__marker--current">[3]</span>
-          <span class="progress-steps__label">Build</span>
-        </div>
-        <span class="progress-steps__connector">──</span>
-        <div class="progress-steps__step">
-          <span class="progress-steps__marker progress-steps__marker--future">[4]</span>
-          <span class="progress-steps__label">Deploy</span>
-        </div>
-      </div>
-    </div>
+<div class="section">
+  <div class="section-title">Progress Bar</div>
+  <p class="progress-label">0%</p>
+  <div class="progress-bar-track">
+    <div class="progress-bar-fill"></div>
   </div>
+  <div class="controls">
+    <button class="btn" data-action="set-progress" data-value="0">[∅] Reset</button>
+    <button class="btn" data-action="set-progress" data-value="25">25%</button>
+    <button class="btn" data-action="set-progress" data-value="50">50%</button>
+    <button class="btn" data-action="set-progress" data-value="75">75%</button>
+    <button class="btn" data-action="set-progress" data-value="100">100%</button>
+    <button class="btn btn-accent" data-action="animate-progress">[↑] Animate</button>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Spinner</div>
+  <div class="spinner-row">
+    <span class="spinner" data-spinner>⟳</span>
+    <span class="spinner-label">Building...</span>
+  </div>
+  <div class="controls">
+    <button class="btn" data-action="set-spinner-speed" data-speed="1.2s">Slow</button>
+    <button class="btn" data-action="set-spinner-speed" data-speed="0.6s">Normal</button>
+    <button class="btn" data-action="set-spinner-speed" data-speed="0.3s">Fast</button>
+    <button class="btn" data-action="toggle-spinner">[×] Toggle</button>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Progress Steps</div>
+  <div class="steps" data-steps>
+    <div class="step completed" data-step="1">[x]</div>
+    <span class="step-connector completed">──</span>
+    <div class="step active" data-step="2">[2]</div>
+    <span class="step-connector">──</span>
+    <div class="step" data-step="3">[3]</div>
+    <span class="step-connector">──</span>
+    <div class="step" data-step="4">[4]</div>
+  </div>
+  <div class="controls">
+    <button class="btn btn-accent" data-action="next-step">[→] Next Step</button>
+    <button class="btn" data-action="reset-steps">[∅] Reset</button>
+  </div>
+</div>
+
+<script>
+let currentProgress = 0;
+let currentStep = 2;
+
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-action]');
+  if (!btn) return;
+  const action = btn.dataset.action;
+
+  switch(action) {
+    case 'set-progress': {
+      const val = parseInt(btn.dataset.value);
+      currentProgress = val;
+      const section = btn.closest('.section');
+      const fill = section.querySelector('.progress-bar-fill');
+      const label = section.querySelector('.progress-label');
+      fill.style.width = val + '%';
+      label.textContent = val + '%';
+      fill.classList.remove('success', 'warning');
+      if (val === 100) fill.classList.add('success');
+      else if (val >= 75) fill.classList.add('warning');
+      break;
+    }
+    case 'animate-progress': {
+      let val = 0;
+      const section = btn.closest('.section');
+      const fill = section.querySelector('.progress-bar-fill');
+      const label = section.querySelector('.progress-label');
+      const interval = setInterval(() => {
+        val += 2;
+        if (val > 100) { clearInterval(interval); return; }
+        fill.style.width = val + '%';
+        label.textContent = val + '%';
+        fill.classList.remove('success', 'warning');
+        if (val === 100) fill.classList.add('success');
+        else if (val >= 75) fill.classList.add('warning');
+      }, 50);
+      break;
+    }
+    case 'set-spinner-speed': {
+      const speed = btn.dataset.speed;
+      const spinner = document.querySelector('[data-spinner]');
+      spinner.style.animationDuration = speed;
+      break;
+    }
+    case 'toggle-spinner': {
+      const spinner = document.querySelector('[data-spinner]');
+      spinner.style.animationPlayState = spinner.style.animationPlayState === 'paused' ? 'running' : 'paused';
+      break;
+    }
+    case 'next-step': {
+      if (currentStep > 4) return;
+      const stepsContainer = document.querySelector('[data-steps]');
+      const currentEl = stepsContainer.querySelector(`.step[data-step="${currentStep}"]`);
+      currentEl.classList.remove('active');
+      currentEl.classList.add('completed');
+      currentEl.textContent = '[x]';
+      const connectors = stepsContainer.querySelectorAll('.step-connector');
+      if (currentStep - 1 < connectors.length) connectors[currentStep - 1].classList.add('completed');
+      currentStep++;
+      if (currentStep <= 4) stepsContainer.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+      break;
+    }
+    case 'reset-steps': {
+      currentStep = 2;
+      const stepsContainer = document.querySelector('[data-steps]');
+      const steps = stepsContainer.querySelectorAll('.step');
+      const connectors = stepsContainer.querySelectorAll('.step-connector');
+      steps.forEach((step, idx) => {
+        step.classList.remove('active', 'completed');
+        step.textContent = idx === 0 ? '[x]' : `[${idx + 1}]`;
+      });
+      connectors.forEach(c => c.classList.remove('completed'));
+      stepsContainer.querySelector('.step[data-step="1"]').classList.add('completed');
+      stepsContainer.querySelector('.step[data-step="2"]').classList.add('active');
+      break;
+    }
+  }
+});
+</script>
 </body>
 </html>

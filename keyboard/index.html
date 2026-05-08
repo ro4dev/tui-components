@@ -1,70 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Keyboard & Command Palette — OpenCode Components</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keyboard</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Keyboard & Command Palette</h1>
 
-    <div class="section">
-      <h3>kbd</h3>
-      <div class="preview-box">
-        <p style="margin-bottom: 16px;">
-          Open command palette: <kbd>⌘</kbd> + <kbd>K</kbd>
-        </p>
-        <p style="margin-bottom: 16px;">
-          Save file: <kbd>⌘</kbd> + <kbd>S</kbd>
-        </p>
-        <p style="margin-bottom: 16px;">
-          Full text search: <kbd>⌘</kbd> + <kbd>⇧</kbd> + <kbd>F</kbd>
-        </p>
-        <p>
-          Active state example: <kbd class="kbd--active">⌘</kbd>
-        </p>
-      </div>
+<div class="header">
+  <h1>Keyboard</h1>
+  <p>Interactive keyboard shortcuts and command palette</p>
+</div>
+
+<div class="section">
+  <h2>Keyboard Shortcuts</h2>
+  <ul class="shortcut-list">
+    <li>
+      <span class="action">Open command palette</span>
+      <span class="keys"><span class="kbd">⌘</span><span class="kbd">K</span></span>
+    </li>
+    <li>
+      <span class="action">Save current file</span>
+      <span class="keys"><span class="kbd">⌘</span><span class="kbd">S</span></span>
+    </li>
+    <li>
+      <span class="action">Find in file</span>
+      <span class="keys"><span class="kbd">⌘</span><span class="kbd">F</span></span>
+    </li>
+    <li>
+      <span class="action">Toggle terminal</span>
+      <span class="keys"><span class="kbd">⌃</span><span class="kbd">`</span></span>
+    </li>
+    <li>
+      <span class="action">Quick open</span>
+      <span class="keys"><span class="kbd">⌘</span><span class="kbd">P</span></span>
+    </li>
+    <li>
+      <span class="action">Navigate back</span>
+      <span class="keys"><span class="kbd">⌘</span><span class="kbd">[</span></span>
+    </li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>Command Palette</h2>
+  <button class="btn btn-accent" data-action="open-palette">[⌕] Open Command Palette</button>
+  <span class="kbd">⌘</span><span class="kbd">K</span>
+  <div class="selected-info" data-target="selectedInfo">No command selected yet.</div>
+</div>
+
+<div class="overlay" data-target="overlay">
+  <div class="command-palette" data-target="palette">
+    <div class="palette-search">
+      <input type="text" data-target="paletteInput" placeholder="Type a command...">
     </div>
-
-    <div class="section">
-      <h3>command-palette</h3>
-      <div class="cmd-overlay">
-        <div class="cmd-palette">
-          <div class="cmd-palette__search">
-            <input class="cmd-palette__input" type="text" placeholder="Type a command or search..." autofocus>
-          </div>
-          <div class="cmd-palette__results">
-            <div class="cmd-palette__item">
-              <span>Open File...</span>
-              <span class="cmd-palette__shortcut">⌘O</span>
-            </div>
-            <div class="cmd-palette__item cmd-palette__item--selected">
-              <span>Toggle Agent Pool</span>
-              <span class="cmd-palette__shortcut">⌘⇧A</span>
-            </div>
-            <div class="cmd-palette__item">
-              <span>Rebuild Index</span>
-              <span class="cmd-palette__shortcut">⌘⇧I</span>
-            </div>
-            <div class="cmd-palette__item">
-              <span>Preferences: Open Settings</span>
-              <span class="cmd-palette__shortcut">⌘,</span>
-            </div>
-            <div class="cmd-palette__item">
-              <span>Terminal: Create New</span>
-              <span class="cmd-palette__shortcut">⌃`</span>
-            </div>
-          </div>
-          <div class="cmd-palette__footer">
-            <span><kbd>↑↓</kbd> navigate</span>
-            <span><kbd>↵</kbd> select</span>
-            <span><kbd>esc</kbd> close</span>
-          </div>
-        </div>
-      </div>
+    <div class="palette-results" data-target="paletteResults"></div>
+    <div class="palette-footer">
+      <span>[↑][↓] Navigate</span>
+      <span>[Enter] Select</span>
+      <span>[Esc] Close</span>
     </div>
   </div>
+</div>
+
+<script>
+const commands = [
+  { name: 'Create New File', hint: '⌘N' },
+  { name: 'Open Settings', hint: '⌘,' },
+  { name: 'Toggle Sidebar', hint: '⌘B' },
+  { name: 'Search Files', hint: '⌘P' },
+  { name: 'Git Commit', hint: '⌃⌘C' },
+  { name: 'Format Document', hint: '⇧⌥F' },
+  { name: 'Toggle Terminal', hint: '⌃`' },
+  { name: 'Quick Fix', hint: '⌘.' },
+  { name: 'Go to Definition', hint: 'F12' },
+  { name: 'Peek References', hint: '⇧F12' },
+  { name: 'Rename Symbol', hint: 'F2' },
+  { name: 'Toggle Breakpoint', hint: 'F9' }
+];
+
+let filteredCommands = [...commands];
+let selectedIndex = 0;
+
+function renderResults() {
+  const container = document.querySelector('[data-target="paletteResults"]');
+  container.innerHTML = '';
+  filteredCommands.forEach((cmd, i) => {
+    const div = document.createElement('div');
+    div.className = 'result-item' + (i === selectedIndex ? ' selected' : '');
+    div.innerHTML = `<span>${cmd.name}</span><span class="hint">${cmd.hint}</span>`;
+    div.dataset.index = i;
+    container.appendChild(div);
+  });
+}
+
+function filterResults(query) {
+  filteredCommands = commands.filter(c => c.name.toLowerCase().includes(query));
+  selectedIndex = 0;
+  renderResults();
+}
+
+function selectCommand(index) {
+  const cmd = filteredCommands[index];
+  document.querySelector('[data-target="selectedInfo"]').innerHTML = `[✓] Selected: <strong>${cmd.name}</strong> (${cmd.hint})`;
+  document.querySelector('[data-target="overlay"]').classList.remove('active');
+}
+
+document.addEventListener('click', (e) => {
+  const action = e.target.dataset.action;
+  if (action === 'open-palette') {
+    document.querySelector('[data-target="overlay"]').classList.add('active');
+    document.querySelector('[data-target="paletteInput"]').focus();
+    renderResults();
+  }
+  if (e.target.closest('[data-target="overlay"]') && !e.target.closest('[data-target="palette"]')) {
+    document.querySelector('[data-target="overlay"]').classList.remove('active');
+  }
+  if (e.target.closest('.result-item')) {
+    const idx = parseInt(e.target.closest('.result-item').dataset.index);
+    selectCommand(idx);
+  }
+});
+
+document.addEventListener('input', (e) => {
+  if (e.target.dataset.target === 'paletteInput') {
+    filterResults(e.target.value.toLowerCase());
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    document.querySelector('[data-target="overlay"]').classList.add('active');
+    document.querySelector('[data-target="paletteInput"]').focus();
+    renderResults();
+  }
+  if (document.querySelector('[data-target="overlay"]').classList.contains('active')) {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      selectedIndex = Math.min(selectedIndex + 1, filteredCommands.length - 1);
+      renderResults();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      selectedIndex = Math.max(selectedIndex - 1, 0);
+      renderResults();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (filteredCommands.length > 0) selectCommand(selectedIndex);
+    } else if (e.key === 'Escape') {
+      document.querySelector('[data-target="overlay"]').classList.remove('active');
+    }
+  }
+});
+
+renderResults();
+</script>
+
 </body>
 </html>

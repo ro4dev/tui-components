@@ -1,54 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Copy Button — OpenCode Components</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copy Button - OpenCode Design System</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Copy Button</h1>
 
-    <div class="section">
-      <h3>copy-button (standalone)</h3>
-      <div class="preview-box">
-        <div class="demo-row">
-          <button class="copy-button" title="Copy to clipboard">[⎘]</button>
-          <span style="color: var(--mute); font-size: 14px;">Default state</span>
-        </div>
-        <div class="demo-row" style="margin-top: 16px;">
-          <button class="copy-button copy-button--copied" title="Copied!">[✓]</button>
-          <span style="color: var(--success); font-size: 14px;">Copied state (1.5s)</span>
-        </div>
-      </div>
-    </div>
+<div class="header">
+  <h1>Copy Button &amp; Function</h1>
+  <p>Interactive copy buttons with clipboard integration</p>
+</div>
 
-    <div class="section">
-      <h3>copy-button in code block</h3>
-      <div class="code-block">
-        <div class="code-block__header">
-          <span class="code-block__filename">install.sh</span>
-          <button class="copy-button" title="Copy to clipboard">[⎘]</button>
-        </div>
-        <div class="code-block__body">
-          $ npm install -g @opencode/cli
-        </div>
-      </div>
-    </div>
+<section>
+  <div class="section-title">Code Block with Copy</div>
+  <div class="code-block">
+    <button class="copy-btn" data-action="copy-code" data-target="code1">[⎘] Copy</button>
+    <pre id="code1">function greet(name: string): string {
+  return `Hello, ${name}!`;
+}
 
-    <div class="section">
-      <h3>copy-button paired with text</h3>
-      <div class="preview-box">
-        <p style="margin-bottom: 8px;">
-          Run the following command:
-        </p>
-        <div style="display: flex; align-items: center; gap: 8px; background: var(--surface-dark); color: var(--on-dark); padding: 8px 12px; border-radius: var(--rounded-sm); max-width: fit-content;">
-          <code style="flex: 1;">curl -fsSL https://opencode.ai/install | sh</code>
-          <button class="copy-button" title="Copy to clipboard">[⎘]</button>
-        </div>
-      </div>
-    </div>
+const message = greet("World");
+console.log(message);</pre>
   </div>
+  <div class="code-block">
+    <button class="copy-btn" data-action="copy-code" data-target="code2">[⎘] Copy</button>
+    <pre id="code2">import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  server: { port: 3000 }
+});</pre>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">Inline Text with Copy</div>
+  <div class="inline-text">
+    <span>npm install @opencode/core</span>
+    <button class="inline-copy-btn" data-action="copy-inline" data-text="npm install @opencode/core">[⎘]</button>
+  </div>
+  <div class="inline-text">
+    <span>git clone https://github.com/anomalyco/opencode.git</span>
+    <button class="inline-copy-btn" data-action="copy-inline" data-text="git clone https://github.com/anomalyco/opencode.git">[⎘]</button>
+  </div>
+  <div class="inline-text">
+    <span>export OPENCODE_API_KEY="sk-..."</span>
+    <button class="inline-copy-btn" data-action="copy-inline" data-text='export OPENCODE_API_KEY="sk-..."'>[⎘]</button>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">Clipboard Log</div>
+  <div class="clipboard-log">
+    <h3>Last Copied</h3>
+    <div class="log-content" data-clipboard-log>Nothing copied yet.</div>
+  </div>
+</section>
+
+<script>
+function fallbackCopy(text, btn, originalHTML) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand('copy');
+    btn.innerHTML = '[✓] Copied';
+    btn.classList.add('copied');
+    updateLog(text);
+    setTimeout(() => {
+      btn.innerHTML = originalHTML;
+      btn.classList.remove('copied');
+    }, 1500);
+  } catch(e) {}
+  document.body.removeChild(textarea);
+}
+
+function updateLog(text) {
+  const now = new Date();
+  const time = now.toLocaleTimeString('en-US', { hour12: false });
+  const display = text.length > 60 ? text.substring(0, 60) + '...' : text;
+  document.querySelector('[data-clipboard-log]').innerHTML = `<span class="timestamp">[${time}]</span> ${display.replace(/</g, '&lt;').replace(/>/g, '&gt;')}`;
+}
+
+document.addEventListener('click', (e) => {
+  const action = e.target.dataset.action;
+
+  if (action === 'copy-code') {
+    const btn = e.target;
+    const code = document.getElementById(btn.dataset.target).textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.innerHTML = '[✓] Copied';
+      btn.classList.add('copied');
+      updateLog(code);
+      setTimeout(() => {
+        btn.innerHTML = '[⎘] Copy';
+        btn.classList.remove('copied');
+      }, 1500);
+    }).catch(() => {
+      fallbackCopy(code, btn, '[⎘] Copy');
+    });
+  }
+
+  if (action === 'copy-inline') {
+    const btn = e.target;
+    const text = btn.dataset.text;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.innerHTML = '[✓]';
+      btn.classList.add('copied');
+      updateLog(text);
+      setTimeout(() => {
+        btn.innerHTML = '[⎘]';
+        btn.classList.remove('copied');
+      }, 1500);
+    }).catch(() => {
+      fallbackCopy(text, btn, '[⎘]');
+    });
+  }
+});
+</script>
+
 </body>
 </html>

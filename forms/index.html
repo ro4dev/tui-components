@@ -1,87 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Forms — OpenCode Components</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forms</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
+  <div class="header">
     <h1>Forms</h1>
-
-    <div class="section">
-      <h3>search-input</h3>
-      <div class="search-input-wrap">
-        <span class="search-input-wrap__icon">[⌕]</span>
-        <input class="text-input" type="text" placeholder="Search files...">
-        <button class="search-input-wrap__clear">[×]</button>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>select (closed)</h3>
-      <div class="select-wrap">
-        <input class="text-input" type="text" value="agent-pool-1" readonly>
-        <span class="select-wrap__indicator">[▾]</span>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>select (open panel)</h3>
-      <div class="select-panel">
-        <div class="select-panel__item select-panel__item--selected">agent-pool-1</div>
-        <div class="select-panel__item">agent-pool-2</div>
-        <div class="select-panel__item">agent-pool-3</div>
-        <div class="select-panel__item">default-pool</div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>radio-group</h3>
-      <div class="radio-group">
-        <label class="radio-option radio-option--selected">
-          <span class="radio-option__marker">(•)</span>
-          <span>Local execution</span>
-        </label>
-        <label class="radio-option radio-option--unselected">
-          <span class="radio-option__marker">( )</span>
-          <span>Remote execution</span>
-        </label>
-        <label class="radio-option radio-option--unselected">
-          <span class="radio-option__marker">( )</span>
-          <span>Hybrid mode</span>
-        </label>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>file-upload</h3>
-      <div class="file-upload">
-        <div class="file-upload__icon">[↑]</div>
-        <div class="file-upload__label">Drop files or click to upload</div>
-      </div>
-
-      <h3 style="margin-top: 24px;">Uploaded files</h3>
-      <div class="file-row">
-        <span class="file-row__name">config.yaml</span>
-        <span class="file-row__size">12 KB</span>
-        <button class="file-row__remove">[×]</button>
-      </div>
-      <div class="file-row">
-        <span class="file-row__name">schema.json</span>
-        <span class="file-row__size">4.2 KB</span>
-        <button class="file-row__remove">[×]</button>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>file-upload (drag-over state)</h3>
-      <div class="file-upload file-upload--dragover">
-        <div class="file-upload__icon">[↑]</div>
-        <div class="file-upload__label">Drop files here</div>
+    <p>Interactive form elements with search, select, radio, and file upload</p>
+  </div>
+  <div class="section">
+    <div class="section-title">Search Input</div>
+    <div class="form-group">
+      <label class="form-label">Search files</label>
+      <div class="form-input-wrap">
+        <span class="search-icon">[⌕]</span>
+        <input type="text" class="form-input" data-action="search-input" placeholder="Type to search...">
+        <button class="clear-btn" data-action="clear-search">[×]</button>
       </div>
     </div>
   </div>
+  <div class="section">
+    <div class="section-title">Select Dropdown</div>
+    <div class="form-group">
+      <label class="form-label">Choose framework</label>
+      <div class="select-wrap">
+        <button class="select-trigger" data-action="toggle-select">
+          <span data-select-value>Select an option...</span>
+          <span class="arrow">[▾]</span>
+        </button>
+        <div class="select-panel" data-select-panel>
+          <div class="select-option" data-action="select-option" data-value="React">React</div>
+          <div class="select-option" data-action="select-option" data-value="Vue">Vue</div>
+          <div class="select-option" data-action="select-option" data-value="Svelte">Svelte</div>
+          <div class="select-option" data-action="select-option" data-value="Angular">Angular</div>
+          <div class="select-option" data-action="select-option" data-value="Solid">Solid</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">Radio Group</div>
+    <div class="form-group">
+      <label class="form-label">Build target</label>
+      <div class="radio-group" data-radio-group>
+        <div class="radio-option" data-action="radio-select">
+          <span class="radio-marker">( )</span>
+          <span class="radio-label">Development (debug, slower)</span>
+        </div>
+        <div class="radio-option selected" data-action="radio-select">
+          <span class="radio-marker">(•)</span>
+          <span class="radio-label">Production (optimized, faster)</span>
+        </div>
+        <div class="radio-option" data-action="radio-select">
+          <span class="radio-marker">( )</span>
+          <span class="radio-label">Test (with coverage)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">File Upload</div>
+    <div class="form-group">
+      <label class="form-label">Attachments</label>
+      <div class="dropzone" data-action="dropzone">
+        <div class="dropzone-icon">[↑]</div>
+        <div class="dropzone-text">Drop files here or use button below</div>
+        <button class="btn" data-action="add-file">[+] Add File</button>
+      </div>
+      <div class="file-list" data-file-list></div>
+    </div>
+  </div>
+<script>
+const sampleFiles = ['config.json', 'README.md', 'index.ts', 'package.json', 'styles.css'];
+let fileCount = 0;
+
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-action]');
+  if (!el) return;
+  const action = el.dataset.action;
+
+  if (action === 'clear-search') {
+    const input = document.querySelector('[data-action="search-input"]');
+    input.value = '';
+    document.querySelector('.clear-btn').classList.remove('show');
+  } else if (action === 'toggle-select') {
+    document.querySelector('[data-select-panel]').classList.toggle('open');
+  } else if (action === 'select-option') {
+    document.querySelector('[data-select-value]').textContent = el.dataset.value;
+    document.querySelectorAll('.select-option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    document.querySelector('[data-select-panel]').classList.remove('open');
+  } else if (action === 'radio-select') {
+    document.querySelectorAll('.radio-option').forEach(o => {
+      o.classList.remove('selected');
+      o.querySelector('.radio-marker').textContent = '( )';
+    });
+    el.classList.add('selected');
+    el.querySelector('.radio-marker').textContent = '(•)';
+  } else if (action === 'add-file') {
+    const file = sampleFiles[fileCount % sampleFiles.length];
+    fileCount++;
+    const item = document.createElement('div');
+    item.className = 'file-item';
+    item.innerHTML = `<span>${file}</span><button class="remove-file" data-action="remove-file">[×]</button>`;
+    document.querySelector('[data-file-list]').appendChild(item);
+  } else if (action === 'remove-file') {
+    el.closest('.file-item').remove();
+  }
+});
+
+document.addEventListener('input', e => {
+  if (e.target.dataset.action === 'search-input') {
+    const btn = document.querySelector('.clear-btn');
+    btn.classList.toggle('show', e.target.value.length > 0);
+  }
+});
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.select-wrap')) {
+    document.querySelector('[data-select-panel]').classList.remove('open');
+  }
+});
+</script>
 </body>
 </html>

@@ -1,43 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Empty States — OpenCode Components</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empty States</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
+  <div class="header">
     <h1>Empty States</h1>
-
-    <div class="section">
-      <h3>empty-default (no files)</h3>
-      <div class="empty-state">
-        <div class="empty-state__icon">[∅]</div>
-        <p class="empty-state__title">No files found</p>
-        <p class="empty-state__desc">This directory is empty. Upload a file or run <span style="background: var(--surface-soft); padding: 2px 6px; border-radius: 4px;">opencode init</span> to get started.</p>
-        <button class="btn-primary">[+] New File</button>
-      </div>
+    <p>Interactive empty states with populate/clear actions</p>
+  </div>
+  <div class="section">
+    <h2>No Files</h2>
+    <div class="empty-state" data-empty="files">
+      <div class="icon">[∅]</div>
+      <h3>No files found</h3>
+      <p>Drop files here or click to upload</p>
+      <button class="btn btn-accent" data-action="populate" data-target="files">[+] Populate Files</button>
     </div>
-
-    <div class="section">
-      <h3>empty-default (no agents)</h3>
-      <div class="empty-state">
-        <div class="empty-state__icon">[∅]</div>
-        <p class="empty-state__title">No active agents</p>
-        <p class="empty-state__desc">All agents are idle. Start a task to activate the pool.</p>
-        <button class="btn-primary">[+] Start Agent</button>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>empty-default (no results)</h3>
-      <div class="empty-state">
-        <div class="empty-state__icon">[∅]</div>
-        <p class="empty-state__title">No search results</p>
-        <p class="empty-state__desc">No files match your search query. Try broadening your search terms.</p>
-      </div>
+    <div class="content-block hidden" data-content="files">
+      <h3>Project Files</h3>
+      <ul>
+        <li>src/index.ts</li>
+        <li>src/App.tsx</li>
+        <li>package.json</li>
+        <li>tsconfig.json</li>
+        <li>README.md</li>
+      </ul>
+      <button class="btn btn-danger" data-action="clear" data-target="files" style="margin-top:var(--spacing-md);">[×] Clear All</button>
     </div>
   </div>
+  <div class="section">
+    <h2>No Agents</h2>
+    <div class="empty-state" data-empty="agents">
+      <div class="icon">[∅]</div>
+      <h3>No agents running</h3>
+      <p>Start an agent to begin processing tasks</p>
+      <button class="btn btn-accent" data-action="populate" data-target="agents">[+] Start Agent</button>
+    </div>
+    <div class="content-block hidden" data-content="agents">
+      <h3>Active Agents</h3>
+      <ul>
+        <li>[✓] Code Reviewer — Processing PR #142</li>
+        <li>[✓] Test Runner — 84 tests passing</li>
+        <li>[✓] Linter — No issues found</li>
+      </ul>
+      <button class="btn btn-danger" data-action="clear" data-target="agents" style="margin-top:var(--spacing-md);">[×] Clear All</button>
+    </div>
+  </div>
+  <div class="section">
+    <h2>No Results</h2>
+    <div class="empty-state" data-empty="results">
+      <div class="icon">[∅]</div>
+      <h3>No results found</h3>
+      <p>Try adjusting your search or filters</p>
+      <button class="btn btn-accent" data-action="populate" data-target="results">[+] Show Results</button>
+    </div>
+    <div class="content-block hidden" data-content="results">
+      <h3>Search Results</h3>
+      <ul>
+        <li>Configure OpenCode settings in ~/.opencode/config.json</li>
+        <li>OpenCode supports multiple AI providers and models</li>
+        <li>Use [⌘K] to open the command palette quickly</li>
+        <li>Agents can be configured with custom system prompts</li>
+      </ul>
+      <button class="btn btn-danger" data-action="clear" data-target="results" style="margin-top:var(--spacing-md);">[×] Clear All</button>
+    </div>
+  </div>
+<script>
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-action]');
+  if (!el) return;
+  const action = el.dataset.action;
+  const target = el.dataset.target;
+
+  if (action === 'populate') {
+    document.querySelector(`[data-empty="${target}"]`).classList.add('hidden');
+    document.querySelector(`[data-content="${target}"]`).classList.remove('hidden');
+  } else if (action === 'clear') {
+    document.querySelector(`[data-content="${target}"]`).classList.add('hidden');
+    document.querySelector(`[data-empty="${target}"]`).classList.remove('hidden');
+  }
+});
+</script>
 </body>
 </html>

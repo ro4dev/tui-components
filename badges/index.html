@@ -3,50 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Badges — OpenCode Components</title>
-<link rel="stylesheet" href="style.css">
+  <title>Badges — TUI Components</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Badges & Status Indicators</h1>
 
-    <div class="section">
-      <h3>badge-status</h3>
-      <div class="demo-row">
-        <span class="badge-status badge-status--active">● active</span>
-        <span class="badge-status badge-status--warning">● warning</span>
-        <span class="badge-status badge-status--error">● error</span>
-        <span class="badge-status badge-status--idle">● idle</span>
-      </div>
-    </div>
+<div class="header">
+  <h1>Badges</h1>
+  <p>Status indicators, labels, and counters with interactive states</p>
+</div>
 
-    <div class="section">
-      <h3>badge-label</h3>
-      <div class="demo-row">
-        <span class="badge-label">v2.4.0</span>
-        <span class="badge-label">typescript</span>
-        <span class="badge-label">stable</span>
-        <span class="badge-label">internal</span>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>badge-counter</h3>
-      <div class="demo-spaced">
-        <span>Notifications <span class="badge-counter">3</span></span>
-        <span>Errors <span class="badge-counter">12</span></span>
-        <span>Updates <span class="badge-counter">1</span></span>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>Combined — Status + Label + Counter</h3>
-      <div class="demo-spaced">
-        <span class="badge-status badge-status--active">● running</span>
-        <span class="badge-label">agent-pool-1</span>
-        <span class="badge-counter">4</span>
-      </div>
-    </div>
+<div class="section">
+  <div class="section-title">Status Badges (Click to Cycle)</div>
+  <div class="badge-row">
+    <span class="badge badge-active" data-state="active">
+      [✓] Active
+    </span>
+    <span class="badge badge-warning" data-state="warning">
+      [!] Warning
+    </span>
+    <span class="badge badge-error" data-state="error">
+      [×] Error
+    </span>
+    <span class="badge badge-idle" data-state="idle">
+      [∅] Idle
+    </span>
   </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Label Badges</div>
+  <div class="badge-row">
+    <span class="badge badge-label">( ) Draft</span>
+    <span class="badge badge-accent">(•) Feature</span>
+    <span class="badge badge-label">( ) Bug Fix</span>
+    <span class="badge badge-accent">(•) Enhancement</span>
+    <span class="badge badge-label">( ) Documentation</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Counter Badges</div>
+  <div class="badge-row">
+    <span class="counter-badge">
+      <button class="counter-btn" data-action="counter" data-delta="-1">[-]</button>
+      <span class="counter-value">0</span>
+      <button class="counter-btn" data-action="counter" data-delta="1">[+]</button>
+      <span style="margin-left: var(--spacing-xs); color: var(--body);">Tasks</span>
+    </span>
+    <span class="counter-badge">
+      <button class="counter-btn" data-action="counter" data-delta="-1">[-]</button>
+      <span class="counter-value">5</span>
+      <button class="counter-btn" data-action="counter" data-delta="1">[+]</button>
+      <span style="margin-left: var(--spacing-xs); color: var(--body);">Notifications</span>
+    </span>
+    <span class="counter-badge">
+      <button class="counter-btn" data-action="counter" data-delta="-1">[-]</button>
+      <span class="counter-value">12</span>
+      <button class="counter-btn" data-action="counter" data-delta="1">[+]</button>
+      <span style="margin-left: var(--spacing-xs); color: var(--body);">Messages</span>
+    </span>
+  </div>
+</div>
+
+<script>
+const statusOrder = ['active', 'warning', 'error', 'idle'];
+const statusConfig = {
+  active: { cls: 'badge-active', marker: '[✓]', text: 'Active' },
+  warning: { cls: 'badge-warning', marker: '[!]', text: 'Warning' },
+  error: { cls: 'badge-error', marker: '[×]', text: 'Error' },
+  idle: { cls: 'badge-idle', marker: '[∅]', text: 'Idle' }
+};
+
+document.addEventListener('click', (e) => {
+  const badge = e.target.closest('.badge[data-state]');
+  if (badge) {
+    const current = badge.dataset.state;
+    const idx = statusOrder.indexOf(current);
+    const next = statusOrder[(idx + 1) % statusOrder.length];
+    const config = statusConfig[next];
+    badge.className = 'badge ' + config.cls;
+    badge.dataset.state = next;
+    badge.textContent = config.marker + ' ' + config.text;
+    return;
+  }
+  const counterBtn = e.target.closest('[data-action="counter"]');
+  if (counterBtn) {
+    const badge = counterBtn.closest('.counter-badge');
+    const valueEl = badge.querySelector('.counter-value');
+    const delta = parseInt(counterBtn.dataset.delta);
+    let val = parseInt(valueEl.textContent);
+    val = Math.max(0, val + delta);
+    valueEl.textContent = val;
+    return;
+  }
+});
+</script>
+
 </body>
 </html>

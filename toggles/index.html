@@ -1,69 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toggles — OpenCode Components</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toggles - OpenCode Design System</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Toggles & Switches</h1>
+<div class="header">
+  <h1>Toggles [x]</h1>
+  <p>ASCII and pill toggles with interactive controls</p>
+</div>
 
-    <div class="section">
-      <h3>toggle-ascii</h3>
-      <div class="toggle-row">
-        <div class="toggle-demo">
-          <label class="toggle-ascii toggle-ascii--on">
-            <span class="toggle-ascii__box">[x]</span>
-            <span>Enable indexing</span>
-          </label>
-        </div>
-        <div class="toggle-demo">
-          <label class="toggle-ascii toggle-ascii--off">
-            <span class="toggle-ascii__box">[ ]</span>
-            <span>Enable telemetry</span>
-          </label>
-        </div>
-        <div class="toggle-demo">
-          <label class="toggle-ascii toggle-ascii--on">
-            <span class="toggle-ascii__box">[x]</span>
-            <span>Auto-save</span>
-          </label>
-        </div>
+<div class="section">
+  <div class="section-title">ASCII Toggles</div>
+  <div class="toggle-group">
+    <div class="toggle-row">
+      <div class="toggle-info">
+        <span class="toggle-label">Enable indexing</span>
+        <span class="toggle-desc">Search through your codebase faster</span>
       </div>
+      <button class="ascii-toggle" data-action="toggle-ascii">[ ]</button>
     </div>
+    <div class="status-msg info">[i] Indexing is enabled. Search performance improved.</div>
 
-    <div class="section">
-      <h3>toggle-switch</h3>
-      <div class="toggle-row">
-        <div class="toggle-demo">
-          <div class="toggle-switch toggle-switch--on"></div>
-          <span>Dark mode</span>
-        </div>
-        <div class="toggle-demo">
-          <div class="toggle-switch toggle-switch--off"></div>
-          <span>Notifications</span>
-        </div>
-        <div class="toggle-demo">
-          <div class="toggle-switch toggle-switch--on"></div>
-          <span>Auto-update</span>
-        </div>
+    <div class="toggle-row">
+      <div class="toggle-info">
+        <span class="toggle-label">Auto-save changes</span>
+        <span class="toggle-desc">Automatically save files as you edit</span>
       </div>
+      <button class="ascii-toggle" data-action="toggle-ascii">[ ]</button>
     </div>
+    <div class="status-msg success show">[✓] Auto-save is enabled. Changes saved automatically.</div>
 
-    <div class="section">
-      <h3>Comparison — ASCII vs Switch</h3>
-      <div class="toggle-demo">
-        <label class="toggle-ascii toggle-ascii--on">
-          <span class="toggle-ascii__box">[x]</span>
-          <span>ASCII toggle</span>
-        </label>
-        <span style="color: var(--mute); margin: 0 16px;">vs</span>
-        <div class="toggle-switch toggle-switch--on"></div>
-        <span>Pill switch</span>
+    <div class="toggle-row">
+      <div class="toggle-info">
+        <span class="toggle-label">Show line numbers</span>
+        <span class="toggle-desc">Display line numbers in code editor</span>
       </div>
+      <button class="ascii-toggle active" data-action="toggle-ascii">[x]</button>
     </div>
+    <div class="status-msg info show">[i] Line numbers are visible.</div>
+
+    <div class="toggle-row">
+      <div class="toggle-info">
+        <span class="toggle-label">Enable warnings</span>
+        <span class="toggle-desc">Show warning notifications</span>
+      </div>
+      <button class="ascii-toggle" data-action="toggle-ascii">[ ]</button>
+    </div>
+    <div class="status-msg warning">[!] Warnings are enabled. You will be notified.</div>
   </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Pill Toggles</div>
+  <div class="toggle-group">
+    <div class="toggle-row">
+      <div class="toggle-info">
+        <span class="toggle-label">Dark mode</span>
+        <span class="toggle-desc">Switch to dark theme</span>
+      </div>
+      <button class="pill-toggle" data-action="toggle-pill">
+        <div class="knob"></div>
+      </button>
+    </div>
+    <div class="status-msg info">[i] Dark mode is off. Using light theme.</div>
+
+    <div class="toggle-row">
+      <div class="toggle-info">
+        <span class="toggle-label">Live reload</span>
+        <span class="toggle-desc">Reload preview on file changes</span>
+      </div>
+      <button class="pill-toggle active" data-action="toggle-pill">
+        <div class="knob"></div>
+      </button>
+    </div>
+    <div class="status-msg success show">[✓] Live reload is active. Watching for changes.</div>
+
+    <div class="toggle-row">
+      <div class="toggle-info">
+        <span class="toggle-label">Error tracking</span>
+        <span class="toggle-desc">Report errors to console</span>
+      </div>
+      <button class="pill-toggle" data-action="toggle-pill">
+        <div class="knob"></div>
+      </button>
+    </div>
+    <div class="status-msg warning">[!] Error tracking is disabled.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Actions</div>
+  <button class="btn" data-action="reset-all">[←] Reset All</button>
+</div>
+
+<script>
+document.addEventListener('click', (e) => {
+  const target = e.target;
+
+  const asciiToggle = target.closest('[data-action="toggle-ascii"]');
+  if (asciiToggle) {
+    asciiToggle.classList.toggle('active');
+    asciiToggle.textContent = asciiToggle.classList.contains('active') ? '[x]' : '[ ]';
+    const statusMsg = asciiToggle.closest('.toggle-row').nextElementSibling;
+    if (statusMsg?.classList.contains('status-msg')) statusMsg.classList.toggle('show');
+    return;
+  }
+
+  const pillToggle = target.closest('[data-action="toggle-pill"]');
+  if (pillToggle) {
+    pillToggle.classList.toggle('active');
+    const statusMsg = pillToggle.closest('.toggle-row').nextElementSibling;
+    if (statusMsg?.classList.contains('status-msg')) statusMsg.classList.toggle('show');
+    return;
+  }
+
+  if (target.closest('[data-action="reset-all"]')) {
+    document.querySelectorAll('.ascii-toggle').forEach(btn => {
+      btn.classList.remove('active');
+      btn.textContent = '[ ]';
+    });
+    document.querySelectorAll('.pill-toggle').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.status-msg').forEach(msg => msg.classList.remove('show'));
+  }
+});
+</script>
 </body>
 </html>

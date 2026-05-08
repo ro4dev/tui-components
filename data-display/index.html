@@ -1,84 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Data Display — OpenCode Components</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Display</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
+  <div class="header">
     <h1>Data Display</h1>
-
-    <div class="section">
-      <h3>list (simple)</h3>
-      <div class="list">
-        <div class="list__item">config.yaml</div>
-        <div class="list__item">package.json</div>
-        <div class="list__item">tsconfig.json</div>
-        <div class="list__item">.gitignore</div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>list (bullet)</h3>
-      <ul class="list list--bullet">
-        <li class="list__item">Local-first architecture</li>
-        <li class="list__item">Berkeley Mono typography</li>
-        <li class="list__item">ASCII bracket markers</li>
-        <li class="list__item">No drop shadows or gradients</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h3>list (numbered)</h3>
-      <div style="max-width: 500px;">
-        <div class="list__item" style="padding-left: 24px; position: relative; padding: 4px 0 4px 24px; border-bottom: 1px solid var(--hairline);">
-          <span style="position: absolute; left: 0; color: var(--mute);">1.</span> Install OpenCode CLI
-        </div>
-        <div class="list__item" style="padding-left: 24px; position: relative; padding: 4px 0 4px 24px; border-bottom: 1px solid var(--hairline);">
-          <span style="position: absolute; left: 0; color: var(--mute);">2.</span> Run <span style="background: var(--surface-card); padding: 2px 6px; border-radius: 4px; font-size: 16px;">opencode init</span>
-        </div>
-        <div class="list__item" style="padding-left: 24px; position: relative; padding: 4px 0 4px 24px; border-bottom: 1px solid var(--hairline);">
-          <span style="position: absolute; left: 0; color: var(--mute);">3.</span> Configure your agent pool
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>definition-list</h3>
-      <dl class="def-list">
-        <div class="def-list__pair">
-          <dt class="def-list__term">agent.pool_size</dt>
-          <dd class="def-list__def">Number of concurrent agents in the pool. Default: 4.</dd>
-        </div>
-        <div class="def-list__pair">
-          <dt class="def-list__term">agent.timeout</dt>
-          <dd class="def-list__def">Maximum execution time per agent in seconds. Default: 300.</dd>
-        </div>
-        <div class="def-list__pair">
-          <dt class="def-list__term">index.enabled</dt>
-          <dd class="def-list__def">Whether to build and maintain a file index. Default: true.</dd>
-        </div>
-      </dl>
-    </div>
-
-    <div class="section">
-      <h3>tag</h3>
-      <div class="tag-group">
-        <span class="tag">typescript</span>
-        <span class="tag">stable</span>
-        <span class="tag">v2.4.0</span>
-        <span class="tag">
-          internal
-          <button class="tag__remove">[×]</button>
-        </span>
-        <span class="tag">
-          deprecated
-          <button class="tag__remove">[×]</button>
-        </span>
-      </div>
-    </div>
+    <p>Interactive lists, tags, and toggles</p>
   </div>
+  <div class="section">
+    <h2>Manage List Items</h2>
+    <div class="input-group">
+      <input type="text" class="input" data-action="add-list-input" placeholder="Add new item...">
+      <button class="btn btn-success" data-action="add-list">[+] Add</button>
+    </div>
+    <div data-list></div>
+  </div>
+  <div class="section">
+    <h2>Definition List</h2>
+    <dl>
+      <dt>Model</dt>
+      <dd>opencode/big-pickle</dd>
+      <dt>Context Window</dt>
+      <dd>200,000 tokens</dd>
+      <dt>Temperature</dt>
+      <dd>0.7 (default)</dd>
+      <dt>Max Tokens</dt>
+      <dd>4,096</dd>
+      <dt>Provider</dt>
+      <dd>Anomaly Co.</dd>
+    </dl>
+  </div>
+  <div class="section">
+    <h2>Tags</h2>
+    <div class="input-group">
+      <input type="text" class="input" data-action="add-tag-input" placeholder="Add new tag...">
+      <button class="btn btn-success" data-action="add-tag">[+] Add Tag</button>
+    </div>
+    <div class="tags" data-tags></div>
+  </div>
+  <div class="section">
+    <h2>Toggle Bullet List</h2>
+    <ul class="bullet-list" data-toggle-list>
+      <li data-action="toggle-item"><span class="toggle">( )</span> Enable syntax highlighting</li>
+      <li data-action="toggle-item"><span class="toggle">( )</span> Auto-save on change</li>
+      <li data-action="toggle-item"><span class="toggle">( )</span> Show line numbers</li>
+      <li data-action="toggle-item"><span class="toggle">( )</span> Format on paste</li>
+      <li data-action="toggle-item"><span class="toggle">( )</span> Word wrap</li>
+    </ul>
+  </div>
+<script>
+let listItems = ['Initialize project', 'Configure build tools', 'Write tests', 'Deploy to staging'];
+let tags = ['frontend', 'react', 'typescript', 'design-system', 'components'];
+
+function renderList() {
+  const c = document.querySelector('[data-list]');
+  c.innerHTML = '';
+  listItems.forEach((item, i) => {
+    const d = document.createElement('div');
+    d.className = 'list-item';
+    d.innerHTML = `<span>${item}</span><div class="actions"><button class="btn btn-danger" data-action="remove-list" data-index="${i}">[×] Remove</button></div>`;
+    c.appendChild(d);
+  });
+}
+
+function renderTags() {
+  const c = document.querySelector('[data-tags]');
+  c.innerHTML = '';
+  tags.forEach((tag, i) => {
+    const s = document.createElement('span');
+    s.className = 'tag';
+    s.innerHTML = `${tag} <span class="remove" data-action="remove-tag" data-index="${i}">[×]</span>`;
+    c.appendChild(s);
+  });
+}
+
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-action]');
+  if (!el) return;
+  const action = el.dataset.action;
+
+  if (action === 'add-list') {
+    const input = document.querySelector('[data-action="add-list-input"]');
+    if (input.value.trim()) { listItems.push(input.value.trim()); input.value = ''; renderList(); }
+  } else if (action === 'remove-list') {
+    listItems.splice(+el.dataset.index, 1); renderList();
+  } else if (action === 'add-tag') {
+    const input = document.querySelector('[data-action="add-tag-input"]');
+    if (input.value.trim()) { tags.push(input.value.trim()); input.value = ''; renderTags(); }
+  } else if (action === 'remove-tag') {
+    tags.splice(+el.dataset.index, 1); renderTags();
+  } else if (action === 'toggle-item') {
+    const li = el.closest('li');
+    const toggle = li.querySelector('.toggle');
+    li.classList.toggle('active');
+    toggle.textContent = li.classList.contains('active') ? '(•)' : '( )';
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  const input = e.target;
+  if (input.dataset.action === 'add-list-input') document.querySelector('[data-action="add-list"]').click();
+  else if (input.dataset.action === 'add-tag-input') document.querySelector('[data-action="add-tag"]').click();
+});
+
+renderList();
+renderTags();
+</script>
 </body>
 </html>

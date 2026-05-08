@@ -1,89 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Navigation — OpenCode Components</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navigation</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Navigation</h1>
 
-    <div class="section">
-      <h3>sidebar-nav</h3>
-      <div class="preview-box" style="width: fit-content;">
-        <nav class="sidebar-nav">
-          <div class="sidebar-nav__group-header">Getting Started</div>
-          <a class="sidebar-nav__item" href="#">Installation</a>
-          <a class="sidebar-nav__item sidebar-nav__item--active" href="#">Configuration</a>
-          <a class="sidebar-nav__item sidebar-nav__item--nested" href="#">agent.pool_size</a>
-          <a class="sidebar-nav__item sidebar-nav__item--nested" href="#">agent.timeout</a>
-          <a class="sidebar-nav__item" href="#">Quick Start</a>
-          <div class="sidebar-nav__group-header">API</div>
-          <a class="sidebar-nav__item" href="#">Endpoints</a>
-          <a class="sidebar-nav__item" href="#">Authentication</a>
-          <a class="sidebar-nav__item" href="#">Webhooks</a>
-        </nav>
-      </div>
-    </div>
+<div class="header">
+  <h1>Navigation</h1>
+  <p>Click sidebar items, paginate, open dropdowns, right-click for context menu.</p>
+</div>
 
-    <div class="section">
-      <h3>pagination</h3>
-      <div class="pagination">
-        <button class="pagination__nav">[←]</button>
-        <button class="pagination__item">1</button>
-        <button class="pagination__item">2</button>
-        <button class="pagination__item pagination__item--active">3</button>
-        <button class="pagination__item">4</button>
-        <span class="pagination__ellipsis">···</span>
-        <button class="pagination__item">12</button>
-        <button class="pagination__nav">[→]</button>
+<div class="section">
+  <h2>sidebar-nav</h2>
+  <div class="preview-box">
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav__group-header">Getting Started</div>
+      <a class="sidebar-nav__item sidebar-nav__item--active" data-page="installation" href="#">Installation</a>
+      <a class="sidebar-nav__item" data-page="configuration" href="#">Configuration</a>
+      <a class="sidebar-nav__item sidebar-nav__item--nested" data-page="pool-size" href="#">agent.pool_size</a>
+      <a class="sidebar-nav__item sidebar-nav__item--nested" data-page="timeout" href="#">agent.timeout</a>
+      <a class="sidebar-nav__item" data-page="quickstart" href="#">Quick Start</a>
+      <div class="sidebar-nav__group-header">API</div>
+      <a class="sidebar-nav__item" data-page="endpoints" href="#">Endpoints</a>
+      <a class="sidebar-nav__item" data-page="auth" href="#">Authentication</a>
+    </nav>
+    <div style="flex: 1;">
+      <div class="nav-content" data-target="navContent">
+        <h4 style="color: var(--ink); margin-bottom: 8px;">Installation</h4>
+        <p>Run <span style="background: var(--surface-card); padding: 2px 6px; border-radius: var(--rounded-sm);">npm install -g @opencode/cli</span></p>
       </div>
-
-      <h3 style="margin-top: 16px;">pagination (simple)</h3>
-      <div class="pagination">
-        <button class="pagination__nav">[←]</button>
-        <span style="color: var(--ink); font-size: 16px;">3 of 12</span>
-        <button class="pagination__nav">[→]</button>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>dropdown-menu</h3>
-      <div class="dropdown-menu">
-        <div class="dropdown-menu__item">
-          <span>Open File</span>
-          <span class="dropdown-menu__shortcut">⌘O</span>
-        </div>
-        <div class="dropdown-menu__item">
-          <span>Save</span>
-          <span class="dropdown-menu__shortcut">⌘S</span>
-        </div>
-        <div class="dropdown-menu__item">
-          <span>Save As...</span>
-          <span class="dropdown-menu__shortcut">⇧⌘S</span>
-        </div>
-        <div class="dropdown-menu__divider"></div>
-        <div class="dropdown-menu__item">
-          <span>Preferences</span>
-          <span class="dropdown-menu__shortcut">⌘,</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>context-menu</h3>
-      <div class="context-menu">
-        <div class="context-menu__item">Copy</div>
-        <div class="context-menu__item">Paste</div>
-        <div class="context-menu__divider"></div>
-        <div class="context-menu__item">Rename</div>
-        <div class="context-menu__item">Duplicate</div>
-        <div class="context-menu__divider"></div>
-        <div class="context-menu__item context-menu__item--danger">Delete</div>
-      </div>
+      <div data-target="navResult"></div>
     </div>
   </div>
+</div>
+
+<div class="section">
+  <h2>pagination</h2>
+  <div class="pagination" data-target="pagination"></div>
+  <div class="page-content" data-target="pageContent">Page 1 — Showing items 1–5 of 23</div>
+</div>
+
+<div class="section">
+  <h2>dropdown-menu</h2>
+  <div class="dropdown-wrap">
+    <button class="dropdown-trigger" data-action="toggle-dropdown">[▾] File Menu</button>
+    <div class="dropdown-menu" data-target="dropdownMenu">
+      <div class="dropdown-menu__item" data-action="dropdown-action"><span>Open File</span><span class="dropdown-menu__shortcut">⌘O</span></div>
+      <div class="dropdown-menu__item" data-action="dropdown-action"><span>Save</span><span class="dropdown-menu__shortcut">⌘S</span></div>
+      <div class="dropdown-menu__item" data-action="dropdown-action"><span>Save As...</span><span class="dropdown-menu__shortcut">⇧⌘S</span></div>
+      <div class="dropdown-menu__divider"></div>
+      <div class="dropdown-menu__item" data-action="dropdown-action"><span>Preferences</span><span class="dropdown-menu__shortcut">⌘,</span></div>
+    </div>
+  </div>
+  <div class="action-log" data-target="dropdownLog">Click menu item to trigger action.</div>
+</div>
+
+<div class="section">
+  <h2>context-menu (right-click below)</h2>
+  <div class="context-area" data-target="contextArea">
+    Right-click here for context menu
+    <div class="context-menu" data-target="contextMenu">
+      <div class="context-menu__item" data-action="copy">Copy</div>
+      <div class="context-menu__item" data-action="paste">Paste</div>
+      <div class="context-menu__divider"></div>
+      <div class="context-menu__item" data-action="rename">Rename</div>
+      <div class="context-menu__item" data-action="duplicate">Duplicate</div>
+      <div class="context-menu__divider"></div>
+      <div class="context-menu__item context-menu__item--danger" data-action="delete">Delete</div>
+    </div>
+  </div>
+  <div class="action-log" data-target="contextLog">Right-click to open context menu.</div>
+</div>
+
+<script>
+const pageContent = {
+  installation: { title: 'Installation', body: 'Run <span style="background: var(--surface-card); padding: 2px 6px; border-radius: var(--rounded-sm);">npm install -g @opencode/cli</span>' },
+  configuration: { title: 'Configuration', body: 'Edit <span style="background: var(--surface-card); padding: 2px 6px; border-radius: var(--rounded-sm);">~/.opencode/config.yaml</span> to customize settings.' },
+  'pool-size': { title: 'agent.pool_size', body: 'Number of concurrent agents. Default: 4. Range: 1–16.' },
+  timeout: { title: 'agent.timeout', body: 'Max execution time per agent in seconds. Default: 300.' },
+  quickstart: { title: 'Quick Start', body: 'Run <span style="background: var(--surface-card); padding: 2px 6px; border-radius: var(--rounded-sm);">opencode init</span> to bootstrap a new project.' },
+  endpoints: { title: 'Endpoints', body: 'REST API at /api/v1/ — agents, sessions, config, health.' },
+  auth: { title: 'Authentication', body: 'Token-based auth via <span style="background: var(--surface-card); padding: 2px 6px; border-radius: var(--rounded-sm);">Authorization: Bearer &lt;token&gt;</span>' },
+};
+
+const totalPages = 5;
+let currentPage = 1;
+
+function renderPagination() {
+  const el = document.querySelector('[data-target="pagination"]');
+  el.innerHTML = '';
+  const prev = document.createElement('button');
+  prev.className = 'pagination__nav';
+  prev.textContent = '[←]';
+  prev.disabled = currentPage === 1;
+  prev.dataset.action = 'pagination-prev';
+  el.appendChild(prev);
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'pagination__item' + (i === currentPage ? ' pagination__item--active' : '');
+    btn.textContent = i;
+    btn.dataset.action = 'pagination-page';
+    btn.dataset.page = i;
+    el.appendChild(btn);
+  }
+  const next = document.createElement('button');
+  next.className = 'pagination__nav';
+  next.textContent = '[→]';
+  next.disabled = currentPage === totalPages;
+  next.dataset.action = 'pagination-next';
+  el.appendChild(next);
+}
+
+function updatePage() {
+  renderPagination();
+  document.querySelector('[data-target="pageContent"]').textContent = `Page ${currentPage} — Showing items ${(currentPage-1)*5+1}–${currentPage*5} of 23`;
+}
+
+renderPagination();
+
+document.addEventListener('click', (e) => {
+  if (e.target.dataset.page) {
+    document.querySelectorAll('.sidebar-nav__item').forEach(i => i.classList.remove('sidebar-nav__item--active'));
+    e.target.classList.add('sidebar-nav__item--active');
+    const content = pageContent[e.target.dataset.page];
+    if (content) {
+      document.querySelector('[data-target="navContent"]').innerHTML = `<h4 style="color: var(--ink); margin-bottom: 8px;">${content.title}</h4><p>${content.body}</p>`;
+    }
+    document.querySelector('[data-target="navResult"]').textContent = `Navigated to: ${e.target.textContent.trim()}`;
+  }
+  if (e.target.dataset.action === 'toggle-dropdown') {
+    document.querySelector('[data-target="dropdownMenu"]').classList.toggle('open');
+  }
+  if (e.target.closest('[data-action="dropdown-action"]')) {
+    const action = e.target.closest('[data-action="dropdown-action"]').querySelector('span').textContent;
+    document.querySelector('[data-target="dropdownLog"]').textContent = `Action: ${action}`;
+    document.querySelector('[data-target="dropdownMenu"]').classList.remove('open');
+  }
+  if (e.target.dataset.action === 'pagination-prev') { currentPage--; updatePage(); }
+  if (e.target.dataset.action === 'pagination-next') { currentPage++; updatePage(); }
+  if (e.target.dataset.action === 'pagination-page') { currentPage = parseInt(e.target.dataset.page); updatePage(); }
+  if (!e.target.closest('.dropdown-wrap')) document.querySelector('[data-target="dropdownMenu"]').classList.remove('open');
+  if (e.target.closest('.context-menu__item')) {
+    const action = e.target.closest('.context-menu__item').dataset.action;
+    document.querySelector('[data-target="contextLog"]').textContent = `Context action: ${action}`;
+    document.querySelector('[data-target="contextMenu"]').classList.remove('open');
+  }
+});
+
+document.querySelector('[data-target="contextArea"]').addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+  const rect = e.target.getBoundingClientRect();
+  const menu = document.querySelector('[data-target="contextMenu"]');
+  menu.style.left = (e.clientX - rect.left) + 'px';
+  menu.style.top = (e.clientY - rect.top) + 'px';
+  menu.classList.add('open');
+});
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.context-menu')) document.querySelector('[data-target="contextMenu"]').classList.remove('open');
+});
+</script>
+
 </body>
 </html>

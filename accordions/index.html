@@ -3,79 +3,117 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accordions — OpenCode Components</title>
-<link rel="stylesheet" href="style.css">
+  <title>Accordions — TUI Components</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Accordions</h1>
 
-    <div class="section">
-      <h3>accordion-default</h3>
-      <div class="accordion">
-        <div class="accordion__header">
-          <span class="accordion__toggle">+</span>
-          How do I install OpenCode?
-        </div>
-      </div>
-      <div class="accordion">
-        <div class="accordion__header">
-          <span class="accordion__toggle">−</span>
-          Can I run multiple agents?
-        </div>
-        <div class="accordion__body">
-          Yes. Configure `agent.pool_size` in your config file. Each agent runs in an isolated process and shares the file index.
-        </div>
-      </div>
-      <div class="accordion">
-        <div class="accordion__header">
-          <span class="accordion__toggle">+</span>
-          What languages are supported?
-        </div>
-      </div>
-      <div class="accordion">
-        <div class="accordion__header">
-          <span class="accordion__toggle">+</span>
-          How does local indexing work?
-        </div>
-      </div>
-    </div>
+<div class="header">
+  <h1>Accordions</h1>
+  <p>Expandable/collapsible content sections with nested support</p>
+</div>
 
-    <div class="section">
-      <h3>accordion-nested</h3>
-      <div class="accordion">
-        <div class="accordion__header">
-          <span class="accordion__toggle">−</span>
-          Agent Configuration
-        </div>
-        <div class="accordion__body">
-          <div class="accordion accordion-nested">
-            <div class="accordion__header">
-              <span class="accordion__toggle">↓</span>
-              Pool size and concurrency
-            </div>
-          </div>
-          <div class="accordion accordion-nested">
-            <div class="accordion__header">
-              <span class="accordion__toggle">→</span>
-              Memory limits
-            </div>
-          </div>
-          <div class="accordion accordion-nested">
-            <div class="accordion__header">
-              <span class="accordion__toggle">→</span>
-              Timeout settings
-            </div>
+<div class="accordion">
+  <button class="accordion-header">
+    <span>Getting Started</span>
+    <span class="marker">[+]</span>
+  </button>
+  <div class="accordion-content">
+    <div class="accordion-body">
+      Welcome to the TUI design system. This accordion demonstrates the expand/collapse functionality with smooth transitions.
+      <br><br>
+      <div class="nested-accordion">
+        <button class="accordion-header">
+          <span>→ Installation Steps</span>
+          <span class="marker">[+]</span>
+        </button>
+        <div class="accordion-content">
+          <div class="accordion-body">
+            1. Clone the repository<br>
+            2. Install dependencies with npm<br>
+            3. Run the development server<br>
+            4. Start building components
           </div>
         </div>
       </div>
-      <div class="accordion">
-        <div class="accordion__header">
-          <span class="accordion__toggle">+</span>
-          Network Settings
+      <div class="nested-accordion">
+        <button class="accordion-header">
+          <span>→ Configuration</span>
+          <span class="marker">[+]</span>
+        </button>
+        <div class="accordion-content">
+          <div class="accordion-body">
+            Configure your design tokens in the root config file. All components read from these CSS custom properties.
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<div class="accordion">
+  <button class="accordion-header">
+    <span>Component API</span>
+    <span class="marker">[+]</span>
+  </button>
+  <div class="accordion-content">
+    <div class="accordion-body">
+      Each component exports a standard API with props, events, and slots. Review the documentation for full details on implementation patterns and usage guidelines.
+    </div>
+  </div>
+</div>
+
+<div class="accordion">
+  <button class="accordion-header">
+    <span>Design Tokens</span>
+    <span class="marker">[+]</span>
+  </button>
+  <div class="accordion-content">
+    <div class="accordion-body">
+      <strong>Colors:</strong> canvas, surface-soft, surface-card, surface-dark, ink, body, mute, stone, ash, accent, warning, danger, success, hairline, hairline-strong, on-dark<br><br>
+      <strong>Spacing:</strong> xs(4px), sm(8px), md(12px), lg(16px), xl(24px), xxl(32px)<br><br>
+      <strong>Radius:</strong> sm(4px), full(9999px)
+    </div>
+  </div>
+</div>
+
+<div class="accordion">
+  <button class="accordion-header">
+    <span>Troubleshooting</span>
+    <span class="marker">[+]</span>
+  </button>
+  <div class="accordion-content">
+    <div class="accordion-body">
+      Having issues? Check the following:<br>
+      • Verify all dependencies are installed<br>
+      • Check browser console for errors<br>
+      • Ensure design tokens are properly loaded<br>
+      • Review component prop types
+    </div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.accordion-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const accordion = header.closest('.accordion, .nested-accordion');
+    const content = accordion.querySelector('.accordion-content');
+    const marker = header.querySelector('.marker');
+    const isOpen = content.classList.contains('open');
+
+    if (isOpen) {
+      content.classList.remove('open');
+      marker.textContent = '[+]';
+    } else {
+      content.classList.add('open');
+      marker.textContent = '[-]';
+      if (accordion.querySelector('.nested-accordion')) {
+        marker.textContent = '[↓]';
+      }
+    }
+  });
+});
+</script>
+
 </body>
 </html>

@@ -3,81 +3,187 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cards — OpenCode Components</title>
-<link rel="stylesheet" href="style.css">
+  <title>Cards — OpenCode</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Cards</h1>
-    <p>Card variants for containers, feature blocks, and stat displays.</p>
+  <div class="header">
+    <h1>[cards]</h1>
+    <p>Click cards to interact, hover to reveal actions, stats animate on click.</p>
+  </div>
 
-    <div class="section">
-      <h3>card-flat</h3>
-      <div class="grid grid-2">
-        <div class="card-flat">
-          <strong>Fast Indexing</strong>
-          <p>Agents navigate your codebase in milliseconds. No warm-up, no cold starts.</p>
-        </div>
-        <div class="card-flat">
-          <strong>Local-First</strong>
-          <p>Everything runs on your machine. Your code never leaves your control.</p>
+  <div class="section">
+    <div class="section-title">card-flat (clickable)</div>
+    <div class="grid grid-2">
+      <div class="card-flat" data-likes="0">
+        <span class="card__toggle">[+]</span>
+        <h4>Fast Indexing</h4>
+        <p>Agents navigate your codebase in milliseconds.</p>
+        <div class="card__actions">
+          <button class="btn" data-action="like">[+] Like</button>
+          <button class="btn" data-action="expand">[+] Details</button>
         </div>
       </div>
-    </div>
-
-    <div class="section">
-      <h3>card-header</h3>
-      <div class="grid grid-2">
-        <div class="card-header">
-          <div class="card-header__head">Session Activity</div>
-          <div class="card-header__body">
-            <p>3 active agents processing 12 files. Estimated completion: 2m 34s.</p>
-          </div>
-        </div>
-        <div class="card-header">
-          <div class="card-header__head">Build Output</div>
-          <div class="card-header__body">
-            <p>Compiled 847 modules in 4.2s. 0 errors, 3 warnings.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>card-dark</h3>
-      <div class="grid grid-2">
-        <div class="card-dark">
-          <div style="color: var(--ash); font-size: 14px;">$ opencode serve</div>
-          <div>✓ Server running on :3000</div>
-          <div>✓ Agent pool initialized (4 workers)</div>
-          <div>✓ Index complete — 12,847 files</div>
-        </div>
-        <div class="card-dark">
-          <div style="color: var(--ash); font-size: 14px;">$ opencode status</div>
-          <div>Runtime: 4h 12m 33s</div>
-          <div>Memory: 256 MB / 512 MB</div>
-          <div>Queue: 0 pending</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>card-stats</h3>
-      <div class="card-stats">
-        <div class="card-stats__cell">
-          <div class="card-stats__number">12.8K</div>
-          <div class="card-stats__label">Files Indexed</div>
-        </div>
-        <div class="card-stats__cell">
-          <div class="card-stats__number">4</div>
-          <div class="card-stats__label">Active Agents</div>
-        </div>
-        <div class="card-stats__cell">
-          <div class="card-stats__number">99.7%</div>
-          <div class="card-stats__label">Uptime</div>
+      <div class="card-flat" data-likes="0">
+        <span class="card__toggle">[+]</span>
+        <h4>Local-First</h4>
+        <p>Everything runs on your machine.</p>
+        <div class="card__actions">
+          <button class="btn" data-action="like">[+] Like</button>
+          <button class="btn" data-action="expand">[+] Details</button>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="section">
+    <div class="section-title">card-header (live log)</div>
+    <div class="grid grid-2">
+      <div class="card-header" data-card="log">
+        <div class="card-header__head">
+          <span>Session Activity</span>
+          <button class="btn" data-action="refresh-log" style="font-size:12px; padding: 2px 8px;">[+] Refresh</button>
+        </div>
+        <div class="card-header__body">
+          <p>3 active agents processing 12 files.</p>
+          <p data-log-time>Updated just now</p>
+        </div>
+      </div>
+      <div class="card-header" data-card="build">
+        <div class="card-header__head">
+          <span>Build Output</span>
+          <button class="btn" data-action="clear-build" style="font-size:12px; padding: 2px 8px;">[×] Clear</button>
+        </div>
+        <div class="card-header__body" data-build-output>
+          <p>Compiled 847 modules in 4.2s.</p>
+          <p>0 errors, 3 warnings.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">card-dark (terminal simulation)</div>
+    <div class="grid grid-2">
+      <div class="card-dark" data-terminal="1">
+        <div class="card-dark__cmd">$ opencode serve</div>
+        <div class="card-dark__body">
+          <div class="card-dark__line">Initializing server...</div>
+        </div>
+      </div>
+      <div class="card-dark" data-terminal="2">
+        <div class="card-dark__cmd">$ opencode status</div>
+        <div class="card-dark__body">
+          <div class="card-dark__line">Fetching status...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">card-stats (animated counters)</div>
+    <div class="card-stats">
+      <div class="card-stats__cell" data-target="12847">
+        <div class="card-stats__number counter-anim">0</div>
+        <div class="card-stats__label">Files Indexed</div>
+      </div>
+      <div class="card-stats__cell" data-target="4">
+        <div class="card-stats__number counter-anim">0</div>
+        <div class="card-stats__label">Active Agents</div>
+      </div>
+      <div class="card-stats__cell" data-target="99">
+        <div class="card-stats__number counter-anim">0</div>
+        <div class="card-stats__label">Uptime %</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('click', (e) => {
+      const action = e.target.dataset.action;
+
+      if (action === 'like') {
+        const card = e.target.closest('.card-flat');
+        let likes = parseInt(card.dataset.likes) + 1;
+        card.dataset.likes = likes;
+        e.target.textContent = `[+] Like (${likes})`;
+      }
+
+      if (action === 'expand') {
+        const card = e.target.closest('.card-flat');
+        const toggle = card.querySelector('.card__toggle');
+        if (card.dataset.expanded === 'true') {
+          card.querySelector('.extra-content')?.remove();
+          card.dataset.expanded = 'false';
+          toggle.textContent = '[+]';
+          e.target.textContent = '[+] Details';
+        } else {
+          const extra = document.createElement('p');
+          extra.className = 'extra-content';
+          extra.textContent = 'Expanded: Full feature details with metrics and configuration options.';
+          extra.style.cssText = 'margin-top: 8px; color: var(--mute); font-size: 14px;';
+          card.querySelector('.card__actions').before(extra);
+          card.dataset.expanded = 'true';
+          toggle.textContent = '[-]';
+          e.target.textContent = '[-] Collapse';
+        }
+      }
+
+      if (action === 'refresh-log') {
+        const card = e.target.closest('[data-card="log"]');
+        const agents = Math.floor(Math.random() * 8) + 1;
+        const files = Math.floor(Math.random() * 50) + 1;
+        card.querySelector('.card-header__body p').textContent = `${agents} active agent(s) processing ${files} file(s).`;
+        card.querySelector('[data-log-time]').textContent = `Updated ${new Date().toLocaleTimeString()}`;
+      }
+
+      if (action === 'clear-build') {
+        document.querySelector('[data-build-output]').innerHTML = '<p style="color: var(--mute);">Build output cleared.</p>';
+      }
+    });
+
+    const t1Lines = ['Starting agent pool...', 'Connecting to index...', 'Loading 12,847 files...', 'Index loaded in 1.2s', 'Server ready on :3000'];
+    const t2Lines = ['Runtime: 4h 12m 33s', 'Memory: 256 MB / 512 MB', 'CPU: 12%', 'Queue: 0 pending', 'All systems operational'];
+
+    function typeLines(el, lines) {
+      el.innerHTML = '';
+      let i = 0;
+      const interval = setInterval(() => {
+        if (i >= lines.length) { clearInterval(interval); return; }
+        const div = document.createElement('div');
+        div.className = 'card-dark__line' + (lines[i].includes('ready') || lines[i].includes('operational') ? ' card-dark__line--success' : '');
+        div.textContent = lines[i];
+        el.appendChild(div);
+        i++;
+      }, 600);
+    }
+
+    typeLines(document.querySelector('[data-terminal="1"] .card-dark__body'), t1Lines);
+    setTimeout(() => typeLines(document.querySelector('[data-terminal="2"] .card-dark__body'), t2Lines), 500);
+
+    function animateCounter(el, target) {
+      let current = 0;
+      const step = Math.ceil(target / 40);
+      const interval = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(interval); }
+        el.textContent = current >= 1000 ? (current / 1000).toFixed(1) + 'K' : current;
+        el.classList.add('bump');
+        setTimeout(() => el.classList.remove('bump'), 100);
+      }, 30);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target.querySelector('.card-stats__number');
+          const target = parseInt(entry.target.dataset.target);
+          animateCounter(el, target);
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+    document.querySelectorAll('.card-stats__cell').forEach(c => observer.observe(c));
+  </script>
 </body>
 </html>

@@ -1,87 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Layout Primitives — OpenCode Components</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layout</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Layout Primitives</h1>
 
-    <div class="section">
-      <h3>divider-horizontal</h3>
-      <p>Content above the divider.</p>
-      <hr class="divider-h">
-      <p>Content below the default divider.</p>
-      <p style="margin-top: 16px;">Stronger separation:</p>
-      <hr class="divider-h divider-h--strong">
-      <p>Content below the strong divider.</p>
-    </div>
+<div class="header">
+  <h1>Layout</h1>
+  <p>Toggle divider styles, visualize spacer tokens, adjust container width.</p>
+</div>
 
-    <div class="section">
-      <h3>divider-vertical</h3>
-      <div class="preview-box">
-        <span>Home</span>
-        <span class="divider-v"></span>
-        <span>Docs</span>
-        <span class="divider-v"></span>
-        <span>API</span>
-        <span class="divider-v"></span>
-        <span>Contact</span>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>spacer</h3>
-      <div class="preview-box">
-        <div class="spacer-demo">
-          <div class="spacer-row">
-            <span class="label" style="width: 100px;">xs (4px)</span>
-            <div class="spacer-bar" style="width: 4px;"></div>
-          </div>
-          <div class="spacer-row">
-            <span class="label" style="width: 100px;">sm (8px)</span>
-            <div class="spacer-bar" style="width: 8px;"></div>
-          </div>
-          <div class="spacer-row">
-            <span class="label" style="width: 100px;">md (12px)</span>
-            <div class="spacer-bar" style="width: 12px;"></div>
-          </div>
-          <div class="spacer-row">
-            <span class="label" style="width: 100px;">lg (16px)</span>
-            <div class="spacer-bar" style="width: 16px;"></div>
-          </div>
-          <div class="spacer-row">
-            <span class="label" style="width: 100px;">xl (24px)</span>
-            <div class="spacer-bar" style="width: 24px;"></div>
-          </div>
-          <div class="spacer-row">
-            <span class="label" style="width: 100px;">xxl (32px)</span>
-            <div class="spacer-bar" style="width: 32px;"></div>
-          </div>
-          <div class="spacer-row">
-            <span class="label" style="width: 100px;">section (96px)</span>
-            <div class="spacer-bar" style="width: 96px;"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>container</h3>
-      <div class="container-demo">
-        <p style="font-size: 14px; color: var(--mute);">max-width: 960px, inner padding: 16px</p>
-        <p>Body content centered with constrained width.</p>
-      </div>
-
-      <h3 style="margin-top: 24px;">container (full-bleed)</h3>
-      <div class="container-full">
-        <p style="font-size: 14px; color: var(--mute);">No max-width, edge-to-edge</p>
-        <p>Used for hero mockup, footer, and full-width sections.</p>
-      </div>
-    </div>
+<div class="section">
+  <h2>divider-horizontal</h2>
+  <div class="divider-controls">
+    <button class="btn" data-action="set-divider" data-type="default">Default</button>
+    <button class="btn" data-action="set-divider" data-type="strong">Strong</button>
+    <button class="btn" data-action="set-divider" data-type="dashed">Dashed</button>
   </div>
+  <p>Content above the divider.</p>
+  <hr class="divider-h" data-target="demoDivider">
+  <p>Content below the divider.</p>
+</div>
+
+<div class="section">
+  <h2>divider-vertical</h2>
+  <div class="preview-box">
+    <span>Home</span><span class="divider-v"></span>
+    <span>Docs</span><span class="divider-v"></span>
+    <span>API</span><span class="divider-v"></span>
+    <span>Contact</span>
+    <p style="margin-top: 12px; font-size: 14px; color: var(--mute);">Vertical dividers between inline items.</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>spacer</h2>
+  <div data-target="spacerViz">
+    <div class="spacer-viz"><span class="spacer-label">xs (4px)</span><div class="spacer-bar" style="width: 4px;"></div></div>
+    <div class="spacer-viz"><span class="spacer-label">sm (8px)</span><div class="spacer-bar" style="width: 8px;"></div></div>
+    <div class="spacer-viz"><span class="spacer-label">md (12px)</span><div class="spacer-bar" style="width: 12px;"></div></div>
+    <div class="spacer-viz"><span class="spacer-label">lg (16px)</span><div class="spacer-bar" style="width: 16px;"></div></div>
+    <div class="spacer-viz"><span class="spacer-label">xl (24px)</span><div class="spacer-bar" style="width: 24px;"></div></div>
+    <div class="spacer-viz"><span class="spacer-label">xxl (32px)</span><div class="spacer-bar" style="width: 32px;"></div></div>
+    <div class="spacer-viz"><span class="spacer-label">section (96px)</span><div class="spacer-bar" style="width: 96px;"></div></div>
+  </div>
+  <div class="spacer-controls">
+    <button class="btn" data-action="toggle-spacer">Toggle Scale</button>
+  </div>
+</div>
+
+<div class="section">
+  <h2>container</h2>
+  <div class="container-controls">
+    <button class="btn" data-action="set-container" data-width="600">600px</button>
+    <button class="btn" data-action="set-container" data-width="960">960px</button>
+    <button class="btn" data-action="set-container" data-width="1200">1200px</button>
+    <button class="btn" data-action="set-container" data-width="100%">Full-bleed</button>
+  </div>
+  <div class="container-box">
+    <div class="container-inner" data-target="demoContainer">
+      <p>Content inside the container.</p>
+    </div>
+    <p class="container-info" data-target="containerInfo">max-width: 960px · padding: 16px</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Responsive container</h2>
+  <div class="responsive-box" data-target="responsiveBox">
+    <p>Drag the slider to simulate viewport width</p>
+    <p class="responsive-label" data-target="responsiveLabel">Viewport: 960px</p>
+  </div>
+  <input type="range" class="width-slider" min="320" max="1400" value="960" data-target="widthSlider">
+</div>
+
+<script>
+document.addEventListener('click', (e) => {
+  const action = e.target.dataset.action;
+  if (action === 'set-divider') {
+    const d = document.querySelector('[data-target="demoDivider"]');
+    d.className = 'divider-h';
+    if (e.target.dataset.type === 'strong') d.classList.add('divider-h--strong');
+    if (e.target.dataset.type === 'dashed') d.classList.add('divider-h--dashed');
+  }
+  if (action === 'toggle-spacer') {
+    const scaled = e.target.dataset.scaled === 'true';
+    const mult = scaled ? 1 : 2;
+    const widths = [4, 8, 12, 16, 24, 32, 96];
+    document.querySelectorAll('[data-target="spacerViz"] .spacer-bar').forEach((bar, i) => {
+      bar.style.width = (widths[i] * mult) + 'px';
+    });
+    e.target.dataset.scaled = (!scaled).toString();
+  }
+  if (action === 'set-container') {
+    const w = e.target.dataset.width;
+    const el = document.querySelector('[data-target="demoContainer"]');
+    el.style.maxWidth = w === '100%' ? w : w + 'px';
+    document.querySelector('[data-target="containerInfo"]').textContent = `max-width: ${w === '100%' ? 'none (full-bleed)' : w + 'px'} · padding: 16px`;
+  }
+});
+
+document.addEventListener('input', (e) => {
+  if (e.target.dataset.target === 'widthSlider') {
+    const w = parseInt(e.target.value);
+    const box = document.querySelector('[data-target="responsiveBox"]');
+    const label = document.querySelector('[data-target="responsiveLabel"]');
+    label.textContent = `Viewport: ${w}px`;
+    box.style.maxWidth = w + 'px';
+    if (w <= 640) {
+      label.textContent = `Viewport: ${w}px — Mobile`;
+      box.style.background = '#EDEAE3';
+    } else if (w <= 850) {
+      label.textContent = `Viewport: ${w}px — Tablet`;
+      box.style.background = '#E5E2DB';
+    } else {
+      label.textContent = `Viewport: ${w}px — Desktop`;
+      box.style.background = '#EDEAE3';
+    }
+  }
+});
+</script>
+
 </body>
 </html>

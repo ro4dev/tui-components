@@ -1,78 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feedback — OpenCode Components</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Feedback & Notifications</h1>
-
-    <div class="section">
-      <h3>toast (stacked)</h3>
-      <div class="preview-box">
-        <div class="toast-stack">
-          <div class="toast toast--info">
-            <span>[i]</span>
-            <span>Index rebuild started — 12,847 files queued.</span>
-            <button class="toast__dismiss">[×]</button>
-          </div>
-          <div class="toast toast--success">
-            <span>[✓]</span>
-            <span>Configuration saved successfully.</span>
-            <button class="toast__dismiss">[×]</button>
-          </div>
-          <div class="toast toast--error">
-            <span>[x]</span>
-            <span>Connection lost — agent pool unreachable.</span>
-            <button class="toast__dismiss">[×]</button>
-          </div>
-          <div class="toast toast--warning">
-            <span>[!]</span>
-            <span>Memory usage above 80%. Consider increasing limits.</span>
-            <button class="toast__dismiss">[×]</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>skeleton</h3>
-      <div class="demo-row">
-        <div style="display: flex; gap: 12px; align-items: center;">
-          <div class="skeleton skeleton--avatar"></div>
-          <div style="flex: 1;">
-            <div class="skeleton skeleton--text" style="width: 120px;"></div>
-            <div class="skeleton skeleton--text-short"></div>
-          </div>
-        </div>
-        <div class="skeleton skeleton--thumbnail"></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>inline-validation (error)</h3>
-      <div class="field-wrap">
-        <label style="display: block; font-weight: 700; color: var(--ink); margin-bottom: 8px;">Agent Name</label>
-        <input class="field-input field-input--error" type="text" value="">
-        <div class="validation-msg validation-msg--error">
-          <span>[!]</span> Agent name is required.
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>inline-validation (success)</h3>
-      <div class="field-wrap">
-        <label style="display: block; font-weight: 700; color: var(--ink); margin-bottom: 8px;">Agent Name</label>
-        <input class="field-input" type="text" value="agent-pool-1">
-        <div class="validation-msg validation-msg--success">
-          <span>[✓]</span> Name is available.
-        </div>
-      </div>
+  <div class="header">
+    <h1>Feedback</h1>
+    <p>Toast notifications, skeleton loading, and inline validation</p>
+  </div>
+  <div class="section">
+    <div class="section-title">Toast Notifications</div>
+    <div class="btn-row">
+      <button class="btn btn-info" data-action="toast" data-type="info" data-msg="[i] Info: Operation completed successfully.">[i] Info</button>
+      <button class="btn btn-success" data-action="toast" data-type="success" data-msg="[✓] Success: File saved to disk.">[✓] Success</button>
+      <button class="btn btn-error" data-action="toast" data-type="error" data-msg="[!] Error: Failed to connect to server.">[!] Error</button>
+      <button class="btn btn-warning" data-action="toast" data-type="warning" data-msg="[!] Warning: Disk space is low.">[!] Warning</button>
     </div>
   </div>
+  <div class="section">
+    <div class="section-title">Skeleton Loading</div>
+    <button class="btn-toggle" data-action="toggle-skeleton">[←] Toggle Skeleton</button>
+    <div class="skeleton-card" data-skeleton="card">
+      <div class="skeleton-avatar"></div>
+      <div class="skeleton-heading"></div>
+      <div class="skeleton-line medium"></div>
+      <div class="skeleton-line"></div>
+      <div class="skeleton-line short"></div>
+    </div>
+    <div class="skeleton-card hidden" data-skeleton="content">
+      <div style="display: flex; gap: var(--spacing-md); margin-bottom: var(--spacing-md);">
+        <div style="width: 32px; height: 32px; border-radius: var(--rounded-full); background: var(--accent); display: flex; align-items: center; justify-content: center; color: var(--on-dark); font-weight: 700;">JD</div>
+        <div>
+          <div style="font-size: 14px; color: var(--ink); font-weight: 500;">Jane Doe</div>
+          <div style="font-size: 12px; color: var(--mute);">Software Engineer</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--body); line-height: 1.6;">This is the loaded content after the skeleton animation completes. The user profile is now visible with all details.</p>
+    </div>
+  </div>
+  <div class="section validation-section">
+    <div class="section-title">Inline Validation</div>
+    <div class="input-group">
+      <label class="input-label">Email Address</label>
+      <input type="text" class="input-field" data-validate="email" placeholder="user@example.com">
+      <div class="validation-msg error" data-error="email"></div>
+      <div class="validation-msg success" data-success="email"></div>
+    </div>
+    <div class="input-group">
+      <label class="input-label">Username</label>
+      <input type="text" class="input-field" data-validate="username" placeholder="3-16 characters">
+      <div class="validation-msg error" data-error="username"></div>
+      <div class="validation-msg success" data-success="username"></div>
+    </div>
+    <div class="input-group">
+      <label class="input-label">Password</label>
+      <input type="password" class="input-field" data-validate="password" placeholder="Min 8 characters">
+      <div class="validation-msg error" data-error="password"></div>
+      <div class="validation-msg success" data-success="password"></div>
+    </div>
+  </div>
+  <div class="toast-container" data-toast-container></div>
+<script>
+function showToast(type, message) {
+  const container = document.querySelector('[data-toast-container]');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `<span class="toast-msg">${message}</span><button class="dismiss-btn" data-action="dismiss-toast">[×]</button>`;
+  container.appendChild(toast);
+  if (type === 'info' || type === 'success') {
+    setTimeout(() => { toast.querySelector('[data-action="dismiss-toast"]').click(); }, 5000);
+  }
+}
+
+function validate(type, input) {
+  const val = input.value.trim();
+  input.classList.remove('error', 'success');
+  const errorEl = document.querySelector(`[data-error="${type}"]`);
+  const successEl = document.querySelector(`[data-success="${type}"]`);
+  errorEl.classList.remove('show');
+  successEl.classList.remove('show');
+  if (!val) return;
+
+  if (type === 'email') {
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+      input.classList.add('success');
+      successEl.textContent = '[✓] Valid email address';
+      successEl.classList.add('show');
+    } else {
+      input.classList.add('error');
+      errorEl.textContent = '[!] Please enter a valid email address';
+      errorEl.classList.add('show');
+    }
+  } else if (type === 'username') {
+    if (val.length < 3) {
+      input.classList.add('error');
+      errorEl.textContent = '[!] Username must be at least 3 characters';
+      errorEl.classList.add('show');
+    } else if (val.length > 16) {
+      input.classList.add('error');
+      errorEl.textContent = '[!] Username must be 16 characters or less';
+      errorEl.classList.add('show');
+    } else {
+      input.classList.add('success');
+      successEl.textContent = '[✓] Username is available';
+      successEl.classList.add('show');
+    }
+  } else if (type === 'password') {
+    if (val.length < 8) {
+      input.classList.add('error');
+      errorEl.textContent = '[!] Password must be at least 8 characters';
+      errorEl.classList.add('show');
+    } else {
+      input.classList.add('success');
+      successEl.textContent = '[✓] Password strength: good';
+      successEl.classList.add('show');
+    }
+  }
+}
+
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-action]');
+  if (!el) return;
+  const action = el.dataset.action;
+
+  if (action === 'toast') {
+    showToast(el.dataset.type, el.dataset.msg);
+  } else if (action === 'dismiss-toast') {
+    const toast = el.closest('.toast');
+    toast.style.animation = 'slideOut 0.3s ease forwards';
+    setTimeout(() => toast.remove(), 300);
+  } else if (action === 'toggle-skeleton') {
+    const card = document.querySelector('[data-skeleton="card"]');
+    const content = document.querySelector('[data-skeleton="content"]');
+    card.classList.toggle('hidden');
+    content.classList.toggle('hidden');
+  }
+});
+
+document.addEventListener('input', e => {
+  const input = e.target;
+  if (input.dataset.validate) validate(input.dataset.validate, input);
+});
+</script>
 </body>
 </html>

@@ -1,53 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tabs — OpenCode Components</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabs - OpenCode Design System</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Tabs</h1>
+<div class="header">
+  <h1>Tabs</h1>
+  <p>Click tabs to switch content.</p>
+</div>
 
-    <div class="section">
-      <h3>tab-strip</h3>
-      <div class="tab-strip">
-        <span class="tab-strip__item tab-strip__item--active">Files</span>
-        <span class="tab-strip__item">Search</span>
-        <span class="tab-strip__item">Terminal</span>
-        <span class="tab-strip__item">Problems</span>
-      </div>
-      <div style="padding: 16px 0;">
-        <p>Active tab shows content panel below.</p>
-      </div>
-
-      <h3 style="margin-top: 24px;">tab-strip (secondary)</h3>
-      <div class="tab-strip">
-        <span class="tab-strip__item">Overview</span>
-        <span class="tab-strip__item tab-strip__item--active">Configuration</span>
-        <span class="tab-strip__item">Logs</span>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>tab-pills</h3>
-      <div class="tab-pills">
-        <span class="tab-pills__item tab-pills__item--active">All</span>
-        <span class="tab-pills__item">TypeScript</span>
-        <span class="tab-pills__item">JavaScript</span>
-        <span class="tab-pills__item">JSON</span>
-        <span class="tab-pills__item">Markdown</span>
-      </div>
-
-      <h3 style="margin-top: 24px;">tab-pills (filter group)</h3>
-      <div class="tab-pills">
-        <span class="tab-pills__item tab-pills__item--active">Active</span>
-        <span class="tab-pills__item">Idle</span>
-        <span class="tab-pills__item">Completed</span>
-        <span class="tab-pills__item">Failed</span>
-      </div>
-    </div>
+<div class="section">
+  <div class="section-title">Tab Strip</div>
+  <div class="tab-strip" data-group="strip1">
+    <div class="tab-strip__item tab-strip__item--active" data-action="switch-tab" data-tab="files">Files</div>
+    <div class="tab-strip__item" data-action="switch-tab" data-tab="search">Search</div>
+    <div class="tab-strip__item" data-action="switch-tab" data-tab="terminal">Terminal</div>
+    <div class="tab-strip__item" data-action="switch-tab" data-tab="problems">Problems</div>
   </div>
+  <div class="tab-panel tab-panel--active" data-panel="strip1-files">
+    <p>File explorer: 12,847 files indexed. 3 folders expanded.</p>
+  </div>
+  <div class="tab-panel" data-panel="strip1-search">
+    <p>Search: Type to find across all indexed files.</p>
+  </div>
+  <div class="tab-panel" data-panel="strip1-terminal">
+    <p>Terminal: $ opencode serve — running on :3000</p>
+  </div>
+  <div class="tab-panel" data-panel="strip1-problems">
+    <p>Problems: 0 errors, 3 warnings found.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Tab Pills</div>
+  <div class="tab-pills" data-group="pills1">
+    <div class="tab-pills__item tab-pills__item--active" data-action="switch-tab" data-tab="all">All</div>
+    <div class="tab-pills__item" data-action="switch-tab" data-tab="ts">TypeScript</div>
+    <div class="tab-pills__item" data-action="switch-tab" data-tab="js">JavaScript</div>
+    <div class="tab-pills__item" data-action="switch-tab" data-tab="json">JSON</div>
+    <div class="tab-pills__item" data-action="switch-tab" data-tab="md">Markdown</div>
+  </div>
+  <div class="pill-panel pill-panel--active" data-panel="pills1-all">
+    <p>Showing all 12,847 files across all types.</p>
+  </div>
+  <div class="pill-panel" data-panel="pills1-ts">
+    <p>Found 8,421 TypeScript files.</p>
+  </div>
+  <div class="pill-panel" data-panel="pills1-js">
+    <p>Found 1,203 JavaScript files.</p>
+  </div>
+  <div class="pill-panel" data-panel="pills1-json">
+    <p>Found 342 JSON files.</p>
+  </div>
+  <div class="pill-panel" data-panel="pills1-md">
+    <p>Found 89 Markdown files.</p>
+  </div>
+</div>
+
+<script>
+document.addEventListener('click', (e) => {
+  const tabItem = e.target.closest('[data-action="switch-tab"]');
+  if (!tabItem) return;
+
+  const group = tabItem.closest('[data-group]').dataset.group;
+  const isStrip = tabItem.closest('.tab-strip') !== null;
+
+  tabItem.parentElement.querySelectorAll('[data-action="switch-tab"]').forEach(t => {
+    t.classList.remove('tab-strip__item--active', 'tab-pills__item--active');
+  });
+  tabItem.classList.add(isStrip ? 'tab-strip__item--active' : 'tab-pills__item--active');
+
+  document.querySelectorAll(`[data-panel^="${group}-"]`).forEach(p => {
+    p.classList.remove('tab-panel--active', 'pill-panel--active');
+  });
+  const panel = document.querySelector(`[data-panel="${group}-${tabItem.dataset.tab}"]`);
+  panel.classList.add(isStrip ? 'tab-panel--active' : 'pill-panel--active');
+});
+</script>
 </body>
 </html>

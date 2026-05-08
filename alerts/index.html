@@ -3,61 +3,114 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alerts — OpenCode Components</title>
-<link rel="stylesheet" href="style.css">
+  <title>Alerts — TUI Components</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Alerts & Callouts</h1>
-    <p>Alert variants for notifications, warnings, and status messages.</p>
 
-    <div class="section">
-      <h3>alert-info</h3>
-      <div class="alert alert-info">
-        <span class="alert__icon">[i]</span>
-        <span class="alert__title">New version available</span>
-        <span class="alert__body">OpenCode 2.4.0 is ready to install. Review the changelog before upgrading.</span>
-      </div>
+<div class="header">
+  <h1>Alerts</h1>
+  <p>Status notifications with dismiss and auto-dismiss behavior</p>
+</div>
+
+<div class="section">
+  <div class="section-title">Trigger Alerts</div>
+  <div class="controls">
+    <button class="btn btn--info" data-action="create-alert" data-type="info">[i] Info</button>
+    <button class="btn btn--warn" data-action="create-alert" data-type="warning">[!] Warning</button>
+    <button class="btn btn--danger" data-action="create-alert" data-type="danger">[x] Danger</button>
+    <button class="btn btn--success" data-action="create-alert" data-type="success">[✓] Success</button>
+    <button class="btn" data-action="dismiss-all">Dismiss All</button>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Active Alerts</div>
+  <div class="alert-container">
+    <div class="alert alert-info">
+      <button class="alert__close" data-action="dismiss">[×]</button>
+      <span class="alert__icon">[i]</span>
+      <span class="alert__title">New version available</span>
+      <span class="alert__body">OpenCode 2.4.0 is ready to install.</span>
     </div>
-
-    <div class="section">
-      <h3>alert-warning</h3>
-      <div class="alert alert-warning">
-        <span class="alert__icon">[!]</span>
-        <span class="alert__title">Low disk space</span>
-        <span class="alert__body">Less than 2 GB remaining. Consider clearing old build artifacts.</span>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>alert-danger</h3>
-      <div class="alert alert-danger">
-        <span class="alert__icon">[x]</span>
-        <span class="alert__title">Build failed</span>
-        <span class="alert__body">TypeScript compilation error in src/agent.ts:42 — Property 'process' does not exist on type 'Agent'.</span>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>alert-success</h3>
-      <div class="alert alert-success">
-        <span class="alert__icon">[✓]</span>
-        <span class="alert__title">Deploy complete</span>
-        <span class="alert__body">Production environment updated successfully. 0 errors, 12 warnings.</span>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>alert-inline</h3>
-      <p>
-        This configuration option is deprecated.
-        <span class="alert-inline">
-          <span class="alert__icon">[!]</span>
-          <span class="alert__body">Use `agent.pool_size` instead of `agent.workers`.</span>
-        </span>
-        The old key will be removed in version 3.0.
-      </p>
+    <div class="alert alert-warning">
+      <button class="alert__close" data-action="dismiss">[×]</button>
+      <span class="alert__icon">[!]</span>
+      <span class="alert__title">Low disk space</span>
+      <span class="alert__body">Less than 2 GB remaining.</span>
     </div>
   </div>
+</div>
+
+<script>
+const alertData = {
+  info: [
+    ['New version available', 'OpenCode 2.4.0 is ready to install.'],
+    ['Index rebuild started', '12,847 files queued for reindexing.'],
+    ['Connection restored', 'Server reconnected after 3s downtime.'],
+  ],
+  warning: [
+    ['Low disk space', 'Less than 2 GB remaining on /dev/sda1.'],
+    ['High memory usage', 'Agent pool using 85% of allocated memory.'],
+    ['Deprecated config key', 'agent.workers is deprecated. Use agent.pool_size.'],
+  ],
+  danger: [
+    ['Build failed', 'TypeScript error in src/agent.ts:42'],
+    ['Connection lost', 'Agent pool unreachable for 30s.'],
+    ['Permission denied', 'Cannot write to ~/.opencode/config.yaml'],
+  ],
+  success: [
+    ['Deploy complete', 'Production updated successfully.'],
+    ['Index rebuilt', '12,847 files indexed in 4.2s.'],
+    ['Agent started', 'Pool initialized with 4 workers.'],
+  ]
+};
+
+const icons = { info: '[i]', warning: '[!]', danger: '[x]', success: '[✓]' };
+
+function createAlert(type) {
+  const container = document.querySelector('.alert-container');
+  const msgs = alertData[type];
+  const [title, body] = msgs[Math.floor(Math.random() * msgs.length)];
+  const div = document.createElement('div');
+  div.className = `alert alert-${type}`;
+  div.innerHTML = `
+    <button class="alert__close" data-action="dismiss">[×]</button>
+    <span class="alert__icon">${icons[type]}</span>
+    <span class="alert__title">${title}</span>
+    <span class="alert__body">${body}</span>
+  `;
+  container.prepend(div);
+  if (type === 'info' || type === 'success') {
+    setTimeout(() => {
+      const closeBtn = div.querySelector('[data-action="dismiss"]');
+      if (closeBtn) dismissAlert(closeBtn);
+    }, 5000);
+  }
+}
+
+function dismissAlert(btn) {
+  const alert = btn.closest('.alert');
+  alert.classList.add('removing');
+  setTimeout(() => alert.remove(), 300);
+}
+
+function dismissAll() {
+  document.querySelectorAll('.alert').forEach(alert => {
+    alert.classList.add('removing');
+    setTimeout(() => alert.remove(), 300);
+  });
+}
+
+document.addEventListener('click', (e) => {
+  const target = e.target.closest('[data-action]');
+  if (!target) return;
+  const action = target.dataset.action;
+  if (action === 'create-alert') createAlert(target.dataset.type);
+  if (action === 'dismiss') dismissAlert(target);
+  if (action === 'dismiss-all') dismissAll();
+});
+</script>
+
 </body>
 </html>

@@ -1,43 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Breadcrumbs — OpenCode Components</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Breadcrumbs - OpenCode Design System</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Breadcrumbs</h1>
 
-    <div class="section">
-      <h3>breadcrumb-default</h3>
-      <div style="display: flex; flex-direction: column; gap: 24px;">
-        <nav class="breadcrumb">
-          <a class="breadcrumb__item" href="#">home</a>
-          <span class="breadcrumb__separator">/</span>
-          <a class="breadcrumb__item" href="#">docs</a>
-          <span class="breadcrumb__separator">/</span>
-          <a class="breadcrumb__item" href="#">agents</a>
-          <span class="breadcrumb__separator">/</span>
-          <span class="breadcrumb__current">configuration</span>
-        </nav>
+<div class="header">
+  <h1>Breadcrumbs</h1>
+  <p>Navigation breadcrumbs with dropdown path selection</p>
+</div>
 
-        <nav class="breadcrumb">
-          <a class="breadcrumb__item" href="#">home</a>
-          <span class="breadcrumb__separator">/</span>
-          <a class="breadcrumb__item" href="#">settings</a>
-          <span class="breadcrumb__separator">/</span>
-          <span class="breadcrumb__current">theme</span>
-        </nav>
+<div class="section">
+  <div class="section-title">Breadcrumb Navigation</div>
+  <div class="breadcrumb" data-breadcrumb>
+    <span class="breadcrumb-item" data-action="navigate">[⌕] Home</span>
+    <span class="breadcrumb-separator">/</span>
+    <span class="breadcrumb-item" data-action="navigate">Projects</span>
+    <span class="breadcrumb-separator">/</span>
+    <span class="breadcrumb-item" data-action="navigate">OpenCode</span>
+    <span class="breadcrumb-separator">/</span>
+    <span class="breadcrumb-item active">Components</span>
+  </div>
 
-        <nav class="breadcrumb">
-          <a class="breadcrumb__item" href="#">home</a>
-          <span class="breadcrumb__separator">/</span>
-          <span class="breadcrumb__current">dashboard</span>
-        </nav>
-      </div>
+  <div class="breadcrumb" data-breadcrumb>
+    <span class="breadcrumb-item" data-action="navigate">[⌕] Dashboard</span>
+    <span class="breadcrumb-separator">/</span>
+    <span class="breadcrumb-item" data-action="navigate">Settings</span>
+    <span class="breadcrumb-separator">/</span>
+    <span class="breadcrumb-item active">Profile</span>
+  </div>
+
+  <div class="breadcrumb" data-breadcrumb>
+    <span class="breadcrumb-item" data-action="navigate">[⌕] Root</span>
+    <span class="breadcrumb-separator">/</span>
+    <span class="breadcrumb-item" data-action="navigate">src</span>
+    <span class="breadcrumb-separator">/</span>
+    <span class="breadcrumb-item" data-action="navigate">components</span>
+    <span class="breadcrumb-separator">/</span>
+    <span class="breadcrumb-item" data-action="navigate">UI</span>
+    <span class="breadcrumb-separator">/</span>
+    <span class="breadcrumb-item active">index.html</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Navigate to Path</div>
+  <div class="dropdown-container">
+    <button class="dropdown-btn" data-action="toggle-dropdown">[▾] Navigate to...</button>
+    <div class="dropdown-menu">
+      <div class="dropdown-item" data-path="Home">[⌕] Home</div>
+      <div class="dropdown-item" data-path="Projects">/ Projects</div>
+      <div class="dropdown-item" data-path="OpenCode / Components">/ OpenCode / Components</div>
+      <div class="dropdown-item" data-path="OpenCode / Tools">/ OpenCode / Tools</div>
+      <div class="dropdown-item" data-path="Settings / Profile">/ Settings / Profile</div>
+      <div class="dropdown-item" data-path="Docs / API Reference">/ Docs / API Reference</div>
     </div>
   </div>
+  <div class="current-path">
+    <strong>Current Path:</strong> <span data-current-path>Home / Projects / OpenCode / Components</span>
+  </div>
+</div>
+
+<div class="log">
+  <div class="log-title">Navigation Log</div>
+  <div data-log-entries></div>
+</div>
+
+<script>
+document.addEventListener('click', (e) => {
+  const action = e.target.dataset.action;
+  if (action === 'navigate') {
+    const bc = e.target.closest('.breadcrumb');
+    bc.querySelectorAll('.breadcrumb-item').forEach(item => item.classList.remove('active'));
+    e.target.classList.add('active');
+    const path = Array.from(bc.querySelectorAll('.breadcrumb-item')).map(i => i.textContent.replace('[⌕] ', '').trim()).join(' / ');
+    document.querySelector('[data-current-path]').textContent = path;
+  }
+  if (action === 'toggle-dropdown') {
+    e.target.nextElementSibling.classList.toggle('open');
+  }
+  if (e.target.classList.contains('dropdown-item')) {
+    document.querySelector('[data-current-path]').textContent = e.target.dataset.path;
+    document.querySelector('.dropdown-menu').classList.remove('open');
+  }
+});
+
+document.addEventListener('click', (e) => {
+  const dropdown = document.querySelector('.dropdown-container');
+  if (dropdown && !dropdown.contains(e.target)) {
+    document.querySelector('.dropdown-menu')?.classList.remove('open');
+  }
+});
+</script>
+
 </body>
 </html>
