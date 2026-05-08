@@ -14,22 +14,9 @@
 </div>
 
 <div class="section">
-  <div class="section-title">Avatar Sizes</div>
-  <div class="size-row"><span class="size-label">XL</span><div class="avatar avatar-xl avatar-blue">JD</div></div>
-  <div class="size-row"><span class="size-label">LG</span><div class="avatar avatar-lg avatar-green">AK</div></div>
-  <div class="size-row"><span class="size-label">MD</span><div class="avatar avatar-md avatar-orange">SM</div></div>
-  <div class="size-row"><span class="size-label">SM</span><div class="avatar avatar-sm avatar-red">T</div></div>
-</div>
-
-<div class="section">
-  <div class="section-title">Avatar Colors</div>
-  <div class="avatar-grid">
-    <div class="avatar-grid-item"><div class="avatar avatar-lg avatar-blue">AB</div><div class="label">Blue</div></div>
-    <div class="avatar-grid-item"><div class="avatar avatar-lg avatar-green">CD</div><div class="label">Green</div></div>
-    <div class="avatar-grid-item"><div class="avatar avatar-lg avatar-orange">EF</div><div class="label">Orange</div></div>
-    <div class="avatar-grid-item"><div class="avatar avatar-lg avatar-red">GH</div><div class="label">Red</div></div>
-    <div class="avatar-grid-item"><div class="avatar avatar-lg avatar-purple">IJ</div><div class="label">Purple</div></div>
-  </div>
+  <div class="section-title">Avatar Circle</div>
+  <div class="size-row"><span class="size-label">Default 32px</span><div class="avatar-circle">J</div></div>
+  <div class="size-row"><span class="size-label">Compact 24px</span><div class="avatar-circle compact">A</div></div>
 </div>
 
 <div class="section">
@@ -39,14 +26,6 @@
     <div class="form-row">
       <input type="text" class="form-input" placeholder="Name (e.g., John Doe)">
       <input type="text" class="form-input" placeholder="Role (e.g., Developer)">
-      <select class="form-select">
-        <option value="avatar-blue">Blue</option>
-        <option value="avatar-green">Green</option>
-        <option value="avatar-orange">Orange</option>
-        <option value="avatar-red">Red</option>
-        <option value="avatar-purple">Purple</option>
-        <option value="avatar-teal">Teal</option>
-      </select>
     </div>
     <button class="btn" data-action="add-user">[+] Add User</button>
   </div>
@@ -55,20 +34,20 @@
 </div>
 
 <div class="section">
-  <div class="section-title">Static User Pills (Examples)</div>
+  <div class="section-title">Static User Pills</div>
   <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-sm);">
     <div class="user-pill">
-      <div class="avatar avatar-md avatar-blue">JD</div>
+      <div class="avatar-circle compact">J</div>
       <div class="user-info"><span class="user-name">Jane Doe</span><span class="user-role">Designer</span></div>
       <button class="remove-btn" data-action="remove-pill">[×]</button>
     </div>
     <div class="user-pill">
-      <div class="avatar avatar-md avatar-green">AK</div>
+      <div class="avatar-circle compact">A</div>
       <div class="user-info"><span class="user-name">Alex Kim</span><span class="user-role">Developer</span></div>
       <button class="remove-btn" data-action="remove-pill">[×]</button>
     </div>
     <div class="user-pill">
-      <div class="avatar avatar-md avatar-orange">SM</div>
+      <div class="avatar-circle compact">S</div>
       <div class="user-info"><span class="user-name">Sara Miles</span><span class="user-role">Manager</span></div>
       <button class="remove-btn" data-action="remove-pill">[×]</button>
     </div>
@@ -76,11 +55,10 @@
 </div>
 
 <script>
-const colors = ['avatar-blue', 'avatar-green', 'avatar-orange', 'avatar-red', 'avatar-purple', 'avatar-teal'];
 let userCount = 0;
 
-function getInitials(name) {
-  return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+function getInitial(name) {
+  return name.charAt(0).toUpperCase();
 }
 
 document.addEventListener('click', (e) => {
@@ -88,14 +66,12 @@ document.addEventListener('click', (e) => {
   if (action === 'add-user') {
     const form = e.target.closest('.add-user-form');
     const inputs = form.querySelectorAll('.form-input');
-    const select = form.querySelector('.form-select');
     const name = inputs[0].value.trim() || 'User ' + (++userCount);
     const role = inputs[1].value.trim() || 'Member';
-    const color = select.value;
-    const initials = getInitials(name);
+    const initial = getInitial(name);
     const pill = document.createElement('div');
     pill.className = 'user-pill';
-    pill.innerHTML = `<div class="avatar avatar-md ${color}">${initials}</div><div class="user-info"><span class="user-name">${name}</span><span class="user-role">${role}</span></div><button class="remove-btn" data-action="remove-pill">[×]</button>`;
+    pill.innerHTML = `<div class="avatar-circle compact">${initial}</div><div class="user-info"><span class="user-name">${name}</span><span class="user-role">${role}</span></div><button class="remove-btn" data-action="remove-pill">[×]</button>`;
     const list = document.querySelector('.user-list');
     list.appendChild(pill);
     inputs[0].value = '';

@@ -71,25 +71,43 @@ body {
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-xs);
-  padding: var(--spacing-xs) var(--spacing-md);
-  font-size: 12px;
+  padding: 2px 8px;
+  font-size: 14px;
   font-family: var(--font-mono);
   border-radius: var(--rounded-full);
-  cursor: pointer;
   transition: opacity 0.1s;
   border: 1px solid transparent;
 }
-.badge:hover { opacity: 0.8; }
+.badge[data-state] { cursor: pointer; }
+.badge[data-state]:hover { opacity: 0.8; }
 .badge-active { background: var(--success); color: var(--on-dark); border-color: var(--success); }
 .badge-warning { background: var(--warning); color: var(--ink); border-color: var(--warning); }
 .badge-error { background: var(--danger); color: var(--on-dark); border-color: var(--danger); }
 .badge-idle { background: var(--surface-card); color: var(--mute); border-color: var(--hairline); }
+.badge-active::before, .badge-warning::before, .badge-error::before, .badge-idle::before {
+  content: '●';
+}
 .badge-label {
   background: var(--surface-card);
-  color: var(--body);
+  color: var(--mute);
   border-color: var(--hairline);
+  border-radius: var(--rounded-sm);
+  cursor: default;
 }
 .badge-accent { background: var(--accent); color: var(--on-dark); border-color: var(--accent); }
+.badge-counter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--danger);
+  color: var(--on-dark);
+  font-size: 14px;
+  font-family: var(--font-mono);
+  border-radius: var(--rounded-full);
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+}
 .counter-badge {
   display: inline-flex;
   align-items: center;

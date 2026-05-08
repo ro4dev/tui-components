@@ -120,9 +120,24 @@ body {
   line-height: 1;
 }
 .alert__close:hover { color: var(--ink); }
-.alert__icon { font-weight: 700; margin-right: var(--spacing-xs); }
+.alert__icon { margin-right: var(--spacing-xs); }
 .alert__title { font-weight: 700; color: var(--ink); display: block; margin-bottom: var(--spacing-xs); }
-.alert__body { font-size: 14px; color: var(--body); }
+.alert__body { color: var(--body); }
+.alert-inline {
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  display: inline;
+}
+.alert-inline .alert__icon { margin-right: 0; }
+.alert-inline.alert-warning,
+.alert-inline.alert-warning .alert__icon { color: var(--warning); }
+.alert-inline.alert-danger,
+.alert-inline.alert-danger .alert__icon { color: var(--danger); }
+.alert-inline.alert-info,
+.alert-inline.alert-info .alert__icon { color: var(--accent); }
+.alert-inline.alert-success,
+.alert-inline.alert-success .alert__icon { color: var(--success); }
 .alert-info { border-left-color: var(--accent); }
 .alert-info .alert__icon { color: var(--accent); }
 .alert-warning { border-left-color: var(--warning); }

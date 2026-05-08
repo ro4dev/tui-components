@@ -9,7 +9,7 @@
 <body>
 <div class="header">
   <h1>Tooltips</h1>
-  <p>Hover-triggered tooltips with dark background and light text</p>
+  <p>Hover or focus to trigger tooltips with dark background and light text</p>
 </div>
 
 <div class="controls">
@@ -47,14 +47,13 @@
   </button>
 </div>
 
-<div class="info-box">
-  <strong>Tooltip Specs</strong>
-  Position: Below trigger element<br>
-  Gap: 4px between trigger and tooltip<br>
-  Background: #1A1A1A (surface-dark)<br>
-  Text: #F5F2EB (on-dark)<br>
-  Radius: 4px (rounded-sm)<br>
-  Arrow: None — the rectangle itself is the tooltip
-</div>
+<script>
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    const trigger = document.activeElement.closest('.tooltip-trigger');
+    if (trigger) trigger.blur();
+  }
+});
+</script>
 </body>
 </html>

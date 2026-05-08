@@ -14,36 +14,37 @@
 </div>
 
 <div class="section">
-  <div class="section-title">Status Badges (Click to Cycle)</div>
+  <div class="section-title">Status Badges - Dot Variant (Click to Cycle)</div>
   <div class="badge-row">
-    <span class="badge badge-active" data-state="active">
-      [✓] Active
-    </span>
-    <span class="badge badge-warning" data-state="warning">
-      [!] Warning
-    </span>
-    <span class="badge badge-error" data-state="error">
-      [×] Error
-    </span>
-    <span class="badge badge-idle" data-state="idle">
-      [∅] Idle
-    </span>
+    <span class="badge badge-active" data-state="active">Active</span>
+    <span class="badge badge-warning" data-state="warning">Warning</span>
+    <span class="badge badge-error" data-state="error">Error</span>
+    <span class="badge badge-idle" data-state="idle">Idle</span>
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">Label Badges</div>
   <div class="badge-row">
-    <span class="badge badge-label">( ) Draft</span>
-    <span class="badge badge-accent">(•) Feature</span>
-    <span class="badge badge-label">( ) Bug Fix</span>
-    <span class="badge badge-accent">(•) Enhancement</span>
-    <span class="badge badge-label">( ) Documentation</span>
+    <span class="badge badge-label">Draft</span>
+    <span class="badge badge-accent">Feature</span>
+    <span class="badge badge-label">Bug Fix</span>
+    <span class="badge badge-accent">Enhancement</span>
+    <span class="badge badge-label">Documentation</span>
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">Counter Badges</div>
+  <div class="badge-row">
+    <span class="badge-counter">3</span>
+    <span class="badge-counter">12</span>
+    <span class="badge-counter">99+</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Interactive Counters</div>
   <div class="badge-row">
     <span class="counter-badge">
       <button class="counter-btn" data-action="counter" data-delta="-1">[-]</button>
@@ -57,22 +58,16 @@
       <button class="counter-btn" data-action="counter" data-delta="1">[+]</button>
       <span style="margin-left: var(--spacing-xs); color: var(--body);">Notifications</span>
     </span>
-    <span class="counter-badge">
-      <button class="counter-btn" data-action="counter" data-delta="-1">[-]</button>
-      <span class="counter-value">12</span>
-      <button class="counter-btn" data-action="counter" data-delta="1">[+]</button>
-      <span style="margin-left: var(--spacing-xs); color: var(--body);">Messages</span>
-    </span>
   </div>
 </div>
 
 <script>
 const statusOrder = ['active', 'warning', 'error', 'idle'];
 const statusConfig = {
-  active: { cls: 'badge-active', marker: '[✓]', text: 'Active' },
-  warning: { cls: 'badge-warning', marker: '[!]', text: 'Warning' },
-  error: { cls: 'badge-error', marker: '[×]', text: 'Error' },
-  idle: { cls: 'badge-idle', marker: '[∅]', text: 'Idle' }
+  active: { cls: 'badge-active', text: 'Active' },
+  warning: { cls: 'badge-warning', text: 'Warning' },
+  error: { cls: 'badge-error', text: 'Error' },
+  idle: { cls: 'badge-idle', text: 'Idle' }
 };
 
 document.addEventListener('click', (e) => {
@@ -84,7 +79,7 @@ document.addEventListener('click', (e) => {
     const config = statusConfig[next];
     badge.className = 'badge ' + config.cls;
     badge.dataset.state = next;
-    badge.textContent = config.marker + ' ' + config.text;
+    badge.textContent = config.text;
     return;
   }
   const counterBtn = e.target.closest('[data-action="counter"]');

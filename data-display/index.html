@@ -7,109 +7,115 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="header">
-    <h1>Data Display</h1>
-    <p>Interactive lists, tags, and toggles</p>
+
+<div class="header">
+  <h1>Data Display</h1>
+  <p>Lists, definition lists, and tags</p>
+</div>
+
+<div class="section">
+  <h2>Bullet List</h2>
+  <ul class="list list--bullet">
+    <li>Enable syntax highlighting</li>
+    <li>Auto-save on change</li>
+    <li>Show line numbers</li>
+    <li>Format on paste</li>
+    <li>Word wrap</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>Numbered List</h2>
+  <ol class="list list--numbered">
+    <li>Initialize project</li>
+    <li>Configure build tools</li>
+    <li>Write tests</li>
+    <li>Deploy to staging</li>
+  </ol>
+</div>
+
+<div class="section">
+  <h2>Definition List</h2>
+  <dl class="definition-list">
+    <dt>Model</dt>
+    <dd>opencode/big-pickle</dd>
+    <dt>Context Window</dt>
+    <dd>200,000 tokens</dd>
+    <dt>Temperature</dt>
+    <dd>0.7 (default)</dd>
+    <dt>Max Tokens</dt>
+    <dd>4,096</dd>
+    <dt>Provider</dt>
+    <dd>Anomaly Co.</dd>
+  </dl>
+</div>
+
+<div class="section">
+  <h2>Tags</h2>
+  <div class="tags">
+    <span class="tag">frontend</span>
+    <span class="tag">react</span>
+    <span class="tag">typescript</span>
+    <span class="tag">design-system</span>
+    <span class="tag">components</span>
   </div>
-  <div class="section">
-    <h2>Manage List Items</h2>
-    <div class="input-group">
-      <input type="text" class="input" data-action="add-list-input" placeholder="Add new item...">
-      <button class="btn btn-success" data-action="add-list">[+] Add</button>
-    </div>
-    <div data-list></div>
+</div>
+
+<div class="section">
+  <h2>Removable Tags</h2>
+  <div class="tags" data-target="tags">
+    <span class="tag tag--removable">frontend<span class="tag__remove" data-action="remove-tag" data-index="0">[×]</span></span>
+    <span class="tag tag--removable">react<span class="tag__remove" data-action="remove-tag" data-index="1">[×]</span></span>
+    <span class="tag tag--removable">typescript<span class="tag__remove" data-action="remove-tag" data-index="2">[×]</span></span>
+    <span class="tag tag--removable">design-system<span class="tag__remove" data-action="remove-tag" data-index="3">[×]</span></span>
+    <span class="tag tag--removable">components<span class="tag__remove" data-action="remove-tag" data-index="4">[×]</span></span>
   </div>
-  <div class="section">
-    <h2>Definition List</h2>
-    <dl>
-      <dt>Model</dt>
-      <dd>opencode/big-pickle</dd>
-      <dt>Context Window</dt>
-      <dd>200,000 tokens</dd>
-      <dt>Temperature</dt>
-      <dd>0.7 (default)</dd>
-      <dt>Max Tokens</dt>
-      <dd>4,096</dd>
-      <dt>Provider</dt>
-      <dd>Anomaly Co.</dd>
-    </dl>
+</div>
+
+<div class="section">
+  <h2>Add New Tag</h2>
+  <div class="input-group">
+    <input type="text" class="input" data-action="add-tag-input" placeholder="Add new tag...">
+    <button class="btn" data-action="add-tag">[+] Add Tag</button>
   </div>
-  <div class="section">
-    <h2>Tags</h2>
-    <div class="input-group">
-      <input type="text" class="input" data-action="add-tag-input" placeholder="Add new tag...">
-      <button class="btn btn-success" data-action="add-tag">[+] Add Tag</button>
-    </div>
-    <div class="tags" data-tags></div>
-  </div>
-  <div class="section">
-    <h2>Toggle Bullet List</h2>
-    <ul class="bullet-list" data-toggle-list>
-      <li data-action="toggle-item"><span class="toggle">( )</span> Enable syntax highlighting</li>
-      <li data-action="toggle-item"><span class="toggle">( )</span> Auto-save on change</li>
-      <li data-action="toggle-item"><span class="toggle">( )</span> Show line numbers</li>
-      <li data-action="toggle-item"><span class="toggle">( )</span> Format on paste</li>
-      <li data-action="toggle-item"><span class="toggle">( )</span> Word wrap</li>
-    </ul>
-  </div>
+</div>
+
 <script>
-let listItems = ['Initialize project', 'Configure build tools', 'Write tests', 'Deploy to staging'];
 let tags = ['frontend', 'react', 'typescript', 'design-system', 'components'];
 
-function renderList() {
-  const c = document.querySelector('[data-list]');
-  c.innerHTML = '';
-  listItems.forEach((item, i) => {
-    const d = document.createElement('div');
-    d.className = 'list-item';
-    d.innerHTML = `<span>${item}</span><div class="actions"><button class="btn btn-danger" data-action="remove-list" data-index="${i}">[×] Remove</button></div>`;
-    c.appendChild(d);
-  });
-}
-
 function renderTags() {
-  const c = document.querySelector('[data-tags]');
-  c.innerHTML = '';
+  const container = document.querySelector('[data-target="tags"]');
+  container.innerHTML = '';
   tags.forEach((tag, i) => {
-    const s = document.createElement('span');
-    s.className = 'tag';
-    s.innerHTML = `${tag} <span class="remove" data-action="remove-tag" data-index="${i}">[×]</span>`;
-    c.appendChild(s);
+    const span = document.createElement('span');
+    span.className = 'tag tag--removable';
+    span.innerHTML = `${tag}<span class="tag__remove" data-action="remove-tag" data-index="${i}">[×]</span>`;
+    container.appendChild(span);
   });
 }
 
 document.addEventListener('click', e => {
-  const el = e.target.closest('[data-action]');
-  if (!el) return;
-  const action = el.dataset.action;
-
-  if (action === 'add-list') {
-    const input = document.querySelector('[data-action="add-list-input"]');
-    if (input.value.trim()) { listItems.push(input.value.trim()); input.value = ''; renderList(); }
-  } else if (action === 'remove-list') {
-    listItems.splice(+el.dataset.index, 1); renderList();
-  } else if (action === 'add-tag') {
+  const action = e.target.dataset.action;
+  if (action === 'remove-tag') {
+    tags.splice(+e.target.dataset.index, 1);
+    renderTags();
+  }
+  if (action === 'add-tag') {
     const input = document.querySelector('[data-action="add-tag-input"]');
-    if (input.value.trim()) { tags.push(input.value.trim()); input.value = ''; renderTags(); }
-  } else if (action === 'remove-tag') {
-    tags.splice(+el.dataset.index, 1); renderTags();
-  } else if (action === 'toggle-item') {
-    const li = el.closest('li');
-    const toggle = li.querySelector('.toggle');
-    li.classList.toggle('active');
-    toggle.textContent = li.classList.contains('active') ? '(•)' : '( )';
+    if (input.value.trim()) {
+      tags.push(input.value.trim());
+      input.value = '';
+      renderTags();
+    }
   }
 });
 
 document.addEventListener('keydown', e => {
-  if (e.key !== 'Enter') return;
-  const input = e.target;
-  if (input.dataset.action === 'add-list-input') document.querySelector('[data-action="add-list"]').click();
-  else if (input.dataset.action === 'add-tag-input') document.querySelector('[data-action="add-tag"]').click();
+  if (e.key === 'Enter' && e.target.dataset.action === 'add-tag-input') {
+    document.querySelector('[data-action="add-tag"]').click();
+  }
 });
-
-renderList();
-renderTags();
 </script>
+
 </body>
 </html>

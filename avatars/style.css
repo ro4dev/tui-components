@@ -25,43 +25,54 @@ body {
 .section { margin-bottom: var(--spacing-xxl); }
 .section-title { font-size: 14px; color: var(--mute); text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--spacing-lg); }
 
-.avatar { border-radius: var(--rounded-full); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--on-dark); flex-shrink: 0; }
-.avatar-sm { width: 24px; height: 24px; font-size: 10px; }
-.avatar-md { width: 32px; height: 32px; font-size: 12px; }
-.avatar-lg { width: 48px; height: 48px; font-size: 16px; }
-.avatar-xl { width: 64px; height: 64px; font-size: 20px; }
-.avatar-blue { background: var(--accent); }
-.avatar-green { background: var(--success); }
-.avatar-orange { background: var(--warning); }
-.avatar-red { background: var(--danger); }
-.avatar-purple { background: var(--ink); }
-.avatar-teal { background: var(--stone); }
+.avatar-circle {
+  border-radius: var(--rounded-full);
+  background: var(--surface-card);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.avatar-circle:not(.compact) {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+}
+
+.avatar-circle.compact {
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+}
+
+.avatar-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--rounded-full);
+}
 
 .size-row { display: flex; align-items: center; gap: var(--spacing-xl); margin-bottom: var(--spacing-md); }
 .size-label { font-size: 12px; color: var(--mute); width: 60px; }
 
-.user-pill { display: inline-flex; align-items: center; gap: var(--spacing-md); background: var(--surface-card); border: 1px solid var(--hairline); border-radius: var(--rounded-full); padding: var(--spacing-sm) var(--spacing-md) var(--spacing-sm) var(--spacing-sm); margin: var(--spacing-xs); }
+.user-pill { display: inline-flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-xs) 0; margin: var(--spacing-xs); }
 .user-pill .user-info { display: flex; flex-direction: column; }
-.user-pill .user-name { font-size: 13px; color: var(--ink); font-weight: 500; }
-.user-pill .user-role { font-size: 11px; color: var(--mute); }
+.user-pill .user-name { font-size: 14px; color: var(--ink); font-weight: 500; }
+.user-pill .user-role { font-size: 12px; color: var(--mute); }
 .user-pill .remove-btn { background: none; border: none; color: var(--stone); cursor: pointer; font-family: inherit; font-size: 14px; padding: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: var(--rounded-sm); }
 .user-pill .remove-btn:hover { background: var(--surface-soft); color: var(--danger); }
 
 .user-list { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-bottom: var(--spacing-lg); min-height: 50px; padding: var(--spacing-md); background: var(--surface-soft); border-radius: var(--rounded-sm); border: 1px dashed var(--hairline-strong); }
 
 .btn { background: var(--ink); color: var(--on-dark); border: none; padding: var(--spacing-sm) var(--spacing-lg); border-radius: var(--rounded-sm); cursor: pointer; font-family: inherit; font-size: 16px; display: inline-flex; align-items: center; gap: var(--spacing-sm); }
-.btn-secondary { background: var(--surface-card); color: var(--body); border: 1px solid var(--hairline); }
-.btn-danger { background: var(--danger); }
-
-.avatar-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--spacing-lg); margin-bottom: var(--spacing-xl); }
-.avatar-grid-item { text-align: center; }
-.avatar-grid-item .avatar { margin: 0 auto var(--spacing-sm); }
-.avatar-grid-item .label { font-size: 11px; color: var(--mute); }
 
 .add-user-form { background: var(--surface-soft); padding: var(--spacing-lg); border-radius: var(--rounded-sm); border: 1px solid var(--hairline); margin-bottom: var(--spacing-lg); }
 .add-user-form h4 { font-size: 13px; color: var(--ink); margin-bottom: var(--spacing-md); }
 .form-row { display: flex; gap: var(--spacing-md); margin-bottom: var(--spacing-md); }
 .form-input { flex: 1; padding: var(--spacing-sm) var(--spacing-md); border: 1px solid var(--hairline); border-radius: var(--rounded-sm); font-family: inherit; font-size: 13px; background: var(--canvas); color: var(--body); }
 .form-input:focus { outline: none; border-color: var(--accent); }
-.form-select { padding: var(--spacing-sm) var(--spacing-md); border: 1px solid var(--hairline); border-radius: var(--rounded-sm); font-family: inherit; font-size: 13px; background: var(--canvas); color: var(--body); }
 .empty-state { text-align: center; padding: var(--spacing-xxl); color: var(--mute); font-size: 13px; }

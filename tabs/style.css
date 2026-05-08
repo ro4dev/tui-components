@@ -81,7 +81,6 @@ body {
   cursor: pointer;
   position: relative;
   user-select: none;
-  transition: color 0.1s;
 }
 
 .tab-strip__item:hover { color: var(--ink); }
@@ -112,7 +111,6 @@ body {
   font-size: 16px;
   cursor: pointer;
   user-select: none;
-  transition: background 0.1s, color 0.1s;
 }
 
 .tab-pills__item:hover { color: var(--ink); }
@@ -120,15 +118,3 @@ body {
 
 .pill-panel { display: none; padding: 16px 0; }
 .pill-panel--active { display: block; }
-
-.event-log {
-  margin-top: 16px;
-  padding: 12px;
-  background: var(--surface-soft);
-  border-radius: var(--rounded-sm);
-  max-height: 120px;
-  overflow-y: auto;
-}
-
-.event-log__entry { font-size: 14px; color: var(--mute); padding: 2px 0; }
-.event-log__entry span { color: var(--ink); font-weight: 700; }

@@ -27,12 +27,25 @@ body {
 
 .code-block { position: relative; background: var(--surface-dark); border-radius: var(--rounded-sm); padding: var(--spacing-lg); margin-bottom: var(--spacing-md); overflow-x: auto; }
 .code-block pre { font-family: inherit; font-size: 12px; line-height: 1.6; color: var(--on-dark); white-space: pre; }
-.copy-btn { position: absolute; top: var(--spacing-sm); right: var(--spacing-sm); display: inline-flex; align-items: center; gap: var(--spacing-xs); padding: var(--spacing-xs) var(--spacing-sm); background: var(--surface-card); border: 1px solid var(--hairline); border-radius: var(--rounded-sm); font-family: inherit; font-size: 11px; color: var(--on-dark); cursor: pointer; transition: all 0.15s; }
+.copy-btn {
+  position: absolute; top: var(--spacing-sm); right: var(--spacing-sm);
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px;
+  background: var(--surface-card); border: 1px solid var(--hairline);
+  border-radius: var(--rounded-sm); font-family: inherit; font-size: 14px;
+  color: var(--mute); cursor: pointer; transition: all 0.15s;
+}
 .copy-btn:hover { background: var(--surface-soft); }
 .copy-btn.copied { background: var(--success); border-color: var(--success); color: var(--on-dark); }
 
 .inline-text { display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-md); background: var(--surface-card); border: 1px solid var(--hairline); border-radius: var(--rounded-sm); margin-bottom: var(--spacing-sm); font-size: 13px; color: var(--body); }
-.inline-copy-btn { display: inline-flex; align-items: center; gap: var(--spacing-xs); padding: var(--spacing-xs) var(--spacing-sm); background: var(--surface-soft); border: 1px solid var(--hairline-strong); border-radius: var(--rounded-sm); font-family: inherit; font-size: 11px; color: var(--mute); cursor: pointer; transition: all 0.15s; margin-left: auto; }
+.inline-copy-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px;
+  background: var(--surface-soft); border: 1px solid var(--hairline-strong);
+  border-radius: var(--rounded-sm); font-family: inherit; font-size: 14px;
+  color: var(--mute); cursor: pointer; transition: all 0.15s; margin-left: auto;
+}
 .inline-copy-btn:hover { background: var(--hairline); color: var(--body); }
 .inline-copy-btn.copied { background: var(--success); border-color: var(--success); color: var(--on-dark); }
 

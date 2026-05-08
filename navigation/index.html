@@ -98,14 +98,36 @@ function renderPagination() {
   prev.disabled = currentPage === 1;
   prev.dataset.action = 'pagination-prev';
   el.appendChild(prev);
-  for (let i = 1; i <= totalPages; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'pagination__item' + (i === currentPage ? ' pagination__item--active' : '');
-    btn.textContent = i;
-    btn.dataset.action = 'pagination-page';
-    btn.dataset.page = i;
-    el.appendChild(btn);
+
+  const pages = [];
+  if (totalPages <= 7) {
+    for (let i = 1; i <= totalPages; i++) pages.push(i);
+  } else {
+    pages.push(1);
+    if (currentPage > 3) pages.push('...');
+    for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+      pages.push(i);
+    }
+    if (currentPage < totalPages - 2) pages.push('...');
+    pages.push(totalPages);
   }
+
+  pages.forEach(p => {
+    if (p === '...') {
+      const ellipsis = document.createElement('span');
+      ellipsis.className = 'pagination__ellipsis';
+      ellipsis.textContent = '···';
+      el.appendChild(ellipsis);
+    } else {
+      const btn = document.createElement('button');
+      btn.className = 'pagination__item' + (p === currentPage ? ' pagination__item--active' : '');
+      btn.textContent = p;
+      btn.dataset.action = 'pagination-page';
+      btn.dataset.page = p;
+      el.appendChild(btn);
+    }
+  });
+
   const next = document.createElement('button');
   next.className = 'pagination__nav';
   next.textContent = '[→]';

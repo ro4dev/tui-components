@@ -96,9 +96,12 @@ body {
 
 table { width: 100%; border-collapse: collapse; }
 
+.numeric { text-align: right; }
+
 .table-default {
   background: var(--canvas);
   border: 1px solid var(--hairline);
+  border-radius: 0;
 }
 
 .table-default th {
@@ -113,14 +116,41 @@ table { width: 100%; border-collapse: collapse; }
 .table-default td {
   padding: 8px 12px;
   border-bottom: 1px solid var(--hairline);
+  color: var(--body);
 }
 
-.table-default tr:nth-child(even) { background: var(--canvas); }
-.table-default tr:nth-child(odd) { background: var(--surface-soft); }
+.table-default tbody tr:nth-child(even) { background: var(--canvas); }
+.table-default tbody tr:nth-child(odd) { background: var(--surface-soft); }
+
+.table-compact {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 0;
+}
+
+.table-compact th {
+  font-weight: 700;
+  color: var(--ink);
+  padding: 4px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--hairline-strong);
+  background: var(--surface-soft);
+  font-size: 14px;
+}
+
+.table-compact td {
+  padding: 4px 12px;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--body);
+}
+
+.table-compact tbody tr:nth-child(even) { background: var(--canvas); }
+.table-compact tbody tr:nth-child(odd) { background: var(--surface-soft); }
 
 .table-interactive {
   background: var(--canvas);
   border: 1px solid var(--hairline);
+  border-radius: 0;
 }
 
 .table-interactive th {
@@ -135,16 +165,25 @@ table { width: 100%; border-collapse: collapse; }
 .table-interactive td {
   padding: 8px 12px;
   border-bottom: 1px solid var(--hairline);
+  color: var(--body);
   cursor: pointer;
 }
 
+.table-interactive tbody tr:nth-child(even) { background: var(--canvas); }
+.table-interactive tbody tr:nth-child(odd) { background: var(--surface-soft); }
 .table-interactive tbody tr:hover { background: var(--surface-card); }
-.table-interactive tr.selected { background: var(--surface-card); border-left: 2px solid var(--ink); }
-.table-interactive tr.selected td:first-child { color: var(--ink); font-weight: 700; }
+.table-interactive tbody tr.selected { background: var(--surface-card); }
+.table-interactive tbody tr.selected td:first-child { color: var(--ink); font-weight: 700; border-left: 2px solid var(--ink); }
+
+.table-interactive tbody tr td:first-child {
+  width: 40px;
+  cursor: pointer;
+}
 
 .table-bordered {
   background: var(--canvas);
   border: 1px solid var(--hairline);
+  border-radius: 0;
 }
 
 .table-bordered th {
@@ -166,6 +205,9 @@ table { width: 100%; border-collapse: collapse; }
 }
 
 .table-bordered td:last-child { border-right: none; }
+
+.table-bordered tbody tr:nth-child(even) { background: var(--canvas); }
+.table-bordered tbody tr:nth-child(odd) { background: var(--surface-soft); }
 
 .sort-btn { cursor: pointer; user-select: none; }
 .sort-btn::after { content: ' [+]'; color: var(--mute); }

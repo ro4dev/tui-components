@@ -65,11 +65,10 @@
     <div class="section-title">File Upload</div>
     <div class="form-group">
       <label class="form-label">Attachments</label>
-      <div class="dropzone" data-action="dropzone">
-        <div class="dropzone-icon">[↑]</div>
-        <div class="dropzone-text">Drop files here or use button below</div>
-        <button class="btn" data-action="add-file">[+] Add File</button>
-      </div>
+       <div class="dropzone" data-action="dropzone" data-target="dropzone">
+         <div class="dropzone-icon">[↑]</div>
+         <div class="dropzone-text">Drop files or click to upload</div>
+       </div>
       <div class="file-list" data-file-list></div>
     </div>
   </div>
@@ -101,16 +100,20 @@ document.addEventListener('click', e => {
     el.classList.add('selected');
     el.querySelector('.radio-marker').textContent = '(•)';
   } else if (action === 'add-file') {
-    const file = sampleFiles[fileCount % sampleFiles.length];
-    fileCount++;
-    const item = document.createElement('div');
-    item.className = 'file-item';
-    item.innerHTML = `<span>${file}</span><button class="remove-file" data-action="remove-file">[×]</button>`;
-    document.querySelector('[data-file-list]').appendChild(item);
+    addFile();
   } else if (action === 'remove-file') {
     el.closest('.file-item').remove();
   }
 });
+
+function addFile() {
+  const file = sampleFiles[fileCount % sampleFiles.length];
+  fileCount++;
+  const item = document.createElement('div');
+  item.className = 'file-item';
+  item.innerHTML = `<span>${file}</span><button class="remove-file" data-action="remove-file">[×]</button>`;
+  document.querySelector('[data-file-list]').appendChild(item);
+}
 
 document.addEventListener('input', e => {
   if (e.target.dataset.action === 'search-input') {
@@ -123,6 +126,23 @@ document.addEventListener('click', e => {
   if (!e.target.closest('.select-wrap')) {
     document.querySelector('[data-select-panel]').classList.remove('open');
   }
+});
+
+const dropzone = document.querySelector('[data-target="dropzone"]');
+dropzone.addEventListener('dragover', e => {
+  e.preventDefault();
+  dropzone.classList.add('dragover');
+});
+dropzone.addEventListener('dragleave', () => {
+  dropzone.classList.remove('dragover');
+});
+dropzone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropzone.classList.remove('dragover');
+  addFile();
+});
+dropzone.addEventListener('click', () => {
+  addFile();
 });
 </script>
 </body>

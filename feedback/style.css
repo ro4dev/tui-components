@@ -37,15 +37,15 @@ body {
 .header p { color: var(--mute); font-size: 14px; margin-top: var(--spacing-xs); }
 .section { margin-bottom: var(--spacing-xxl); }
 .section-title { font-size: 14px; color: var(--mute); text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--spacing-lg); }
-.toast-container { position: fixed; bottom: var(--spacing-xl); right: var(--spacing-xl); display: flex; flex-direction: column-reverse; gap: var(--spacing-sm); z-index: 1000; }
-.toast { padding: var(--spacing-md) var(--spacing-lg); border-radius: var(--rounded-sm); font-size: 13px; display: flex; align-items: center; gap: var(--spacing-md); min-width: 280px; animation: slideIn 0.3s ease; background: var(--surface-dark); color: var(--on-dark); border-left: 3px solid var(--accent); }
+.toast-container { position: fixed; bottom: 16px; right: 16px; display: flex; flex-direction: column-reverse; gap: 8px; z-index: 1000; }
+.toast { padding: 12px 16px; border-radius: var(--rounded-sm); font-size: 16px; display: flex; align-items: flex-start; gap: var(--spacing-md); min-width: 280px; max-width: 360px; background: var(--surface-dark); color: var(--on-dark); border-left: 3px solid var(--accent); animation: slideIn 0.3s ease; position: relative; }
 .toast.info { border-left-color: var(--accent); }
 .toast.success { border-left-color: var(--success); }
 .toast.error { border-left-color: var(--danger); }
 .toast.warning { border-left-color: var(--warning); }
-.toast .toast-msg { flex: 1; }
-.toast .dismiss-btn { background: none; border: none; color: inherit; cursor: pointer; font-family: inherit; font-size: 14px; opacity: 0.8; padding: 0; }
-.toast .dismiss-btn:hover { opacity: 1; }
+.toast .toast-msg { flex: 1; padding-right: 20px; }
+.toast .dismiss-btn { position: absolute; top: 8px; right: 8px; background: none; border: none; color: var(--ash); cursor: pointer; font-family: inherit; font-size: 16px; padding: 0; line-height: 1; }
+.toast .dismiss-btn:hover { color: var(--on-dark); }
 @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
 .btn-row { display: flex; gap: var(--spacing-md); flex-wrap: wrap; margin-bottom: var(--spacing-xl); }
@@ -55,13 +55,14 @@ body {
 .btn-success { background: var(--success); color: var(--on-dark); border-color: var(--success); }
 .btn-error { background: var(--danger); color: var(--on-dark); border-color: var(--danger); }
 .btn-warning { background: var(--warning); color: var(--ink); border-color: var(--warning); }
-.skeleton-card { background: var(--surface-soft); border: 1px solid var(--hairline); border-radius: var(--rounded-sm); padding: var(--spacing-lg); }
-.skeleton-line { height: 12px; background: var(--hairline); border-radius: var(--rounded-sm); margin-bottom: var(--spacing-md); animation: pulse 1.2s ease-in-out infinite; }
+.skeleton-card { background: var(--surface-card); border-radius: var(--rounded-sm); padding: var(--spacing-lg); }
+.skeleton-line { height: 16px; background: var(--hairline); border-radius: var(--rounded-sm); margin-bottom: var(--spacing-md); animation: pulse 1.2s ease-in-out infinite; }
 .skeleton-line.short { width: 60%; }
 .skeleton-line.medium { width: 80%; }
-.skeleton-heading { height: 20px; width: 40%; background: var(--hairline); border-radius: var(--rounded-sm); margin-bottom: var(--spacing-md); animation: pulse 1.2s ease-in-out infinite; }
+.skeleton-heading { height: 16px; width: 40%; background: var(--hairline); border-radius: var(--rounded-sm); margin-bottom: var(--spacing-md); animation: pulse 1.2s ease-in-out infinite; }
 .skeleton-avatar { width: 32px; height: 32px; border-radius: var(--rounded-full); background: var(--hairline); margin-bottom: var(--spacing-md); animation: pulse 1.2s ease-in-out infinite; }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.skeleton-thumbnail { width: 120px; height: 80px; background: var(--hairline); border-radius: var(--rounded-sm); margin-bottom: var(--spacing-md); animation: pulse 1.2s ease-in-out infinite; }
+@keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1.0; } 100% { opacity: 0.4; } }
 .validation-section { max-width: 400px; }
 .input-group { margin-bottom: var(--spacing-lg); }
 .input-label { display: block; font-size: 13px; color: var(--ink); margin-bottom: var(--spacing-sm); font-weight: 500; }

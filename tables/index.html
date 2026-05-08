@@ -9,32 +9,53 @@
 <body>
 <div class="header">
   <h1>Tables</h1>
-  <p>Click to select rows, sort columns, add/delete entries.</p>
+  <p>Four variants: default, compact, interactive, and bordered.</p>
 </div>
 
 <div class="section">
-  <div class="section-title">Sortable Table</div>
-  <table class="table-default" data-table="sortable">
+  <div class="section-title">table-default</div>
+  <table class="table-default">
     <thead>
       <tr>
-        <th data-action="sort" data-col="0">Component</th>
-        <th data-action="sort" data-col="1">Status</th>
-        <th data-action="sort" data-col="2">Version</th>
-        <th data-action="sort" data-col="3">Size</th>
+        <th>Component</th>
+        <th>Status</th>
+        <th>Version</th>
+        <th class="numeric">Size</th>
       </tr>
     </thead>
     <tbody>
-      <tr><td>button-primary</td><td>stable</td><td>2.1.0</td><td>4.2 KB</td></tr>
-      <tr><td>card-flat</td><td>stable</td><td>1.8.3</td><td>2.1 KB</td></tr>
-      <tr><td>dialog-default</td><td>beta</td><td>0.9.0</td><td>3.5 KB</td></tr>
-      <tr><td>alert-info</td><td>stable</td><td>1.4.1</td><td>1.8 KB</td></tr>
-      <tr><td>tooltip-default</td><td>beta</td><td>0.7.2</td><td>0.9 KB</td></tr>
+      <tr><td>button-primary</td><td>stable</td><td>2.1.0</td><td class="numeric">4.2 KB</td></tr>
+      <tr><td>card-flat</td><td>stable</td><td>1.8.3</td><td class="numeric">2.1 KB</td></tr>
+      <tr><td>dialog-default</td><td>beta</td><td>0.9.0</td><td class="numeric">3.5 KB</td></tr>
+      <tr><td>alert-info</td><td>stable</td><td>1.4.1</td><td class="numeric">1.8 KB</td></tr>
+      <tr><td>tooltip-default</td><td>beta</td><td>0.7.2</td><td class="numeric">0.9 KB</td></tr>
     </tbody>
   </table>
 </div>
 
 <div class="section">
-  <div class="section-title">Interactive Table</div>
+  <div class="section-title">table-compact</div>
+  <table class="table-compact">
+    <thead>
+      <tr>
+        <th>Process</th>
+        <th>Status</th>
+        <th class="numeric">PID</th>
+        <th class="numeric">CPU</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>opencode-agent</td><td>running</td><td class="numeric">1243</td><td class="numeric">12%</td></tr>
+      <tr><td>file-watcher</td><td>running</td><td class="numeric">1244</td><td class="numeric">3%</td></tr>
+      <tr><td>syntax-parser</td><td>idle</td><td class="numeric">1245</td><td class="numeric">0%</td></tr>
+      <tr><td>git-sync</td><td>running</td><td class="numeric">1246</td><td class="numeric">5%</td></tr>
+      <tr><td>log-shipper</td><td>stopped</td><td class="numeric">—</td><td class="numeric">0%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <div class="section-title">table-interactive</div>
   <div class="controls">
     <button class="btn" data-action="select-all">Select All</button>
     <button class="btn" data-action="deselect-all">Deselect All</button>
@@ -43,39 +64,34 @@
   </div>
   <table class="table-interactive" data-table="interactive">
     <thead>
-      <tr><th style="width:40px"></th><th>File</th><th>Modified</th><th>Size</th></tr>
+      <tr><th></th><th>File</th><th>Modified</th><th class="numeric">Size</th></tr>
     </thead>
     <tbody>
-      <tr data-id="1"><td>[ ]</td><td>config.yaml</td><td>2026-05-04 14:22</td><td>12 KB</td></tr>
-      <tr data-id="2"><td>[ ]</td><td>package.json</td><td>2026-05-03 09:15</td><td>4.2 KB</td></tr>
-      <tr data-id="3"><td>[ ]</td><td>README.md</td><td>2026-05-02 18:30</td><td>8.1 KB</td></tr>
-      <tr data-id="4"><td>[ ]</td><td>tsconfig.json</td><td>2026-05-01 11:45</td><td>2.3 KB</td></tr>
-      <tr data-id="5"><td>[ ]</td><td>.gitignore</td><td>2026-04-28 08:00</td><td>0.5 KB</td></tr>
+      <tr data-id="1"><td>[ ]</td><td>config.yaml</td><td>2026-05-04 14:22</td><td class="numeric">12 KB</td></tr>
+      <tr data-id="2"><td>[ ]</td><td>package.json</td><td>2026-05-03 09:15</td><td class="numeric">4.2 KB</td></tr>
+      <tr data-id="3"><td>[ ]</td><td>README.md</td><td>2026-05-02 18:30</td><td class="numeric">8.1 KB</td></tr>
+      <tr data-id="4"><td>[ ]</td><td>tsconfig.json</td><td>2026-05-01 11:45</td><td class="numeric">2.3 KB</td></tr>
+      <tr data-id="5"><td>[ ]</td><td>.gitignore</td><td>2026-04-28 08:00</td><td class="numeric">0.5 KB</td></tr>
     </tbody>
   </table>
 </div>
 
 <div class="section">
-  <div class="section-title">Dynamic Table</div>
-  <div class="controls">
-    <button class="btn btn-accent" data-action="add-row">[+] Add Row</button>
-    <span data-row-count style="color: var(--mute); font-size: 14px; margin-left: 8px;">4 rows</span>
-  </div>
-  <table class="table-bordered" data-table="dynamic">
-    <thead><tr><th>Endpoint</th><th>Method</th><th>Status</th><th>Latency</th></tr></thead>
+  <div class="section-title">table-bordered</div>
+  <table class="table-bordered">
+    <thead>
+      <tr><th>Endpoint</th><th>Method</th><th>Status</th><th class="numeric">Latency</th></tr>
+    </thead>
     <tbody>
-      <tr><td>/api/v1/agents</td><td>GET</td><td>200</td><td>45ms</td></tr>
-      <tr><td>/api/v1/sessions</td><td>POST</td><td>201</td><td>120ms</td></tr>
-      <tr><td>/api/v1/config</td><td>PUT</td><td>200</td><td>89ms</td></tr>
-      <tr><td>/api/v1/health</td><td>GET</td><td>200</td><td>12ms</td></tr>
+      <tr><td>/api/v1/agents</td><td>GET</td><td>200</td><td class="numeric">45ms</td></tr>
+      <tr><td>/api/v1/sessions</td><td>POST</td><td>201</td><td class="numeric">120ms</td></tr>
+      <tr><td>/api/v1/config</td><td>PUT</td><td>200</td><td class="numeric">89ms</td></tr>
+      <tr><td>/api/v1/health</td><td>GET</td><td>200</td><td class="numeric">12ms</td></tr>
     </tbody>
   </table>
 </div>
 
 <script>
-const endpoints = ['/api/v1/users', '/api/v1/files', '/api/v1/logs', '/api/v1/metrics', '/api/v1/tokens'];
-const methods = ['GET', 'POST', 'DELETE', 'PATCH'];
-
 document.addEventListener('click', (e) => {
   const target = e.target;
   const action = target.dataset.action;
@@ -83,81 +99,45 @@ document.addEventListener('click', (e) => {
   if (!action) {
     const row = target.closest('tr[data-id]');
     if (row) {
-      const table = row.closest('[data-table="interactive"]');
-      if (table) {
-        const td = row.cells[0];
-        const isSelected = row.classList.toggle('selected');
-        td.textContent = isSelected ? '[x]' : '[ ]';
-        updateSelectedCount(table);
-      }
+      const td = row.cells[0];
+      const isSelected = row.classList.toggle('selected');
+      td.textContent = isSelected ? '[x]' : '[ ]';
+      updateSelectedCount();
     }
     return;
   }
 
+  const table = document.querySelector('[data-table="interactive"]');
   switch(action) {
-    case 'sort': {
-      const th = target.closest('th');
-      if (!th) return;
-      const table = th.closest('[data-table="sortable"]');
-      const tbody = table.querySelector('tbody');
-      const rows = Array.from(tbody.querySelectorAll('tr'));
-      const col = parseInt(th.dataset.col);
-      const isAsc = th.classList.contains('asc');
-      table.querySelectorAll('th[data-action="sort"]').forEach(b => b.classList.remove('asc', 'desc'));
-      th.classList.add(isAsc ? 'desc' : 'asc');
-      rows.sort((a, b) => {
-        const aT = a.cells[col].textContent.trim();
-        const bT = b.cells[col].textContent.trim();
-        return isAsc ? bT.localeCompare(aT) : aT.localeCompare(bT);
-      });
-      rows.forEach(r => tbody.appendChild(r));
-      break;
-    }
     case 'select-all': {
-      const table = document.querySelector('[data-table="interactive"]');
       table.querySelectorAll('tbody tr').forEach(row => {
         row.classList.add('selected');
         row.cells[0].textContent = '[x]';
       });
-      updateSelectedCount(table);
+      updateSelectedCount();
       break;
     }
     case 'deselect-all': {
-      const table = document.querySelector('[data-table="interactive"]');
       table.querySelectorAll('tbody tr').forEach(row => {
         row.classList.remove('selected');
         row.cells[0].textContent = '[ ]';
       });
-      updateSelectedCount(table);
+      updateSelectedCount();
       break;
     }
     case 'delete-selected': {
-      const table = document.querySelector('[data-table="interactive"]');
       const selected = table.querySelectorAll('tbody tr.selected');
       if (selected.length === 0) { toast('No rows selected'); return; }
       selected.forEach(r => r.remove());
-      updateSelectedCount(table);
+      updateSelectedCount();
       toast(`${selected.length} row(s) deleted`);
-      break;
-    }
-    case 'add-row': {
-      const table = document.querySelector('[data-table="dynamic"]');
-      const tbody = table.querySelector('tbody');
-      const ep = endpoints[Math.floor(Math.random() * endpoints.length)];
-      const m = methods[Math.floor(Math.random() * methods.length)];
-      const s = [200, 201, 204, 404, 500][Math.floor(Math.random() * 5)];
-      const l = Math.floor(Math.random() * 200) + 'ms';
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${ep}</td><td>${m}</td><td>${s}</td><td>${l}</td>`;
-      tbody.appendChild(tr);
-      document.querySelector('[data-row-count]').textContent = `${tbody.querySelectorAll('tr').length} rows`;
-      toast('Row added');
       break;
     }
   }
 });
 
-function updateSelectedCount(table) {
+function updateSelectedCount() {
+  const table = document.querySelector('[data-table="interactive"]');
   const count = table.querySelectorAll('tr.selected').length;
   document.querySelector('[data-selected-count]').textContent = `${count} selected`;
 }

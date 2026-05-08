@@ -10,102 +10,50 @@
 
 <div class="header">
   <h1>Media</h1>
-  <p>Click images to swap, play/pause video, toggle quotes.</p>
+  <p>Image blocks, video embeds, and blockquotes</p>
 </div>
 
 <div class="section">
-  <h2>image-block (click to swap)</h2>
-  <div class="image-block" data-target="imageBlock">
-    <div class="image-block__placeholder" data-target="imagePlaceholder">
+  <h2>image-block</h2>
+  <div class="image-block">
+    <div class="image-block__placeholder">
       [image: agent-architecture.png]
     </div>
-    <p class="image-block__caption" data-target="imageCaption">Figure 1: Agent pool architecture with shared index</p>
-  </div>
-  <div style="margin-top: 8px; display: flex; gap: 8px;">
-    <button class="btn" data-action="swap-image" data-idx="0">Image 1</button>
-    <button class="btn" data-action="swap-image" data-idx="1">Image 2</button>
-    <button class="btn" data-action="swap-image" data-idx="2">Image 3</button>
+    <p class="image-block__caption">Figure 1: Agent pool architecture with shared index</p>
   </div>
 </div>
 
 <div class="section">
-  <h2>video-embed (play/pause)</h2>
+  <h2>video-embed</h2>
   <div class="video-embed" data-target="videoEmbed">
-    <div class="video-embed__placeholder" data-action="toggle-play">
-      <span class="video-embed__play" data-target="playBtn">[▶]</span>
-    </div>
-    <div class="video-embed__progress" data-target="videoProgress"></div>
-    <div class="video-embed__controls" data-target="videoControls">
-      <button class="video-embed__btn" data-action="toggle-play">[▶]</button>
-      <span data-target="videoTime">0:00 / 2:34</span>
+    <div class="video-embed__placeholder">
+      <span class="video-embed__play">[▶]</span>
     </div>
     <p class="video-embed__caption">Demo: Setting up your first agent pool</p>
   </div>
 </div>
 
 <div class="section">
-  <h2>blockquote (toggle attribution)</h2>
-  <div class="blockquote-controls">
-    <button class="btn" data-action="toggle-quote">[+] Show/Hide</button>
-  </div>
+  <h2>blockquote</h2>
   <blockquote class="blockquote">
-    <p class="blockquote__text blockquote__text--italic">
-      "The constraint is the identity. Every design decision flows from the same principles: Berkeley Mono, cream canvas, ASCII markers."
-    </p>
-    <cite class="blockquote__attribution">— OpenCode Design System</cite>
+    <p class="blockquote__text">"The constraint is the identity. Every design decision flows from the same principles: Berkeley Mono, cream canvas, ASCII markers."</p>
+    <cite class="blockquote__attribution">OpenCode Design System</cite>
+  </blockquote>
+</div>
+
+<div class="section">
+  <h2>blockquote (italic, person)</h2>
+  <blockquote class="blockquote">
+    <p class="blockquote__text blockquote__text--italic">"Simplicity is the ultimate sophistication."</p>
+    <cite class="blockquote__attribution">Leonardo da Vinci</cite>
   </blockquote>
 </div>
 
 <script>
-const images = [
-  { label: 'agent-architecture.png', caption: 'Figure 1: Agent pool architecture with shared index' },
-  { label: 'dashboard-ui.png', caption: 'Figure 2: Dashboard with real-time agent monitoring' },
-  { label: 'terminal-render.png', caption: 'Figure 3: TUI terminal rendering of build output' },
-];
-
-let videoPlaying = false;
-let videoInterval = null;
-let videoSeconds = 0;
-const totalSeconds = 154;
-
-function formatTime(s) {
-  const m = Math.floor(s / 60);
-  const sec = s % 60;
-  return `${m}:${sec.toString().padStart(2, '0')}`;
-}
-
-function togglePlay() {
-  if (videoPlaying) {
-    videoPlaying = false;
-    clearInterval(videoInterval);
-    document.querySelector('[data-target="playBtn"]').classList.remove('video-embed__play--active');
-    document.querySelector('[data-target="videoControls"]').classList.remove('video-embed__controls--visible');
-    document.querySelectorAll('[data-action="toggle-play"]').forEach(b => b.textContent = '[▶]');
-  } else {
-    videoPlaying = true;
-    document.querySelector('[data-target="playBtn"]').classList.add('video-embed__play--active');
-    document.querySelector('[data-target="videoControls"]').classList.add('video-embed__controls--visible');
-    document.querySelectorAll('[data-action="toggle-play"]').forEach(b => b.textContent = '[||]');
-    videoInterval = setInterval(() => {
-      videoSeconds++;
-      if (videoSeconds >= totalSeconds) { videoSeconds = 0; togglePlay(); }
-      document.querySelector('[data-target="videoProgress"]').style.width = ((videoSeconds / totalSeconds) * 100) + '%';
-      document.querySelector('[data-target="videoTime"]').textContent = `${formatTime(videoSeconds)} / ${formatTime(totalSeconds)}`;
-    }, 100);
-  }
-}
-
 document.addEventListener('click', (e) => {
-  if (e.target.dataset.action === 'swap-image') {
-    const idx = parseInt(e.target.dataset.idx);
-    document.querySelector('[data-target="imagePlaceholder"]').textContent = `[image: ${images[idx].label}]`;
-    document.querySelector('[data-target="imageCaption"]').textContent = images[idx].caption;
-  }
-  if (e.target.dataset.action === 'toggle-play') {
-    togglePlay();
-  }
-  if (e.target.dataset.action === 'toggle-quote') {
-    document.querySelector('.blockquote').classList.toggle('blockquote--hidden');
+  if (e.target.closest('.video-embed__placeholder')) {
+    const playBtn = document.querySelector('.video-embed__play');
+    playBtn.classList.toggle('video-embed__play--active');
   }
 });
 </script>

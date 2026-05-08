@@ -18,7 +18,7 @@
       <button class="btn" data-action="open-dialog" data-dialog="terminal">Terminal Confirm</button>
       <button class="btn" data-action="open-dialog" data-dialog="delete">Destructive Action</button>
     </div>
-    <div id="dialogResult">Click a button to open a dialog. The result of your action will appear here.</div>
+    <div class="dialog-result" data-role="dialog-result">Click a button to open a dialog. The result of your action will appear here.</div>
   </div>
 
   <div class="dialog-overlay" data-dialog="save">
@@ -65,15 +65,15 @@
 
 <script>
 function openDialog(name) {
-  document.querySelector(`[data-dialog="${name}"].dialog-overlay`).classList.add('active');
+  document.querySelector(`.dialog-overlay[data-dialog="${name}"]`).classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 function closeDialog(name) {
-  document.querySelector(`[data-dialog="${name}"].dialog-overlay`).classList.remove('active');
+  document.querySelector(`.dialog-overlay[data-dialog="${name}"]`).classList.remove('active');
   document.body.style.overflow = '';
 }
 function setResult(msg) {
-  const el = document.getElementById('dialogResult');
+  const el = document.querySelector('[data-role="dialog-result"]');
   el.textContent = msg;
   el.classList.add('has-result');
 }

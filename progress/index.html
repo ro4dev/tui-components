@@ -14,7 +14,6 @@
 
 <div class="section">
   <div class="section-title">Progress Bar</div>
-  <p class="progress-label">0%</p>
   <div class="progress-bar-track">
     <div class="progress-bar-fill"></div>
   </div>
@@ -45,13 +44,22 @@
 <div class="section">
   <div class="section-title">Progress Steps</div>
   <div class="steps" data-steps>
-    <div class="step completed" data-step="1">[x]</div>
+    <span class="step completed" data-step="1">[x]</span>
     <span class="step-connector completed">──</span>
-    <div class="step active" data-step="2">[2]</div>
+    <span class="step active" data-step="2">[2]</span>
     <span class="step-connector">──</span>
-    <div class="step" data-step="3">[3]</div>
+    <span class="step" data-step="3">[3]</span>
     <span class="step-connector">──</span>
-    <div class="step" data-step="4">[4]</div>
+    <span class="step" data-step="4">[4]</span>
+  </div>
+  <div class="step-labels">
+    <span class="step-label">Init</span>
+    <span class="step-label-spacer"></span>
+    <span class="step-label">Build</span>
+    <span class="step-label-spacer"></span>
+    <span class="step-label">Test</span>
+    <span class="step-label-spacer"></span>
+    <span class="step-label">Done</span>
   </div>
   <div class="controls">
     <button class="btn btn-accent" data-action="next-step">[→] Next Step</button>
@@ -60,7 +68,6 @@
 </div>
 
 <script>
-let currentProgress = 0;
 let currentStep = 2;
 
 document.addEventListener('click', (e) => {
@@ -71,30 +78,19 @@ document.addEventListener('click', (e) => {
   switch(action) {
     case 'set-progress': {
       const val = parseInt(btn.dataset.value);
-      currentProgress = val;
       const section = btn.closest('.section');
       const fill = section.querySelector('.progress-bar-fill');
-      const label = section.querySelector('.progress-label');
       fill.style.width = val + '%';
-      label.textContent = val + '%';
-      fill.classList.remove('success', 'warning');
-      if (val === 100) fill.classList.add('success');
-      else if (val >= 75) fill.classList.add('warning');
       break;
     }
     case 'animate-progress': {
       let val = 0;
       const section = btn.closest('.section');
       const fill = section.querySelector('.progress-bar-fill');
-      const label = section.querySelector('.progress-label');
       const interval = setInterval(() => {
         val += 2;
         if (val > 100) { clearInterval(interval); return; }
         fill.style.width = val + '%';
-        label.textContent = val + '%';
-        fill.classList.remove('success', 'warning');
-        if (val === 100) fill.classList.add('success');
-        else if (val >= 75) fill.classList.add('warning');
       }, 50);
       break;
     }

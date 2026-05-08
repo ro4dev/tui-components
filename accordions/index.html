@@ -16,16 +16,16 @@
 <div class="accordion">
   <button class="accordion-header">
     <span>Getting Started</span>
-    <span class="marker">[+]</span>
+    <span class="marker">+</span>
   </button>
   <div class="accordion-content">
     <div class="accordion-body">
-      Welcome to the TUI design system. This accordion demonstrates the expand/collapse functionality with smooth transitions.
+      Welcome to the TUI design system. This accordion demonstrates the expand/collapse functionality.
       <br><br>
       <div class="nested-accordion">
         <button class="accordion-header">
-          <span>→ Installation Steps</span>
-          <span class="marker">[+]</span>
+          <span>Installation Steps</span>
+          <span class="marker">→</span>
         </button>
         <div class="accordion-content">
           <div class="accordion-body">
@@ -38,8 +38,8 @@
       </div>
       <div class="nested-accordion">
         <button class="accordion-header">
-          <span>→ Configuration</span>
-          <span class="marker">[+]</span>
+          <span>Configuration</span>
+          <span class="marker">→</span>
         </button>
         <div class="accordion-content">
           <div class="accordion-body">
@@ -54,7 +54,7 @@
 <div class="accordion">
   <button class="accordion-header">
     <span>Component API</span>
-    <span class="marker">[+]</span>
+    <span class="marker">+</span>
   </button>
   <div class="accordion-content">
     <div class="accordion-body">
@@ -66,7 +66,7 @@
 <div class="accordion">
   <button class="accordion-header">
     <span>Design Tokens</span>
-    <span class="marker">[+]</span>
+    <span class="marker">+</span>
   </button>
   <div class="accordion-content">
     <div class="accordion-body">
@@ -80,7 +80,7 @@
 <div class="accordion">
   <button class="accordion-header">
     <span>Troubleshooting</span>
-    <span class="marker">[+]</span>
+    <span class="marker">+</span>
   </button>
   <div class="accordion-content">
     <div class="accordion-body">
@@ -100,16 +100,14 @@ document.querySelectorAll('.accordion-header').forEach(header => {
     const content = accordion.querySelector('.accordion-content');
     const marker = header.querySelector('.marker');
     const isOpen = content.classList.contains('open');
+    const isNested = accordion.classList.contains('nested-accordion');
 
     if (isOpen) {
       content.classList.remove('open');
-      marker.textContent = '[+]';
+      marker.textContent = isNested ? '→' : '+';
     } else {
       content.classList.add('open');
-      marker.textContent = '[-]';
-      if (accordion.querySelector('.nested-accordion')) {
-        marker.textContent = '[↓]';
-      }
+      marker.textContent = isNested ? '↓' : '−';
     }
   });
 });

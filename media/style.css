@@ -88,7 +88,6 @@ body {
   border-radius: var(--rounded-sm);
   overflow: hidden;
   max-width: 560px;
-  cursor: pointer;
 }
 
 .image-block__placeholder {
@@ -104,10 +103,10 @@ body {
 }
 
 .image-block__placeholder:hover { background: var(--hairline); }
-.image-block__caption { font-size: 14px; color: var(--mute); padding: 8px 12px; }
+.image-block__caption { font-size: 14px; color: var(--mute); padding: 8px 0; }
 
 .video-embed {
-  background: var(--surface-dark);
+  background: var(--surface-soft);
   border-radius: var(--rounded-sm);
   overflow: hidden;
   max-width: 560px;
@@ -121,6 +120,7 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  position: relative;
 }
 
 .video-embed__play {
@@ -128,9 +128,13 @@ body {
   opacity: 0.5;
   font-size: 48px;
   transition: opacity 0.2s, transform 0.2s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.video-embed__play:hover { opacity: 1; transform: scale(1.1); }
+.video-embed__play:hover { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
 .video-embed__play--active { opacity: 0; pointer-events: none; }
 
 .video-embed__progress {
@@ -166,7 +170,7 @@ body {
   font-size: 16px;
 }
 
-.video-embed__caption { font-size: 14px; color: var(--mute); padding: 8px 12px; }
+.video-embed__caption { font-size: 14px; color: var(--mute); padding: 8px 0; }
 
 .blockquote {
   border-left: 3px solid var(--hairline-strong);
@@ -177,6 +181,7 @@ body {
 .blockquote__text { font-size: 16px; color: var(--mute); }
 .blockquote__text--italic { font-style: italic; }
 .blockquote__attribution { font-size: 14px; color: var(--stone); margin-top: 8px; }
+.blockquote__attribution::before { content: '— '; }
 .blockquote-controls { margin-bottom: 12px; display: flex; gap: 8px; }
 .blockquote--hidden .blockquote__text { display: none; }
 .blockquote--hidden .blockquote__attribution { display: none; }

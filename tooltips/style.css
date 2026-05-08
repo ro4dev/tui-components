@@ -56,10 +56,6 @@ body {
   font-size: 14px;
 }
 
-.section {
-  margin-bottom: var(--spacing-xxl);
-}
-
 .controls {
   margin-bottom: var(--spacing-xl);
   display: flex;
@@ -87,7 +83,7 @@ body {
   top: calc(100% + 4px);
   left: 50%;
   transform: translateX(-50%);
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: 4px 8px;
   background: var(--surface-dark);
   color: var(--on-dark);
   font-size: 14px;
@@ -99,46 +95,5 @@ body {
   z-index: 100;
 }
 
-.tooltip-trigger:hover .tooltip { opacity: 1; }
-
-.info-box {
-  margin-top: var(--spacing-xl);
-  padding: var(--spacing-lg);
-  background: var(--surface-soft);
-  border: 1px solid var(--hairline);
-  border-radius: var(--rounded-sm);
-  font-size: 12px;
-  color: var(--body);
-}
-
-.info-box strong {
-  display: block;
-  margin-bottom: var(--spacing-sm);
-  color: var(--ink);
-}
-
-.log {
-  margin-top: var(--spacing-xl);
-  padding: var(--spacing-lg);
-  background: var(--surface-dark);
-  color: var(--on-dark);
-  border-radius: var(--rounded-sm);
-  font-size: 12px;
-  max-height: 150px;
-  overflow-y: auto;
-}
-
-.log-title {
-  color: var(--ash);
-  margin-bottom: var(--spacing-sm);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.log-entry {
-  padding: var(--spacing-xs) 0;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.log-entry:last-child { border-bottom: none; }
+.tooltip-trigger:hover .tooltip,
+.tooltip-trigger:focus-within .tooltip { opacity: 1; }

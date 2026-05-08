@@ -25,20 +25,24 @@ body {
 .section { margin-bottom: var(--spacing-xxl); }
 .section-title { font-size: 14px; color: var(--stone); margin-bottom: var(--spacing-md); text-transform: uppercase; letter-spacing: 1px; }
 
-.breadcrumb { display: flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-md) var(--spacing-lg); background: var(--surface-card); border: 1px solid var(--hairline); border-radius: var(--rounded-sm); margin-bottom: var(--spacing-md); font-size: 13px; }
-.breadcrumb-item { color: var(--mute); cursor: pointer; padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--rounded-sm); transition: background 0.1s, color 0.1s; }
-.breadcrumb-item:hover { background: var(--surface-soft); color: var(--ink); }
-.breadcrumb-item.active { color: var(--ink); font-weight: 600; }
-.breadcrumb-separator { color: var(--hairline-strong); font-size: 11px; }
+.breadcrumb {
+  display: flex; align-items: center; gap: var(--spacing-sm);
+  font-size: 14px; margin-bottom: var(--spacing-md);
+}
 
-.dropdown-container { position: relative; display: inline-block; margin-bottom: var(--spacing-md); }
-.dropdown-btn { padding: var(--spacing-sm) var(--spacing-md); background: var(--surface-card); border: 1px solid var(--hairline); border-radius: var(--rounded-sm); font-family: var(--font-mono); font-size: 13px; color: var(--ink); cursor: pointer; display: flex; align-items: center; gap: var(--spacing-sm); }
-.dropdown-btn:hover { background: var(--surface-soft); }
-.dropdown-menu { position: absolute; top: 100%; left: 0; margin-top: var(--spacing-xs); background: var(--surface-card); border: 1px solid var(--hairline); border-radius: var(--rounded-sm); min-width: 200px; z-index: 100; display: none; }
-.dropdown-menu.open { display: block; }
-.dropdown-item { padding: var(--spacing-sm) var(--spacing-md); font-size: 12px; color: var(--body); cursor: pointer; transition: background 0.1s; }
-.dropdown-item:hover { background: var(--surface-soft); }
-.dropdown-item + .dropdown-item { border-top: 1px solid var(--hairline); }
+.breadcrumb-item {
+  color: var(--stone); cursor: pointer;
+  text-decoration: none;
+}
 
-.current-path { margin-top: var(--spacing-md); padding: var(--spacing-md); background: var(--surface-soft); border-radius: var(--rounded-sm); font-size: 12px; color: var(--body); }
-.current-path strong { color: var(--ink); }
+.breadcrumb-item:hover { color: var(--ink); }
+
+.breadcrumb-item.active {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.breadcrumb-separator {
+  color: var(--stone);
+  font-size: 14px;
+}

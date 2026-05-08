@@ -10,7 +10,7 @@
 
 <div class="header">
   <h1>Panels</h1>
-  <p>Interactive panels with split view and scroll areas</p>
+  <p>Panels, split views, and scroll areas</p>
 </div>
 
 <div class="section">
@@ -117,6 +117,18 @@ document.addEventListener('click', (e) => {
     splitLeft.style.flex = '1';
     splitRight.style.flex = '1';
   }
+});
+
+// Auto-hide scrollbar after 2s
+const scrollArea = document.querySelector('[data-target="scrollArea"]');
+let scrollTimeout;
+
+scrollArea.addEventListener('scroll', () => {
+  scrollArea.style.setProperty('--scrollbar-opacity', '1');
+  clearTimeout(scrollTimeout);
+  scrollTimeout = setTimeout(() => {
+    scrollArea.style.setProperty('--scrollbar-opacity', '0');
+  }, 2000);
 });
 </script>
 

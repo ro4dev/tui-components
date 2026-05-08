@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Copy Button - OpenCode Design System</title>
+<title>Copy Button</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="header">
-  <h1>Copy Button &amp; Function</h1>
-  <p>Interactive copy buttons with clipboard integration</p>
+  <h1>Copy Button</h1>
+  <p>Click to copy, shows [✓] for 1.5s</p>
 </div>
 
 <section>
   <div class="section-title">Code Block with Copy</div>
   <div class="code-block">
-    <button class="copy-btn" data-action="copy-code" data-target="code1">[⎘] Copy</button>
+    <button class="copy-btn" data-action="copy-code" data-target="code1">[⎘]</button>
     <pre id="code1">function greet(name: string): string {
   return `Hello, ${name}!`;
 }
@@ -25,7 +25,7 @@ const message = greet("World");
 console.log(message);</pre>
   </div>
   <div class="code-block">
-    <button class="copy-btn" data-action="copy-code" data-target="code2">[⎘] Copy</button>
+    <button class="copy-btn" data-action="copy-code" data-target="code2">[⎘]</button>
     <pre id="code2">import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -61,7 +61,7 @@ export default defineConfig({
 </section>
 
 <script>
-function fallbackCopy(text, btn, originalHTML) {
+function fallbackCopy(text, btn) {
   const textarea = document.createElement('textarea');
   textarea.value = text;
   textarea.style.position = 'fixed';
@@ -70,11 +70,11 @@ function fallbackCopy(text, btn, originalHTML) {
   textarea.select();
   try {
     document.execCommand('copy');
-    btn.innerHTML = '[✓] Copied';
+    btn.textContent = '[✓]';
     btn.classList.add('copied');
     updateLog(text);
     setTimeout(() => {
-      btn.innerHTML = originalHTML;
+      btn.textContent = '[⎘]';
       btn.classList.remove('copied');
     }, 1500);
   } catch(e) {}
@@ -95,15 +95,15 @@ document.addEventListener('click', (e) => {
     const btn = e.target;
     const code = document.getElementById(btn.dataset.target).textContent;
     navigator.clipboard.writeText(code).then(() => {
-      btn.innerHTML = '[✓] Copied';
+      btn.textContent = '[✓]';
       btn.classList.add('copied');
       updateLog(code);
       setTimeout(() => {
-        btn.innerHTML = '[⎘] Copy';
+        btn.textContent = '[⎘]';
         btn.classList.remove('copied');
       }, 1500);
     }).catch(() => {
-      fallbackCopy(code, btn, '[⎘] Copy');
+      fallbackCopy(code, btn);
     });
   }
 
@@ -111,15 +111,15 @@ document.addEventListener('click', (e) => {
     const btn = e.target;
     const text = btn.dataset.text;
     navigator.clipboard.writeText(text).then(() => {
-      btn.innerHTML = '[✓]';
+      btn.textContent = '[✓]';
       btn.classList.add('copied');
       updateLog(text);
       setTimeout(() => {
-        btn.innerHTML = '[⎘]';
+        btn.textContent = '[⎘]';
         btn.classList.remove('copied');
       }, 1500);
     }).catch(() => {
-      fallbackCopy(text, btn, '[⎘]');
+      fallbackCopy(text, btn);
     });
   }
 });

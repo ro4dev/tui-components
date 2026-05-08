@@ -37,15 +37,18 @@ body {
 .header p { font-size: 12px; color: var(--mute); }
 .section { margin-bottom: var(--spacing-xxl); }
 .section h2 { font-size: 14px; font-weight: 600; color: var(--body); margin-bottom: var(--spacing-md); padding-bottom: var(--spacing-sm); border-bottom: 1px solid var(--hairline); }
-.empty-state { text-align: center; padding: var(--spacing-xxl) var(--spacing-xl); background: var(--surface-card); border: 1px solid var(--hairline); border-radius: var(--rounded-sm); margin-bottom: var(--spacing-md); }
-.empty-state .icon { font-size: 32px; color: var(--ash); margin-bottom: var(--spacing-md); }
-.empty-state h3 { font-size: 14px; font-weight: 600; color: var(--body); margin-bottom: var(--spacing-sm); }
-.empty-state p { font-size: 12px; color: var(--mute); margin-bottom: var(--spacing-lg); }
+
+.empty-default { text-align: center; padding: var(--spacing-xxl); margin-bottom: var(--spacing-md); }
+.empty-default .icon { font-size: 24px; color: var(--stone); margin-bottom: var(--spacing-md); }
+.empty-default .title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: var(--spacing-sm); }
+.empty-default .description { font-size: 14px; color: var(--mute); max-width: 320px; margin: 0 auto var(--spacing-lg); }
+
 .content-block { padding: var(--spacing-lg); background: var(--surface-card); border: 1px solid var(--hairline); border-radius: var(--rounded-sm); margin-bottom: var(--spacing-md); }
 .content-block h3 { font-size: 14px; font-weight: 600; color: var(--body); margin-bottom: var(--spacing-md); }
 .content-block ul { list-style: none; font-size: 13px; color: var(--body); }
 .content-block li { padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--hairline); }
 .content-block li:last-child { border-bottom: none; }
+
 .btn { display: inline-flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-sm) var(--spacing-md); background: var(--surface-card); border: 1px solid var(--hairline-strong); border-radius: var(--rounded-sm); font-family: inherit; font-size: 13px; color: var(--ink); cursor: pointer; transition: background 0.15s; }
 .btn:hover { background: var(--surface-soft); }
 .btn-accent { background: var(--accent); color: var(--on-dark); border-color: var(--accent); }

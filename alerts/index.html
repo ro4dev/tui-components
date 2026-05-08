@@ -24,23 +24,45 @@
   </div>
 </div>
 
-<div class="section">
-  <div class="section-title">Active Alerts</div>
-  <div class="alert-container">
-    <div class="alert alert-info">
-      <button class="alert__close" data-action="dismiss">[×]</button>
-      <span class="alert__icon">[i]</span>
-      <span class="alert__title">New version available</span>
-      <span class="alert__body">OpenCode 2.4.0 is ready to install.</span>
-    </div>
-    <div class="alert alert-warning">
-      <button class="alert__close" data-action="dismiss">[×]</button>
-      <span class="alert__icon">[!]</span>
-      <span class="alert__title">Low disk space</span>
-      <span class="alert__body">Less than 2 GB remaining.</span>
+  <div class="section">
+    <div class="section-title">Alert Types</div>
+    <div class="alert-container">
+      <div class="alert alert-info">
+        <button class="alert__close" data-action="dismiss">[×]</button>
+        <span class="alert__icon">[i]</span>
+        <span class="alert__title">New version available</span>
+        <span class="alert__body">OpenCode 2.4.0 is ready to install.</span>
+      </div>
+      <div class="alert alert-warning">
+        <button class="alert__close" data-action="dismiss">[×]</button>
+        <span class="alert__icon">[!]</span>
+        <span class="alert__title">Low disk space</span>
+        <span class="alert__body">Less than 2 GB remaining.</span>
+      </div>
+      <div class="alert alert-danger">
+        <button class="alert__close" data-action="dismiss">[×]</button>
+        <span class="alert__icon">[x]</span>
+        <span class="alert__title">Build failed</span>
+        <span class="alert__body">TypeScript error in src/agent.ts:42</span>
+      </div>
+      <div class="alert alert-success">
+        <button class="alert__close" data-action="dismiss">[×]</button>
+        <span class="alert__icon">[✓]</span>
+        <span class="alert__title">Deploy complete</span>
+        <span class="alert__body">Production updated successfully.</span>
+      </div>
     </div>
   </div>
-</div>
+
+  <div class="section">
+    <div class="section-title">Inline Alerts</div>
+    <p style="color: var(--body);">
+      <span class="alert alert-inline alert-warning">[!] This action cannot be undone.</span>
+      <span class="alert alert-inline alert-danger">[x] Connection lost.</span>
+      <span class="alert alert-inline alert-info">[i] Auto-save enabled.</span>
+      <span class="alert alert-inline alert-success">[✓] All checks passed.</span>
+    </p>
+  </div>
 
 <script>
 const alertData = {

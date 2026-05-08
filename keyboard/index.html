@@ -10,43 +10,39 @@
 
 <div class="header">
   <h1>Keyboard</h1>
-  <p>Interactive keyboard shortcuts and command palette</p>
+  <p>Keyboard shortcuts and command palette</p>
 </div>
 
 <div class="section">
-  <h2>Keyboard Shortcuts</h2>
+  <h2>kbd (Keyboard Keys)</h2>
   <ul class="shortcut-list">
     <li>
       <span class="action">Open command palette</span>
-      <span class="keys"><span class="kbd">⌘</span><span class="kbd">K</span></span>
+      <span class="keys"><span class="kbd">⌘</span><span class="kbd-separator">+</span><span class="kbd">K</span></span>
     </li>
     <li>
       <span class="action">Save current file</span>
-      <span class="keys"><span class="kbd">⌘</span><span class="kbd">S</span></span>
+      <span class="keys"><span class="kbd">⌘</span><span class="kbd-separator">+</span><span class="kbd">S</span></span>
     </li>
     <li>
       <span class="action">Find in file</span>
-      <span class="keys"><span class="kbd">⌘</span><span class="kbd">F</span></span>
+      <span class="keys"><span class="kbd">⌘</span><span class="kbd-separator">+</span><span class="kbd">F</span></span>
     </li>
     <li>
       <span class="action">Toggle terminal</span>
-      <span class="keys"><span class="kbd">⌃</span><span class="kbd">`</span></span>
-    </li>
-    <li>
-      <span class="action">Quick open</span>
-      <span class="keys"><span class="kbd">⌘</span><span class="kbd">P</span></span>
-    </li>
-    <li>
-      <span class="action">Navigate back</span>
-      <span class="keys"><span class="kbd">⌘</span><span class="kbd">[</span></span>
+      <span class="keys"><span class="kbd">⌃</span><span class="kbd-separator">+</span><span class="kbd">`</span></span>
     </li>
   </ul>
 </div>
 
 <div class="section">
+  <h2>kbd Active State</h2>
+  <p>Press <span class="kbd kbd--active">⌘</span><span class="kbd-separator">+</span><span class="kbd kbd--active">K</span> to open command palette</p>
+</div>
+
+<div class="section">
   <h2>Command Palette</h2>
-  <button class="btn btn-accent" data-action="open-palette">[⌕] Open Command Palette</button>
-  <span class="kbd">⌘</span><span class="kbd">K</span>
+  <button class="btn btn-accent" data-action="open-palette"><span class="kbd">⌘</span><span class="kbd-separator">+</span><span class="kbd">K</span> Open Command Palette</button>
   <div class="selected-info" data-target="selectedInfo">No command selected yet.</div>
 </div>
 
@@ -57,9 +53,11 @@
     </div>
     <div class="palette-results" data-target="paletteResults"></div>
     <div class="palette-footer">
-      <span>[↑][↓] Navigate</span>
-      <span>[Enter] Select</span>
-      <span>[Esc] Close</span>
+      <span><span class="kbd">↑↓</span> navigate</span>
+      <span>·</span>
+      <span><span class="kbd">↵</span> select</span>
+      <span>·</span>
+      <span><span class="kbd">esc</span> close</span>
     </div>
   </div>
 </div>
@@ -76,8 +74,6 @@ const commands = [
   { name: 'Quick Fix', hint: '⌘.' },
   { name: 'Go to Definition', hint: 'F12' },
   { name: 'Peek References', hint: '⇧F12' },
-  { name: 'Rename Symbol', hint: 'F2' },
-  { name: 'Toggle Breakpoint', hint: 'F9' }
 ];
 
 let filteredCommands = [...commands];

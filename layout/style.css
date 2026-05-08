@@ -86,7 +86,6 @@ body {
 
 .divider-h { border: none; height: 1px; background: var(--hairline); width: 100%; margin: 16px 0; }
 .divider-h--strong { background: var(--hairline-strong); }
-.divider-h--dashed { background: none; border-top: 1px dashed var(--hairline-strong); }
 .divider-controls { display: flex; gap: 8px; margin-bottom: 12px; }
 
 .divider-v { display: inline-block; width: 1px; background: var(--hairline); height: 1em; vertical-align: middle; margin: 0 var(--spacing-md); }
@@ -97,11 +96,18 @@ body {
 .spacer-controls { display: flex; gap: 8px; margin-top: 12px; }
 
 .container-box { border: 2px dashed var(--hairline); padding: 8px; margin-bottom: 16px; border-radius: var(--rounded-sm); }
-.container-inner { background: var(--surface-soft); padding: 16px; border-radius: var(--rounded-sm); transition: max-width 0.3s, padding 0.3s; }
+.container-inner {
+  background: var(--surface-soft);
+  padding: 16px;
+  border-radius: var(--rounded-sm);
+  transition: max-width 0.3s, padding 0.3s;
+  margin: 0 auto;
+  max-width: 960px;
+}
 .container-info { font-size: 14px; color: var(--mute); margin-top: 8px; }
 .container-controls { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
 
-.responsive-box { background: var(--surface-soft); padding: 16px; border-radius: var(--rounded-sm); text-align: center; transition: all 0.3s; }
+.responsive-box { background: var(--surface-soft); padding: 16px; border-radius: var(--rounded-sm); text-align: center; transition: all 0.3s; margin: 0 auto; }
 .responsive-label { font-size: 14px; color: var(--mute); margin-top: 4px; }
 .width-slider { width: 100%; max-width: 400px; margin-top: 12px; }
 

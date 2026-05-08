@@ -2,6 +2,8 @@
 
 Colección de componentes reutilizables estilo TUI (Terminal User Interface) en HTML, CSS y JavaScript.
 
+Todos los componentes siguen las especificaciones de diseño en [DESIGN.md](./DESIGN.md).
+
 ## Estructura
 
 Cada componente vive en su propia carpeta con dos archivos:
